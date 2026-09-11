@@ -1,0 +1,80 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/monster.gd" id="1_monster"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_root"]
+radius = 0.6
+
+[sub_resource type="StandardMaterial3D" id="Mat_DefaultMonster"]
+albedo_color = Color(1, 0.2, 0.25, 1)
+roughness = 0.3
+emission_enabled = true
+emission = Color(0.3, 0.05, 0.05, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_Body"]
+material = SubResource("Mat_DefaultMonster")
+radius = 0.5
+height = 1.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_Skirt"]
+material = SubResource("Mat_DefaultMonster")
+top_radius = 0.52
+bottom_radius = 0.62
+height = 0.3
+
+[sub_resource type="StandardMaterial3D" id="Mat_WhiteEye"]
+albedo_color = Color(0.98, 0.98, 0.98, 1)
+roughness = 0.1
+
+[sub_resource type="StandardMaterial3D" id="Mat_Pupil"]
+albedo_color = Color(0.05, 0.1, 0.3, 1)
+roughness = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_Eye"]
+material = SubResource("Mat_WhiteEye")
+radius = 0.16
+height = 0.28
+
+[sub_resource type="SphereMesh" id="SphereMesh_Pupil"]
+material = SubResource("Mat_Pupil")
+radius = 0.08
+height = 0.14
+
+[node name="Monster" type="CharacterBody3D" groups=["monsters"]]
+collision_layer = 8
+collision_mask = 1
+script = ExtResource("1_monster")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+shape = SubResource("SphereShape3D_root")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("CapsuleMesh_Body")
+
+[node name="SkirtMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+mesh = SubResource("CylinderMesh_Skirt")
+
+[node name="Eyes" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.3, 0)
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Visuals/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.05, 0.16)
+mesh = SubResource("SphereMesh_Eye")
+
+[node name="PupilLeft" type="MeshInstance3D" parent="Visuals/Eyes/EyeLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 0.02, 0.07)
+mesh = SubResource("SphereMesh_Pupil")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Visuals/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.18, 0.05, -0.16)
+mesh = SubResource("SphereMesh_Eye")
+
+[node name="PupilRight" type="MeshInstance3D" parent="Visuals/Eyes/EyeRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.06, 0.02, -0.07)
+mesh = SubResource("SphereMesh_Pupil")

@@ -1,0 +1,256 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_TopBadge"]
+bg_color = Color(0.08, 0.1, 0.22, 0.85)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.7, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_LevelCleared"]
+bg_color = Color(0.06, 0.15, 0.35, 0.95)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.85, 0.1, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+shadow_size = 12
+shadow_color = Color(0, 0, 0, 0.5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_GameOver"]
+bg_color = Color(0.28, 0.04, 0.08, 0.95)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 0.2, 0.3, 1)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+shadow_size = 12
+shadow_color = Color(0, 0, 0, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_RestartBtn"]
+bg_color = Color(0.12, 0.72, 0.35, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 1, 0.9, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_RestartBtnHover"]
+bg_color = Color(0.18, 0.85, 0.45, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="TopMargin" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 70.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 24
+
+[node name="TopHBox" type="HBoxContainer" parent="TopMargin"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 24
+
+[node name="ScorePanel" type="PanelContainer" parent="TopMargin/TopHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_TopBadge")
+
+[node name="ScoreLabel" type="Label" parent="TopMargin/TopHBox/ScorePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.1, 1)
+theme_override_font_sizes/font_size = 20
+text = "SCORE: 00000"
+
+[node name="TimePanel" type="PanelContainer" parent="TopMargin/TopHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_TopBadge")
+
+[node name="TimeLabel" type="Label" parent="TopMargin/TopHBox/TimePanel"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "TIME: 00:00"
+
+[node name="LevelPanel" type="PanelContainer" parent="TopMargin/TopHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_TopBadge")
+
+[node name="HBox" type="HBoxContainer" parent="TopMargin/TopHBox/LevelPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LevelLabel" type="Label" parent="TopMargin/TopHBox/LevelPanel/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.55, 0.2, 1)
+theme_override_font_sizes/font_size = 20
+text = "LEVEL 1"
+
+[node name="SpeedLabel" type="Label" parent="TopMargin/TopHBox/LevelPanel/HBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 1, 0.4, 1)
+theme_override_font_sizes/font_size = 17
+text = "SPEED: 100%"
+
+[node name="LivesPanel" type="PanelContainer" parent="TopMargin/TopHBox"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_TopBadge")
+
+[node name="LivesHBox" type="HBoxContainer" parent="TopMargin/TopHBox/LivesPanel"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="MenuButton" type="Button" parent="TopMargin/TopHBox"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBox_TopBadge")
+theme_override_colors/font_color = Color(0.9, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "🏰 MENU (ESC)"
+
+[node name="BottomMargin" type="MarginContainer" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -46.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 14
+
+[node name="ControlsHint" type="Label" parent="BottomMargin"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 0.7)
+theme_override_font_sizes/font_size = 14
+text = "[WASD / Arrows] Move   |   [F11] Fullscreen   |   [R] Restart"
+
+[node name="CenterMargin" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LevelClearedPanel" type="PanelContainer" parent="CenterMargin"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_LevelCleared")
+
+[node name="VBox" type="VBoxContainer" parent="CenterMargin/LevelClearedPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterMargin/LevelClearedPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.1, 1)
+theme_override_font_sizes/font_size = 32
+text = "★ LEVEL 1 COMPLETE! ★"
+horizontal_alignment = 1
+
+[node name="SpeedDescLabel" type="Label" parent="CenterMargin/LevelClearedPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.3, 0.95, 0.7, 1)
+theme_override_font_sizes/font_size = 20
+text = "SPEED INCREASED BY +10%!
+CURRENT SPEED: 110%"
+horizontal_alignment = 1
+
+[node name="NextHintLabel" type="Label" parent="CenterMargin/LevelClearedPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 0.8)
+theme_override_font_sizes/font_size = 16
+text = "Get ready for the next round..."
+horizontal_alignment = 1
+
+[node name="GameOverPanel" type="PanelContainer" parent="CenterMargin"]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_GameOver")
+
+[node name="VBox" type="VBoxContainer" parent="CenterMargin/GameOverPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="CenterMargin/GameOverPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.25, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "☠ GAME OVER ☠"
+horizontal_alignment = 1
+
+[node name="FinalScoreLabel" type="Label" parent="CenterMargin/GameOverPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
+theme_override_font_sizes/font_size = 22
+text = "FINAL SCORE: 0"
+horizontal_alignment = 1
+
+[node name="FinalTimeLabel" type="Label" parent="CenterMargin/GameOverPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 20
+text = "TIME SURVIVED: 00:00"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="CenterMargin/GameOverPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBox_RestartBtn")
+theme_override_styles/hover = SubResource("StyleBox_RestartBtnHover")
+text = "PLAY AGAIN"

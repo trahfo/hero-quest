@@ -1,0 +1,304 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://scripts/start_menu.gd" id="1_menu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.04, 0.05, 0.08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pacman_card"]
+bg_color = Color(0.06, 0.08, 0.16, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.2, 0.6, 1, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.1, 0.4, 0.9, 0.35)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pacman_btn"]
+bg_color = Color(0.08, 0.35, 0.75, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.8, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pacman_btn_hover"]
+bg_color = Color(0.12, 0.5, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 0.95, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_card"]
+bg_color = Color(0.1, 0.07, 0.05, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.9, 0.65, 0.2, 0.95)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.8, 0.45, 0.1, 0.35)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_btn"]
+bg_color = Color(0.65, 0.35, 0.1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.85, 0.35, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hero_btn_hover"]
+bg_color = Color(0.85, 0.45, 0.12, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.95, 0.6, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quit"]
+bg_color = Color(0.14, 0.15, 0.18, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.4, 0.45, 0.5, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_quit_hover"]
+bg_color = Color(0.3, 0.15, 0.18, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.3, 0.4, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="StartMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="Header" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 60.0
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Title" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.92, 0.75, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_y = 3
+theme_override_font_sizes/font_size = 46
+text = "CHOOSE YOUR GAME"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Header"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.7, 0.8, 0.9)
+theme_override_font_sizes/font_size = 18
+text = "Select an experience to embark upon"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -180.0
+offset_right = 550.0
+offset_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBox" type="HBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="PacmanCard" type="PanelContainer" parent="CenterContainer/HBox"]
+custom_minimum_size = Vector2(460, 420)
+layout_mode = 2
+pivot_offset = Vector2(230, 210)
+theme_override_styles/panel = SubResource("StyleBoxFlat_pacman_card")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBox/PacmanCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 36
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/HBox/PacmanCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="Label" parent="CenterContainer/HBox/PacmanCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "🟡 👻"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/HBox/PacmanCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.2, 1)
+theme_override_colors/font_shadow_color = Color(0.1, 0.3, 0.8, 1)
+theme_override_font_sizes/font_size = 32
+text = "PAC-MAN 3D"
+horizontal_alignment = 1
+
+[node name="Tagline" type="Label" parent="CenterContainer/HBox/PacmanCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 15
+text = "NEON ARCADE LABYRINTH"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="CenterContainer/HBox/PacmanCard/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.8, 0.85, 0.95, 0.85)
+theme_override_font_sizes/font_size = 15
+text = "Navigate a vibrant 3D maze, chomp shining pellets, and outsmart 5 colorful ghost hunters with accelerating speeds."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="PlayPacmanButton" type="Button" parent="CenterContainer/HBox/PacmanCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_pacman_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_pacman_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pacman_btn_hover")
+text = "PLAY PAC-MAN"
+
+[node name="HeroCard" type="PanelContainer" parent="CenterContainer/HBox"]
+custom_minimum_size = Vector2(460, 420)
+layout_mode = 2
+pivot_offset = Vector2(230, 210)
+theme_override_styles/panel = SubResource("StyleBoxFlat_hero_card")
+
+[node name="Margin" type="MarginContainer" parent="CenterContainer/HBox/HeroCard"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 36
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 36
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer/HBox/HeroCard/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="Label" parent="CenterContainer/HBox/HeroCard/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "⚔️ 🏰"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="CenterContainer/HBox/HeroCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0.4, 0.15, 0.05, 1)
+theme_override_font_sizes/font_size = 32
+text = "HERO QUEST"
+horizontal_alignment = 1
+
+[node name="Tagline" type="Label" parent="CenterContainer/HBox/HeroCard/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.6, 0.2, 1)
+theme_override_font_sizes/font_size = 15
+text = "3D ISOMETRIC CASTLE CRAWLER"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="CenterContainer/HBox/HeroCard/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.9, 0.82, 0.72, 0.85)
+theme_override_font_sizes/font_size = 15
+text = "Explore a sprawling medieval fortress! Tour the Chapel, Stables, Forge, Round Watchtowers, and Chasm Bridges with dark adventure music."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="PlayHeroButton" type="Button" parent="CenterContainer/HBox/HeroCard/Margin/VBox"]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_hero_btn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hero_btn_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hero_btn_hover")
+text = "ENTER CASTLE"
+
+[node name="BottomBar" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="QuitButton" type="Button" parent="BottomBar"]
+custom_minimum_size = Vector2(160, 44)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.8, 0.85, 1)
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_quit")
+theme_override_styles/hover = SubResource("StyleBoxFlat_quit_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_quit_hover")
+text = "EXIT APPLICATION"
