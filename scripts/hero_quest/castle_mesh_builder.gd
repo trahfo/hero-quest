@@ -32,7 +32,7 @@ func create_square_tile_mesh(parent: Node3D, cell: Vector2i, mat: Material) -> S
 
 	var mesh_inst = MeshInstance3D.new()
 	var box_mesh = BoxMesh.new()
-	box_mesh.size = Vector3(TILE_SIZE - 0.08, 0.28, TILE_SIZE - 0.08)
+	box_mesh.size = Vector3(TILE_SIZE, 0.28, TILE_SIZE)
 	box_mesh.material = mat
 	mesh_inst.mesh = box_mesh
 	mesh_inst.position = Vector3(0, -0.14, 0)

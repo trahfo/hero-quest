@@ -1,6 +1,10 @@
 class_name CastleMaterials
 extends RefCounted
 
+const CastleFloorTextureGenerator = preload("res://scripts/hero_quest/castle_floor_texture_generator.gd")
+
+var walls_transparent: bool = false
+
 var mat_floor_stone: StandardMaterial3D
 var mat_floor_stone_alt: StandardMaterial3D
 var mat_floor_chapel: StandardMaterial3D
@@ -187,6 +191,30 @@ func _init() -> void:
 	mat_bone.roughness = 0.7
 
 	_setup_brick_wall_texture()
+	_setup_floor_textures()
+
+func _setup_floor_textures() -> void:
+	var gen = CastleFloorTextureGenerator.new()
+	gen.apply_floor_textures(self)
+
+func set_walls_transparent(transparent: bool, alpha: float = 0.28) -> void:
+	if walls_transparent == transparent:
+		return
+	walls_transparent = transparent
+	if transparent:
+		mat_wall_stone.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat_wall_stone.albedo_color.a = alpha
+		mat_wall_stone.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+		mat_wall_trim.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		mat_wall_trim.albedo_color.a = clampf(alpha * 1.25, 0.0, 1.0)
+		mat_wall_trim.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_ALWAYS
+	else:
+		mat_wall_stone.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		mat_wall_stone.albedo_color.a = 1.0
+		mat_wall_stone.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_OPAQUE_ONLY
+		mat_wall_trim.transparency = BaseMaterial3D.TRANSPARENCY_DISABLED
+		mat_wall_trim.albedo_color.a = 1.0
+		mat_wall_trim.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_OPAQUE_ONLY
 
 func _setup_brick_wall_texture() -> void:
 	var img = Image.create(128, 128, false, Image.FORMAT_RGBA8)
