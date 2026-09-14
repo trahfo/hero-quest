@@ -38,6 +38,7 @@ func clear_selection() -> void:
 	active_tool = "none"; selected_item_data = {}
 	if ghost_preview: ghost_preview.set_preview_visible(false)
 	if grid: grid.hide_cursor()
+	if model and model.materials: model.materials.set_walls_transparent(false)
 
 func set_tool(tool_name: String, item_data: Dictionary = {}) -> void:
 	active_tool = tool_name
@@ -46,6 +47,7 @@ func set_tool(tool_name: String, item_data: Dictionary = {}) -> void:
 		is_dragging = false
 		grid.hide_cursor()
 	_update_ghost_mesh()
+	if model and model.materials: model.materials.set_walls_transparent(active_tool == "floor")
 
 func _update_ghost_mesh() -> void:
 	if not ghost_preview:
@@ -66,17 +68,14 @@ func update_mouse_position(screen_pos: Vector2) -> void:
 	var hit_cell: Vector2i = Vector2i.ZERO
 	var found_hit: bool = false
 
-	# 1. Physics raycast for clicking high objects (walls, pillars, tall furniture)
-	var world_3d = camera.get_world_3d()
-	if world_3d:
-		var space_state = world_3d.direct_space_state
-		if space_state:
+	# 1. Physics raycast for high objects (bypassed for floor tool so clicks penetrate transparent walls)
+	if active_tool != "floor":
+		var world_3d = camera.get_world_3d()
+		if world_3d and world_3d.direct_space_state:
 			var query = PhysicsRayQueryParameters3D.create(origin, origin + normal * 1000.0)
-			var result = space_state.intersect_ray(query)
+			var result = world_3d.direct_space_state.intersect_ray(query)
 			if not result.is_empty():
-				var hit_pos: Vector3 = result.position
-				var hit_norm: Vector3 = result.normal
-				var sample_pos = hit_pos - hit_norm * 0.15
+				var sample_pos = result.position - result.normal * 0.15
 				hit_cell = Vector2i(roundi(sample_pos.x / TILE_SIZE), roundi(sample_pos.z / TILE_SIZE))
 				found_hit = true
 

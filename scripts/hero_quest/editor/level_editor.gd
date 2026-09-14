@@ -94,9 +94,13 @@ func toggle_editor() -> bool:
 		ui.set_level_name(model.get_level_name())
 		status_message.emit("Level Editor Active. Press TAB to Save & Exit.")
 		ui.set_status_notice("Level Editor Active. Drag floors/walls or select a tool.")
+		if model and model.materials and tool_handler:
+			model.materials.set_walls_transparent(tool_handler.active_tool == "floor")
 	else:
 		if room_manager:
 			room_manager.set_walls_only_visible(false)
+		if model and model.materials:
+			model.materials.set_walls_transparent(false)
 		save_level()
 		status_message.emit("Level saved to %s. Returning to gameplay." % active_file_path)
 
@@ -106,6 +110,8 @@ func toggle_editor() -> bool:
 func exit_without_saving() -> bool:
 	if room_manager:
 		room_manager.set_walls_only_visible(false)
+	if model and model.materials:
+		model.materials.set_walls_transparent(false)
 	if model:
 		model.discard_unsaved_changes()
 	is_active = false
@@ -123,6 +129,8 @@ func handle_escape() -> void:
 		tool_handler.clear_selection()
 		if room_manager and was_room:
 			room_manager.set_walls_only_visible(false)
+		if model and model.materials:
+			model.materials.set_walls_transparent(false)
 		if ui:
 			ui.clear_selection_highlight()
 			ui.set_status_notice("Deselected item. (ESC: Exit without save | TAB: Save & Exit)")
@@ -135,7 +143,14 @@ func save_level() -> bool:
 	var ok = model.save_to_json(active_file_path)
 	if ok:
 		level_saved.emit(active_file_path)
-		ui.set_status_notice("Level saved successfully to %s" % active_file_path)
+		var note = model.last_save_result.get("notice", "")
+		if note != "":
+			ui.set_status_notice("Saved to %s (%s)" % [active_file_path.get_file(), note])
+		else:
+			ui.set_status_notice("Level saved successfully to %s" % active_file_path)
+	else:
+		var err = model.last_save_result.get("error", "Save failed.")
+		ui.set_status_notice("⚠ Failed to save: %s" % err)
 	return ok
 
 func undo() -> void:
@@ -153,6 +168,8 @@ func _on_ui_tool_selected(tool_name: String, data: Dictionary) -> void:
 		tool_handler.set_tool(tool_name, data)
 	if room_manager:
 		room_manager.set_walls_only_visible(tool_name == "room")
+	if model and model.materials:
+		model.materials.set_walls_transparent(tool_name == "floor")
 
 func _on_chest_config_changed(cfg: Dictionary) -> void:
 	if tool_handler:
