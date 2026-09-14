@@ -151,13 +151,14 @@ func spawn_prop(room: Node3D, data: Dictionary, builder: Node3D) -> Node3D:
 				return as_node
 			)
 			return as_node
-		"treasure_chest":
+		"treasure_chest", "chest":
 			var relic = data.get("relic_name", "Ancient Relic")
 			var mini_game = data.get("mini_game_id", "")
 			var chest = prop_factory.create_treasure_chest(room, pos, rot_y, relic, mini_game)
 			builder.interactive_chests.append(chest)
 			if builder.grid.has(p_cell):
 				builder.grid[p_cell]["walkable"] = false
+				builder.grid[p_cell]["prop"] = chest
 			return chest
 		"candelabra":
 			var cd_node: Node3D
@@ -172,6 +173,7 @@ func spawn_prop(room: Node3D, data: Dictionary, builder: Node3D) -> Node3D:
 			builder.interactive_anvil = anvil
 			if builder.grid.has(p_cell):
 				builder.grid[p_cell]["walkable"] = false
+				builder.grid[p_cell]["prop"] = anvil
 			return anvil
 		"altar":
 			var altar_size = CastleLevelData.arr_to_vec3(data.get("size", [2.6, 1.2, 1.6]))

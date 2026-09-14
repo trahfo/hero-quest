@@ -31,7 +31,7 @@ func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 	var pos = builder.grid_to_world(cell)
 	var rot_y = float(p_info.get("rot_y", 0.0))
 
-	if p_type == "treasure_chest":
+	if p_type == "treasure_chest" or p_type == "chest":
 		var relic = p_info.get("relic_name", "Gold Relic")
 		var chest = prop_factory.create_treasure_chest(parent, pos + Vector3(0, 0.12, 0), rot_y, relic)
 		chest.set_meta("gold", int(p_info.get("gold", 100)))
