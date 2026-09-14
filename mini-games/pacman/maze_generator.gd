@@ -31,7 +31,7 @@ const MAZE_MAP: Array[String] = [
 
 var grid_width: int = 0
 var grid_height: int = 0
-var pellet_scene: PackedScene = preload("res://scenes/pellet.tscn")
+var pellet_scene: PackedScene = preload("res://mini-games/pacman/pellet.tscn")
 
 var walls_container: Node3D
 var pellets_container: Node3D

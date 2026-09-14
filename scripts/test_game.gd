@@ -2,7 +2,9 @@ extends SceneTree
 
 func _init() -> void:
 	print("=== RUNNING PACMAN 3D INTEGRATION TESTS ===")
-	var main_scene = load("res://scenes/main.tscn")
+	var main_scene = load("res://mini-games/pacman/pacman_game.tscn")
+	if not main_scene:
+		main_scene = load("res://mini-games/pacman/main.tscn")
 	if not main_scene:
 		push_error("Failed to load main scene")
 		quit(1)

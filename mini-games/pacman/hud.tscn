@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3]
 
-[ext_resource type="Script" path="res://scripts/hud.gd" id="1_hud"]
+[ext_resource type="Script" path="res://mini-games/pacman/hud.gd" id="1_hud"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_TopBadge"]
 bg_color = Color(0.08, 0.1, 0.22, 0.85)
@@ -254,3 +254,10 @@ theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBox_RestartBtn")
 theme_override_styles/hover = SubResource("StyleBox_RestartBtnHover")
 text = "PLAY AGAIN"
+
+[node name="ReturnButton" type="Button" parent="CenterMargin/GameOverPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 1, 1)
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBox_TopBadge")
+text = "RETURN TO CASTLE"

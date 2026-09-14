@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3]
 
-[ext_resource type="Script" path="res://scripts/pacman.gd" id="1_pacman"]
+[ext_resource type="Script" path="res://mini-games/pacman/pacman.gd" id="1_pacman"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_root"]
 radius = 0.6

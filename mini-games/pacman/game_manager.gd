@@ -8,7 +8,7 @@ enum State { PLAYING, LEVEL_CLEARED, RESPAWNING, GAME_OVER }
 @export var sound_node: Node
 @export var monsters_container: Node3D
 
-var monster_scene: PackedScene = preload("res://scenes/monster.tscn")
+var monster_scene: PackedScene = preload("res://mini-games/pacman/monster.tscn")
 
 var current_state: State = State.PLAYING
 var score: int = 0

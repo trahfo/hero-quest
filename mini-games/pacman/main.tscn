@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_manager"]
-[ext_resource type="Script" path="res://scripts/maze_generator.gd" id="2_maze"]
-[ext_resource type="PackedScene" path="res://scenes/pacman.tscn" id="3_pacman"]
-[ext_resource type="PackedScene" path="res://scenes/hud.tscn" id="4_hud"]
-[ext_resource type="Script" path="res://scripts/sound_manager.gd" id="5_sound"]
+[ext_resource type="Script" path="res://mini-games/pacman/game_manager.gd" id="1_manager"]
+[ext_resource type="Script" path="res://mini-games/pacman/maze_generator.gd" id="2_maze"]
+[ext_resource type="PackedScene" path="res://mini-games/pacman/pacman.tscn" id="3_pacman"]
+[ext_resource type="PackedScene" path="res://mini-games/pacman/hud.tscn" id="4_hud"]
+[ext_resource type="Script" path="res://mini-games/pacman/sound_manager.gd" id="5_sound"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.04, 0.06, 0.12, 1)

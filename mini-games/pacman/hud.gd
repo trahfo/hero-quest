@@ -2,6 +2,8 @@ extends CanvasLayer
 
 signal restart_pressed
 
+const MiniGameManagerClass = preload("res://scripts/hero_quest/mini_game_manager.gd")
+
 @onready var score_label: Label = $TopMargin/TopHBox/ScorePanel/ScoreLabel
 @onready var time_label: Label = $TopMargin/TopHBox/TimePanel/TimeLabel
 @onready var level_label: Label = $TopMargin/TopHBox/LevelPanel/HBox/LevelLabel
@@ -21,16 +23,28 @@ func _ready() -> void:
 	level_cleared_panel.visible = false
 	game_over_panel.visible = false
 	restart_button.pressed.connect(_on_restart_button_pressed)
+	
 	var menu_btn = get_node_or_null("TopMargin/TopHBox/MenuButton")
 	if menu_btn:
+		if MiniGameManagerClass.has_return_state or MiniGameManagerClass.is_launched_from_hero_quest:
+			menu_btn.text = "🏰 RETURN TO CASTLE (ESC)"
 		menu_btn.pressed.connect(_on_menu_pressed)
+
+	var return_btn = get_node_or_null("CenterMargin/GameOverPanel/VBox/ReturnButton")
+	if return_btn:
+		if MiniGameManagerClass.has_return_state or MiniGameManagerClass.is_launched_from_hero_quest:
+			return_btn.text = "🏰 RETURN TO CASTLE"
+		return_btn.pressed.connect(_on_menu_pressed)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		_on_menu_pressed()
 
 func _on_menu_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
+	if MiniGameManagerClass.has_return_state:
+		MiniGameManagerClass.return_to_hero_quest(get_tree())
+	else:
+		get_tree().change_scene_to_file("res://scenes/start_menu.tscn")
 
 func update_score(score: int) -> void:
 	score_label.text = "SCORE: %05d" % score
