@@ -64,20 +64,34 @@ Walls are built dynamically via `CastleWallTileFactory.create_modular_wall` base
 
 ---
 
-## 3. Portals, Arches & Door Piers
+## 3. Portals, Arches, Doors & Lock Mechanics
 
-### Door Pier Extension
-- Column shafts (`0.9m x 0.9m`) are centered in a `2.0m` cell, leaving a `0.55m` gap to the cell boundary.
-- **Never instantiate separate attached wall meshes** next to a door column.
-- The pier itself expands directly along `extend_dir`:
-  - Plinth base expands to `1.6m` along `extend_dir` (offset `0.2m`).
-  - Column shaft expands from `0.9m` to `1.45m` (`0.9m + 0.55m`, offset `0.275m`).
-  - Capital expands to `1.575m` (offset `0.2125m`).
+### Door Architectural Variants & Exact Footprints
+Constructed procedurally via `CastleDoorBuilder`:
+- **Footprint Rule**: A 1-tile door occupies **strictly 1 grid cell** (`2.0m x 0.9m`). A 2-tile door occupies **strictly 2 grid cells** (`4.0m x 0.9m`). No extra side pier tiles are generated.
+- **Wall Auto-Connection (0.0m Gap)**: Modular walls adjacent to doors auto-connect (`is_wall_or_portal_at`), extending their wall arms (`0.55m` extension) to touch the door jamb flush with 0.0m gap.
+- **Light-Tight & Non-Overlapping Frame**: Stone jambs extend from `y = 0.0m` to `y = door_h` (`3.25m`), top solid stone lintels sit directly on top of jambs from `door_h` to `4.5m` (zero Z-fighting), and interior rebate stops at `z = 0.08m` block all light leaks when the door is closed.
+- **Wooden Door (Round Arch Top)**:
+  - `wooden_door_1tile`: Single timber leaf with iron strap hinges swinging 90° inward matching Romanesque stone portal arch.
+  - `wooden_door_2tile`: Double meeting timber leaves spanning 2 tiles (`4.0m` total width, `3.5m` clear opening) under a 4.0m round arch frame.
+- **Iron Door (Square Lintel Top)**:
+  - `iron_door_1tile`: Single reinforced riveted iron plate door with rectangular square lintel profile and gold ring handle.
+  - `iron_door_2tile`: Double reinforced iron portal leaves meeting under a square reinforced stone lintel.
+- **Portcullis Gate (Vertical Sliding Lattice)**:
+  - `portcullis_1tile` & `portcullis_2tile`: Heavy cross-braced wrought iron lattice with bottom triangular spikes. Slides vertically inside recessed stone guide channels up to `y = 3.2m` (`is_slide = true`).
+
+### Interactive Door States & Keys
+- **Controller**: `HeroQuestDoor`
+- **Initial State Options** (Default for new doors: `Closed (Unlocked)`):
+  - `Closed (Unlocked)`: Walkable = `false`. Prompt: `"Press [E] or [SPACE] to open Door"`. Interacting opens the door and enables walkability (`walkable = true`).
+  - `Closed (Locked)`: Walkable = `false`. Prompt: `"Door is Locked (Requires %s)" % required_key`. Interacting without key returns `"The door is locked! You need the %s to open it."`. Interacting with key consumes key (if enabled), unlocks and opens.
+  - `Open`: Walkable = `true`. Prompt: `"Press [E] or [SPACE] to close Door"`. Starts in open pose (90° rotated leaf or raised gate). Interacting closes door and disables walkability (`walkable = false`).
+- **Floor Substrates**: Every door tile must have a solid stone floor tile instantiated beneath it.
 
 ### Mathematical Arch Spans & Heights
 The ends of curved arches land directly on column capitals (`y = 3.6m`):
-- **3-Tile Arch** (1 doorway): Span = `4.0m` (`2.0 * TILE_SIZE`), Radius = `2.0m`, Pier distance = `±1` tile.
-- **4-Tile Arch** (2 doorways): Span = `6.0m` (`3.0 * TILE_SIZE`), Radius = `3.0m`, Pier distance = `±1.5` tiles.
+- **3-Tile Arch**: Span = `4.0m` (`2.0 * TILE_SIZE`), Radius = `2.0m`, Pier distance = `±1` tile.
+- **4-Tile Arch**: Span = `6.0m` (`3.0 * TILE_SIZE`), Radius = `3.0m`, Pier distance = `±1.5` tiles.
 - **Corridor Door Matching**: When a corridor exits one room through a door/arch, the destination room **must also have a matching door or arch**. Never leave a bare hole in the wall.
 - **Corridor Width Matching**: Corridor floor width must match the portal arch spanning it. Ingress lanes must remain clear of blocking props.
 
@@ -127,10 +141,22 @@ Flat-backed furniture (cupboards, drawers, bookshelves, weapon racks) must rest 
 - Beacon light: `OmniLight3D` at `y = 0.45m` (`radius = 2.5m`, `energy = 0.6`, color matches item rarity).
 - Attached `HeroQuestInteractable`: `interact_type = ITEM`, prompt `Press [E] or [SPACE] to pick up [Name]`.
 
+### Wall Decorations & Placement Exceptions
+- Wall decorations (`torch`, `painting`, `wall_shield`, `banner`) mount directly on modular and window walls at `y = 2.2m`.
+- **Wall Preservation Rule**: Placing a wall decor on a wall tile replaces prior decorations on that cell while **strictly preserving the underlying wall and floor**.
+- **Two-Stage Deletion**: Right-clicking a wall with a decor removes the decor on the first click, and removes the wall on the second click.
+
+### Doors, Portcullises & Locks (`HeroQuestDoor`)
+- **Types**: `wooden_door_1tile`, `wooden_door_2tile`, `iron_door_1tile`, `iron_door_2tile`, `portcullis_1tile`, `portcullis_2tile`.
+- **Default State**: Closed, Unlocked (`is_open = false`, `is_locked = false`).
+- **Locks & Keys**: Locked doors require keys (`required_key = "Iron Key"`, etc.). Unlocking consumes the key if `consumes_key = true`. Dynamic walkability toggles automatically.
+- **Footprints**: Strict 1-tile or 2-tile spans without extra wall wings. Full-height light-tight stone frames (`4.5m`) with interior rebate stops.
+
 ### Treasure Chests
 - Footprint: 1 tile, `walkable = false`.
 - Attached `HeroQuestInteractable`: `interact_type = CHEST`.
 - Parameters: `gold_bounty` (int), `is_trapped` (bool), `relic_name` (string), cardinal rotation `rot_y` (`0`, `PI*0.5`, `PI`, `-PI*0.5`).
+
 
 ---
 

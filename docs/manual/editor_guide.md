@@ -33,7 +33,8 @@ The Level Editor allows real-time, in-game modification and creation of levels. 
 | **Left Click** | **Place Single Item** | Instantiates active tool object on the clicked cell. |
 | **Left Click + Drag (Floor)** | **Rectangular Floor Fill** | Defines bounding box `[min_x..max_x, min_z..max_z]` and fills floor tiles on release. |
 | **Left Click + Drag (Wall)** | **Line Wall Run** | Batches wall registration along the dominant orthogonal axis (X or Z) and refreshes auto-tiling. |
-| **Right Click** | **Contextual 2-Stage Erase** | Stage 1 removes object/wall and restores floor walkability; Stage 2 removes floor tile. |
+| **Right Click** | **Category-Specific / 2-Stage Erase** | When a tool is selected (`wall`, `window`, `door`, `arch`, `chest`, `item`, `prop`, `floor`), right click ONLY deletes objects matching that specific tool category. When unselected (`none` or `erase`), Stage 1 deletes objects/walls (keeping floor); Stage 2 deletes floor tile. |
+| **Hover Mouse** | **Status Bar Tile Inspector** | Hovering over any grid tile displays a live object summary in the status bar (Zone, Floor material, Wall type, Props/Doors). |
 | **Middle Mouse Drag** | **Pan Camera** | Moves the overhead camera across the grid. (WASD keys also pan). |
 | **`R` Key** | **Rotate Camera 90°** | Rotates camera viewpoint clockwise by 90°. |
 | **`Z` / `Ctrl+Z`** | **Undo** | Reverts the last editor action from history stack (up to 50 steps). |
@@ -88,8 +89,16 @@ Every non-floor placeable object displays an unshaded, semi-transparent holograp
 - **Substrate Generation**: Automatically places solid stone floor tiles beneath wall segments.
 
 ### 5.3. Arches, Doors & Portals
-- Supports 3-tile (single portal) and 4-tile (double portal) configurations.
-- **Wall Cutout**: Placing an arch over an existing wall removes the wall obstruction from the doorway cell, leaving an open walkable threshold flanked by stone piers.
+- **Procedural Variants**:
+  - **Wooden Door (Round Arch Top)**: 1-Tile (`wooden_door_1tile`) single leaf and 2-Tile (`wooden_door_2tile`) double leaf.
+  - **Iron Door (Square Lintel Top)**: 1-Tile (`iron_door_1tile`) single leaf and 2-Tile (`iron_door_2tile`) double leaf.
+  - **Portcullis Gate**: 1-Tile (`portcullis_1tile`) and 2-Tile (`portcullis_2tile`) vertical sliding iron lattice gates.
+  - **Arch Portals**: 3-Tile single open portal and 4-Tile double open portal.
+- **Door Configuration Inspector Panel (`LevelEditorDoorPanel`)**:
+  - **Initial State**: `Closed (Unlocked)` (**Default**), `Closed (Locked)`, or `Open`.
+  - **Required Key**: Specifies key name required to unlock (e.g. `Iron Key`, `Golden Key`, `Skeleton Key`).
+  - **Consume Key On Unlock**: Checkbox toggling whether the key item is consumed from inventory when unlocked.
+- **Wall Cutout & Substrates**: Placing a door or arch automatically cuts out existing wall segments, places solid stone floor substrates under the opening and flanking piers, and sets grid cell walkability to match initial state.
 
 ### 5.4. Windows
 - Window tiles are dedicated 0.9m thick modular wall units with jamb columns, lintel, sill shelf, and embrasure corner reveals.
@@ -113,9 +122,11 @@ Every non-floor placeable object displays an unshaded, semi-transparent holograp
 
 ## 6. Deletion, Persistence & Integrity
 
-### Contextual Two-Stage Deletion
-1. **Stage 1 (Object First)**: If an object, prop, arch, or wall exists at the cell, right-clicking deletes the object, clears collision bounds, and restores the floor tile to walkable.
-2. **Stage 2 (Floor Second)**: If the cell is empty of objects, right-clicking removes the floor tile itself.
+### Category-Specific & Unselected 2-Stage Deletion
+1. **Tool-Specific Deletion**: When a specific tool is active in the palette (`floor`, `wall`, `window`, `door`, `arch`, `chest`, `item`, `prop`), right-clicking strictly deletes objects matching that tool's specific category, ignoring all other elements on the cell.
+2. **Unselected Fallback**: When no tool is selected (`none` or `erase`):
+   - **Stage 1 (Objects First)**: Erases any object, wall, prop, door, or arch at the cell while preserving the floor tile substrate.
+   - **Stage 2 (Floor Second)**: If only the floor tile remains, erases the floor tile itself (making the cell an empty abyss).
 
 ### Pre-Save Health & Validation (`LevelEditorPersistence`)
 Before writing any level file to disk:

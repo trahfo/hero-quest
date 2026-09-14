@@ -410,10 +410,13 @@ Blocking furniture with a flat back (cupboards, drawers, bookshelves, weapon rac
 - Preview nodes clone the visual meshes, strip collision shapes, disable light sources, and apply a holographic unshaded material with `alpha = 0.22` (approx. 80% transparency), `cull_mode = CULL_DISABLED`, and `render_priority = 3`.
 - Windows and arches display their actual cutouts, gothic tracery, and stone piers rather than plain bounding boxes.
 
-### 26.2. Contextual Two-Stage Right-Click Deletion
-- **Stage 1 (Object First)**: If a prop, wall, chest, or arch exists at the hovered cell, right-clicking erases that object, restores the underlying floor tile's walkability, and preserves the floor mesh.
-- **Stage 2 (Floor Second)**: Only if no object exists on the tile does right-clicking delete the floor tile itself.
+### 26.2. Strict Category-Specific & Unselected 2-Stage Right-Click Deletion
+- **Category-Specific Tool Deletion**: When a specific tool is active (`floor`, `wall`, `window`, `door`, `arch`, `chest`, `item`, `prop`), right-clicking strictly deletes items matching that tool's specific category, ignoring all other elements on the cell.
+- **Unselected Fallback Deletion**: When no tool is selected (`none` or `erase`):
+  - **Stage 1 (Object First)**: If an object, prop, arch, door, window, or wall exists at the hovered cell, right-clicking erases that object, restores floor walkability, and preserves the floor substrate.
+  - **Stage 2 (Floor Second)**: If only the floor tile remains, right-clicking deletes the floor tile substrate itself (making the cell an empty abyss).
 - Camera panning is reassigned to **middle-mouse drag** (and WASD keys) to keep right-click completely unhindered for deletion.
+- **Status Bar Hover Inspector**: Hovering over grid cells dynamically updates the editor status bar to list all room zones, floor substrates, wall types, and objects present at `hovered_cell`.
 
 ### 26.3. Gap-Free Wall Line Batching
 - Dragging wall lines must pre-register all cells along the line into the model's grid in batch before evaluating connectivity.
@@ -724,3 +727,69 @@ Blocking furniture with a flat back (cupboards, drawers, bookshelves, weapon rac
 2. **Model State Flush**: `LevelEditorModel.discard_unsaved_changes()` flushes temporary node references, clears pending cell and prop modifications (`cell_data`, `erased_cells`, `erased_props`), and reloads the initial level metadata.
 3. **History Purge**: `LevelEditorHistory.clear()` purges all undo/redo history stacks from the discarded editing session, resetting UI undo/redo counts to `(0)`.
 4. **Room Overlays & Signs Sync**: `LevelEditorRoomManager.reset_state()` rebinds the overlay container, clears temporary overlay instances, and synchronizes room boundary overlays and 3D room placard signs with the restored level state.
+
+---
+
+## 37. Door Types, Interactive States, Keys & Lock Mechanics
+
+### 37.1. Door Architectural Variants & Exact 1/2-Tile Footprints
+Doors in Hero Quest 3D are constructed procedurally via `CastleDoorBuilder` and belong to 3 distinct architectural styles, spanning **exactly 1 or 2 tiles** without extra flanking pier columns:
+
+- **Exact Grid Footprint**: A 1-tile door occupies **strictly 1 grid cell** (`2.0m` width, `0.9m` depth). A 2-tile door occupies **strictly 2 grid cells** (`4.0m` width, `0.9m` depth). No external pier columns or adjacent wall tiles are auto-generated. Adjoining walls on either side are standard modular walls (or corners/T-junctions). *(Note: Arches remain multi-tile structures with separate piers).*
+- **Light-Tight Frame Construction**: Every door includes full-height stone jambs (`0.25m` width, `4.5m` height, `0.9m` wall depth) and a top solid stone lintel/spandrel infill (filling `y = 3.25m` up to `4.5m`) featuring interior rebate stops. Closed door leaves rest flush against the rebate lips so that zero light or sight leaks through.
+
+1. **Wooden Door (Round Arch Top)**:
+   - **1-Tile Span (`wooden_door_1tile`)**: Single heavy timber leaf with vertical planks, iron strap hinges, and round arch upper coping matching the Romanesque stone portal curve. Swings 90° inward on pivot at `(gx - 0.75, 0, gz)`.
+   - **2-Tile Span (`wooden_door_2tile`)**: Double meeting wooden leaves spanning 2 tiles (`4.0m` total width, `3.5m` clear opening) under a 4.0m round arch frame. Dual symmetric pivots swing open outward.
+2. **Iron Door (Square Lintel Top)**:
+   - **1-Tile Span (`iron_door_1tile`)**: Heavy riveted iron plate door with horizontal reinforcing bands, square rectangular lintel profile, and massive gold ring handle.
+   - **2-Tile Span (`iron_door_2tile`)**: Double reinforced iron portal leaves meeting at center under a square reinforced stone lintel.
+3. **Portcullis Gate (Vertical Sliding Lattice)**:
+   - **1-Tile Span (`portcullis_1tile`)** & **2-Tile Span (`portcullis_2tile`)**: Heavy cross-braced wrought iron lattice with bottom triangular spikes. Slides vertically inside recessed side stone guide tracks from `y = 0.0m` (closed) to `y = 3.2m` (open) (`is_slide = true`).
+
+### 37.2. Interactive States, Prompts & Locked Notifications
+- **Controller**: `HeroQuestDoor` attached to each door root node.
+- **States & Prompts**:
+  - `Closed (Unlocked)` (**Default for new doors**): Walkable = `false`. Prompt: `"Press [E] or [SPACE] to open Door"`. Interacting opens the door with sound effect and sets `walkable = true` across all occupied cells.
+  - `Closed (Locked)`: Walkable = `false`. Prompt: `"Door is Locked (Requires %s)" % required_key`.
+    - **Attempting Interaction Without Key**: Plays locked rattle sound and returns `"The door is locked! You need the %s to open it." % required_key`.
+    - **Interacting With Key in Inventory**: Unlocks and opens the door, consumes the key if `consumes_key = true`, plays unlock SFX, and returns `"Unlocked and opened the door with %s!" % required_key`.
+  - `Open`: Walkable = `true`. Prompt: `"Press [E] or [SPACE] to close Door"`. Leaf pivots rotated 90° (or portcullis elevated to `y = 3.2m`). Interacting closes the door and sets `walkable = false`.
+- **Dynamic Walkability**: Toggling open/close immediately updates `builder.grid[cell]["walkable"]` across all spanned cells so pathfinding and actor collision dynamically reflect the barrier state.
+
+### 37.3. Floor Substrates Under Doors
+- Every door tile must have a solid stone floor tile (`materials.mat_floor_stone`, `y = 0.0m`, thickness `0.28m`) instantiated beneath it (`LevelEditorModel` auto-spawns floor substrate on door placement).
+
+### 37.4. Keys & Floor Items
+- Keys are registered in `ItemDatabase` (`iron_key`, `golden_key`, `skeleton_key`) with item category `KEY`.
+- Keys can be stored inside treasure chests (`relic_name = "Iron Key"`), dropped in loot dialogs, or placed directly in the world via the editor's Item tool (`HeroQuestFloorItem`).
+
+---
+
+## 38. Seamless Wall-to-Door Connections, Fireplace Hearth Geometry & Window Mechanics
+
+### 38.1. Seamless Wall-to-Door Auto-Tiling (0.0m Gaps)
+- When a modular wall is adjacent to a door, the wall auto-tiling system (`is_wall_or_portal_at`) recognizes the door as a wall-connectable neighbor.
+- The modular wall automatically extends its arm (`0.55m` extension, from `0.45m` to `1.0m`), touching the door frame jamb seamlessly with **0.0m physical or visual gap**.
+- When placing or erasing a door in the level editor, neighboring modular walls immediately re-evaluate connections and update their arm extensions.
+
+### 38.2. Non-Overlapping Door Frame Geometry (Z-Fighting Prevention)
+- Door jambs extend vertically from `y = 0.0m` to `y = door_h` (`3.25m`).
+- Solid stone lintels sit directly on top of the jambs from `y = door_h` to `y = 4.5m` with zero volumetric overlap.
+- Rebate stop lips sit cleanly behind the closed door leaf (`z = 0.08m`), preventing coplanar face flickering while completely blocking ambient and directional light leaks.
+
+### 38.3. Fireplace Hearth Clearance (1/3 Height Plate)
+- Castle chimney fireplaces (`create_chimney_fireplace`) feature a front hearth curb/plate measuring strictly **1/3 of cavity height** (`0.5m` height at `y = 0.25m`).
+- This clearance ensures the burning wood logs (`y = 0.25m`) and animated procedural fire flames (`y = 0.45m`) remain unobstructed and fully visible from all camera angles.
+
+### 38.4. Window Wall Placement, Rotation & Contextual Erasure
+- **Placement & Rotation**: Clicking on an existing window wall rotates its orientation normal by 90° clockwise cleanly without duplicate instances or crashes.
+- **Contextual Erasure**: Right-clicking on a window wall with either the `wall` tool or `window` tool safely removes the window and restores the underlying stone floor.
+
+### 38.5. Wall Decoration Placement Exception (Wall Preservation & Two-Stage Erasure)
+- **Wall Preservation on Placement**: Wall decorations (torches, paintings, wall shields, banners) attach directly to wall surfaces. When placing a wall decoration on a tile occupied by a modular or window wall, the editor replaces any prior decoration on that cell while **strictly preserving the underlying wall and floor nodes** (`keep_wall = true`).
+- **Two-Stage Contextual Erasure**:
+  - **First Right-Click**: Removes the attached wall decoration only (`erased_props[cell] = true`), leaving the solid wall intact.
+  - **Second Right-Click**: Removes the wall structure itself, reverting the cell back to a standard walkable floor tile.
+
+
