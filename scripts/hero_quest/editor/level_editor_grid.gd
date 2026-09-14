@@ -24,7 +24,7 @@ render_mode unshaded, cull_disabled, depth_draw_always;
 uniform vec4 line_color : source_color = vec4(0.85, 0.9, 1.0, 0.35);
 uniform float tile_size = 2.0;
 uniform float line_thickness = 0.04;
-uniform float dot_spacing = 0.35;
+uniform float dot_spacing = 0.25;
 
 varying vec3 world_pos;
 
@@ -34,7 +34,7 @@ void vertex() {
 
 void fragment() {
 	vec2 coord = world_pos.xz;
-	vec2 f = abs(fract(coord / tile_size + 0.5) - 0.5) * tile_size;
+	vec2 f = abs(fract(coord / tile_size) - 0.5) * tile_size;
 
 	bool on_line_x = f.y < line_thickness;
 	bool on_line_z = f.x < line_thickness;
