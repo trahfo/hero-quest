@@ -10,7 +10,7 @@ var builder: Node3D
 var model: RefCounted
 var history: RefCounted
 
-var active_room_name: String = "The Great Hall"
+var active_room_name: String = ""
 var paint_mode: String = "brush" # "brush", "box", "erase"
 var is_walls_only: bool = false
 var hidden_nodes: Array[Node3D] = []
@@ -50,6 +50,13 @@ func _init_room_colors() -> void:
 		var r_name = summary[i]["name"]
 		if not room_colors.has(r_name):
 			room_colors[r_name] = palette_colors[i % palette_colors.size()]
+	if active_room_name.is_empty():
+		if not summary.is_empty():
+			active_room_name = summary[0]["name"]
+		elif model and model.has_method("get_level_name") and model.get_level_name() != "":
+			active_room_name = model.get_level_name()
+		else:
+			active_room_name = "Room 1"
 
 func get_room_color(r_name: String) -> Color:
 	if not room_colors.has(r_name):
@@ -231,7 +238,13 @@ func delete_room(r_name: String) -> void:
 		erase_cells(matching_cells)
 	room_colors.erase(r_name)
 	if active_room_name == r_name:
-		set_active_room("The Great Hall")
+		var summary = get_room_summary()
+		var fallback = "Room 1"
+		if not summary.is_empty():
+			fallback = summary[0]["name"]
+		elif model and model.has_method("get_level_name") and model.get_level_name() != "":
+			fallback = model.get_level_name()
+		set_active_room(fallback)
 	refresh_overlays()
 	rooms_updated.emit()
 

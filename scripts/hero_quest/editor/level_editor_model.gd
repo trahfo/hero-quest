@@ -11,6 +11,7 @@ const CastleLevelPropSpawner = preload("res://scripts/hero_quest/level/castle_le
 const CastleLevelData = preload("res://scripts/hero_quest/level/castle_level_data.gd")
 const LevelEditorWallAutoTiler = preload("res://scripts/hero_quest/editor/level_editor_wall_autotiler.gd")
 const LevelEditorCustomPropSpawner = preload("res://scripts/hero_quest/editor/level_editor_custom_prop_spawner.gd")
+const LevelEditorPersistence = preload("res://scripts/hero_quest/editor/level_editor_persistence.gd")
 
 var builder: Node3D
 var materials: CastleMaterials
@@ -30,6 +31,8 @@ var active_file_path: String = "res://data/levels/first_level.json"
 # State per cell: { "tile": Dictionary, "wall": Dictionary, "prop": Dictionary, "nodes": Array[Node3D] }
 var cell_data: Dictionary = {}
 var erased_cells: Dictionary = {}
+var erased_props: Dictionary = {}
+var last_save_result: Dictionary = {}
 
 func _init(p_builder: Node3D, p_file_path: String = "res://data/levels/first_level.json", p_level_name: String = "") -> void:
 	builder = p_builder
@@ -53,16 +56,7 @@ func _ensure_custom_room() -> void:
 		builder.add_child(custom_room_node)
 
 func _load_initial_data(p_level_name: String = "") -> void:
-	if FileAccess.file_exists(active_file_path):
-		var parsed = JSON.parse_string(FileAccess.get_file_as_string(active_file_path))
-		if parsed is Dictionary: current_level_data = parsed
-	if current_level_data.is_empty():
-		var display_name = p_level_name if p_level_name != "" else "Untitled Level"
-		current_level_data = {
-			"level_id": active_file_path.get_file().get_basename(),
-			"name": display_name,
-			"rooms": []
-		}
+	current_level_data = LevelEditorPersistence.load_initial_level_data(active_file_path, builder, p_level_name)
 
 func is_wall_at(cell: Vector2i) -> bool:
 	if cell_data.has(cell) and cell_data[cell].get("wall") != null: return true
@@ -132,7 +126,8 @@ func set_cell_zone(cell: Vector2i, zone: String) -> void:
 				break
 
 func get_level_name() -> String:
-	return str(current_level_data.get("name", "Untitled Level"))
+	var fallback = active_file_path.get_file().get_basename().capitalize()
+	return str(current_level_data.get("name", fallback if fallback != "" else "Custom Realm"))
 
 func set_level_name(p_name: String) -> void:
 	current_level_data["name"] = p_name
@@ -234,6 +229,8 @@ func spawn_custom_prop(cell: Vector2i, p_info: Dictionary) -> Node3D:
 		else:
 			builder.grid[cell]["walkable"] = true
 
+	if not p_info.has("cell"):
+		p_info["cell"] = CastleLevelData.vec2i_to_arr(cell)
 	cell_data[cell]["prop"] = p_info
 
 	var created_node = custom_spawner.spawn(custom_room_node, cell, p_info)
@@ -297,7 +294,17 @@ func erase_object_at_cell(cell: Vector2i) -> bool:
 			had_obj = true
 			cell_data[cell]["wall"] = null
 
-	var has_grid_prop = builder.grid.has(cell) and builder.grid[cell].get("prop") != null
+	var has_grid_prop = false
+	if builder and builder.grid.has(cell):
+		if builder.grid[cell].get("prop") != null:
+			has_grid_prop = true
+		elif not builder.grid[cell].get("walkable", true) and not was_wall:
+			has_grid_prop = true
+		else:
+			for ch in builder.interactive_chests:
+				if is_instance_valid(ch) and builder.world_to_grid(ch.global_position) == cell:
+					has_grid_prop = true
+					break
 	if was_wall or has_grid_prop:
 		had_obj = true
 
@@ -309,6 +316,7 @@ func erase_object_at_cell(cell: Vector2i) -> bool:
 	if was_wall:
 		set_floor(cell, "stone", 1, true)
 	else:
+		erased_props[cell] = true
 		if cell_data.has(cell) and cell_data[cell].get("tile") != null:
 			builder.grid[cell]["walkable"] = cell_data[cell]["tile"].get("walkable", true)
 			builder.grid[cell]["type"] = cell_data[cell]["tile"].get("type", 1)
@@ -323,6 +331,7 @@ func erase_cell(cell: Vector2i) -> void:
 	var was_wall = is_wall_at(cell)
 	_free_object_nodes_at_cell(cell, false)
 	cell_data.erase(cell)
+	erased_props.erase(cell)
 	erased_cells[cell] = true
 	builder.grid.erase(cell)
 	if was_wall:
@@ -337,58 +346,14 @@ func discard_unsaved_changes() -> void:
 		c.queue_free()
 	cell_data.clear()
 	erased_cells.clear()
+	erased_props.clear()
 	_load_initial_data()
 
 func save_to_json(file_path: String = "") -> bool:
 	var path = file_path if file_path != "" else active_file_path
-	var custom_room: Dictionary = {
-		"name": "EditorCustom", "tiles": [], "carpets": [], "pillars": [], "torches": [],
-		"arches": [], "props": [], "lights": [], "windows": [], "modular_walls": []
-	}
-	for d in cell_data.values():
-		if d.get("tile") != null: custom_room["tiles"].append(d["tile"])
-		if d.get("wall") != null:
-			var w = d["wall"]
-			if w.get("type") == "window": custom_room["windows"].append(w)
-			else: custom_room["modular_walls"].append(w)
-		if d.get("prop") != null:
-			var p = d["prop"]
-			if p.get("is_arch", false): custom_room["arches"].append(p)
-			else: custom_room["props"].append(p)
-
-	var touched: Dictionary = {}
-	for c in cell_data.keys(): touched[c] = true
-	for c in erased_cells.keys(): touched[c] = true
-
-	var rooms: Array = current_level_data.get("rooms", [])
-	var idx = -1
-	for i in range(rooms.size()):
-		var r = rooms[i]
-		if r.get("name") == "EditorCustom":
-			idx = i
-			continue
-		_prune_room_cells(r, touched)
-
-	if idx >= 0: rooms[idx] = custom_room
-	else: rooms.append(custom_room)
-	current_level_data["rooms"] = rooms
-
-	var file = FileAccess.open(path, FileAccess.WRITE)
-	if not file:
-		push_error("Failed to write level file to: " + path)
+	last_save_result = LevelEditorPersistence.save_level_to_json(path, current_level_data, cell_data, erased_cells, erased_props, builder)
+	if not last_save_result.get("ok", false):
+		push_error("Failed to write level file to: " + path + " - " + last_save_result.get("error", ""))
 		return false
-	file.store_string(JSON.stringify(current_level_data, "\t"))
-	file.close()
 	print("Level Editor: Successfully saved level to ", path)
 	return true
-
-func _prune_room_cells(room: Dictionary, touched: Dictionary) -> void:
-	for k in ["modular_walls", "windows", "tiles", "props", "arches", "pillars", "torches"]:
-		if not room.has(k) or not (room[k] is Array): continue
-		var filtered = []
-		for item in room[k]:
-			if item is Dictionary and item.has("cell"):
-				var c = CastleLevelData.arr_to_vec2i(item["cell"])
-				if touched.has(c): continue
-			filtered.append(item)
-		room[k] = filtered
