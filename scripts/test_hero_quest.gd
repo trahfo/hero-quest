@@ -1196,6 +1196,8 @@ func _init() -> void:
 	var LevelEditorChestPanelClass = load("res://scripts/hero_quest/editor/level_editor_chest_panel.gd")
 
 	var test_path = "res://data/levels/test_room_level.json"
+	if FileAccess.file_exists(test_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
 	var test_model = LevelEditorModelClass.new(builder, test_path, "Initial Realm")
 	assert(test_model.get_level_name() == "Initial Realm", "Initial level name must match")
 
@@ -1226,7 +1228,7 @@ func _init() -> void:
 	assert(room_mgr.hidden_nodes.is_empty(), "Hidden nodes list must be empty after restoration")
 	print("  - Walls-only blueprint mode cleanly restored all element visibilities.")
 
-	# 3. Room Tile Painting & Translucent Overlays
+	# 3. Room Tile Painting & Translucent Overlays + 3D Room Signs
 	var paint_cells: Array[Vector2i] = [Vector2i(0, 1), Vector2i(0, 2), Vector2i(1, 1), Vector2i(1, 2)]
 	room_mgr.paint_cells(paint_cells, "The Grand Library")
 	for c in paint_cells:
@@ -1241,31 +1243,84 @@ func _init() -> void:
 			found_summary = true
 			break
 	assert(found_summary, "Room summary must include painted room")
-	print("  - Room painting and translucent overlays verified for 4 tiles.")
 
-	# 4. Room Renaming & Deletion
+	# Verify 3D in-world room sign generated for painted room
+	assert(room_mgr.sign_instances.has("The Grand Library"), "Room manager must generate 3D sign for painted room")
+	var sign_node = room_mgr.sign_instances["The Grand Library"]
+	assert(sign_node != null, "Sign node must not be null")
+	var placard_pivot = sign_node.get_node_or_null("PlacardPivot")
+	assert(placard_pivot != null, "Sign must have PlacardPivot")
+	var sign_label = placard_pivot.get_node_or_null("Label")
+	assert(sign_label is Label3D, "Sign must have Label3D")
+	assert(sign_label.text == "The Grand Library", "Sign label must display room name")
+	assert(sign_label.billboard == BaseMaterial3D.BILLBOARD_FIXED_Y, "Sign label must use BILLBOARD_FIXED_Y")
+	print("  - Room painting, translucent overlays, and in-world 3D signs verified for 4 tiles.")
+
+	# 4. Room Renaming & Deletion + Sign Updates
 	room_mgr.rename_room("The Grand Library", "Arcane Archives")
 	for c in paint_cells:
 		assert(builder.grid[c]["zone"] == "Arcane Archives", "Renamed room zone must reflect Arcane Archives")
+	assert(room_mgr.sign_instances.has("Arcane Archives"), "3D sign must update to Arcane Archives")
+	assert(not room_mgr.sign_instances.has("The Grand Library"), "Old 3D sign must be removed")
+
 	room_mgr.delete_room("Arcane Archives")
 	for c in paint_cells:
 		assert(builder.grid[c]["zone"] != "Arcane Archives", "Deleted room zone should no longer be Arcane Archives")
-	print("  - Room rename and deletion verified across grid and overlays.")
+	assert(not room_mgr.sign_instances.has("Arcane Archives"), "Deleted room sign must be removed")
+	print("  - Room rename, deletion, and 3D sign synchronizations verified.")
 
-	# 5. UI Panels Verification
+	# 4b. save_or_rename_active_room Helper Logic
+	var res_empty = room_mgr.save_or_rename_active_room("   ")
+	assert(res_empty["success"] == false, "Empty room name must fail validation")
+
+	room_mgr.set_active_room("Unpainted Hall")
+	var res_new = room_mgr.save_or_rename_active_room("Armory Hall")
+	assert(res_new["success"] == true and res_new["action"] == "set", "Setting empty room name should succeed")
+	assert(room_mgr.active_room_name == "Armory Hall", "Active room should be Armory Hall")
+
+	room_mgr.paint_cells(paint_cells, "Armory Hall")
+	assert(room_mgr.get_room_tile_count("Armory Hall") == 4, "Tile count helper should return 4")
+	var res_rename = room_mgr.save_or_rename_active_room("Royal Armory")
+	assert(res_rename["success"] == true and res_rename["action"] == "renamed", "Renaming populated room should succeed")
+	assert(room_mgr.active_room_name == "Royal Armory", "Active room should update to Royal Armory")
+	assert(room_mgr.sign_instances.has("Royal Armory"), "3D sign should exist for Royal Armory")
+	print("  - save_or_rename_active_room atomic logic verified for empty and painted rooms.")
+
+	# 5. UI Panels Verification & Interactive Save Flow
 	var chest_panel = LevelEditorChestPanelClass.new()
 	var cfg = chest_panel.get_chest_config()
 	assert(cfg.has("relic_name") and cfg.has("gold") and cfg.has("is_trapped"), "Chest config must have standard fields")
 
 	var room_panel = LevelEditorRoomPanelClass.new(room_mgr)
 	assert(room_panel != null, "Room panel must initialize")
+	assert(room_panel.save_btn != null, "Room panel must contain Save button")
+	assert(room_panel.room_name_input != null, "Room panel must contain Room Name input")
+	assert(room_panel.active_badge_lbl != null, "Room panel must contain active badge label")
+
+	# Test UI save flow
+	room_panel.room_name_input.text = "Grand Crypt"
+	room_panel._save_name()
+	assert(room_mgr.active_room_name == "Grand Crypt", "UI _save_name() should update active room to Grand Crypt")
+	assert(room_panel.active_badge_lbl.text.begins_with("Grand Crypt"), "Active badge should reflect Grand Crypt")
+	print("  - Room panel UI controls, Save button, and active badge synchronization verified.")
+
+	# 6. Editor Grid Line Perimeter Alignment Verification
+	var LevelEditorGridClass = load("res://scripts/hero_quest/editor/level_editor_grid.gd")
+	var editor_grid = LevelEditorGridClass.new()
+	assert(editor_grid != null, "LevelEditorGrid should instantiate")
+	var grid_shader = (editor_grid.grid_mesh_instance.material_override as ShaderMaterial).shader
+	assert(grid_shader.code.contains("fract(coord / tile_size) - 0.5"), "Grid shader must align lines to tile boundaries")
+	assert(not grid_shader.code.contains("coord / tile_size + 0.5"), "Grid shader must not center lines on tiles with + 0.5 shift")
+	print("  - Editor grid line perimeter boundary alignment verified.")
+
 	room_panel.queue_free()
 	chest_panel.queue_free()
+	editor_grid.queue_free()
 
 	if FileAccess.file_exists(test_path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_path))
 
-	print("  -> Passed! Complete Room / Area management, blueprint mode, and level renaming confirmed.")
+	print("  -> Passed! Complete Room / Area management, 3D signs, grid alignment, and level renaming confirmed.")
 
 	# =========================================================================
 	# [TEST 21] Verifying Gapless Floor Tiles, PBR Boundary Textures & Editor Wall Transparency
