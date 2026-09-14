@@ -8,13 +8,18 @@ const TILE_SIZE: float = 2.0
 var materials: CastleMaterials
 var grid_to_world_fn: Callable
 var register_tile_fn: Callable
+var floor_cells: Dictionary = {}
 
 func _init(p_materials: CastleMaterials, p_grid_to_world: Callable, p_register_tile: Callable) -> void:
 	materials = p_materials
 	grid_to_world_fn = p_grid_to_world
 	register_tile_fn = p_register_tile
 
+func clear_cache() -> void:
+	floor_cells.clear()
+
 func create_square_tile_mesh(parent: Node3D, cell: Vector2i, mat: Material) -> StaticBody3D:
+	floor_cells[cell] = true
 	var body = StaticBody3D.new()
 	body.position = grid_to_world_fn.call(cell)
 
@@ -98,6 +103,9 @@ func create_wall_segment(parent: Node3D, cell: Vector2i, height: float = 4.0) ->
 	return body
 
 func create_arch_pier(parent: Node3D, cell: Vector2i, height: float = 3.6, extend_dir: Vector2i = Vector2i.ZERO) -> StaticBody3D:
+	if not floor_cells.has(cell):
+		create_square_tile_mesh(parent, cell, materials.mat_floor_stone)
+
 	if register_tile_fn.is_valid():
 		register_tile_fn.call(cell, 6, false, "Arch Pier") # 6 = TileType.WALL
 

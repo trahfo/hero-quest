@@ -1,0 +1,103 @@
+{
+	"level_id": "custom_level_3",
+	"name": "Custom Level 3",
+	"rooms": [
+		{
+			"arches": [],
+			"carpets": [],
+			"lights": [],
+			"modular_walls": [
+				{
+					"cell": [
+						-1,
+						0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-1,
+						2
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-1,
+						3
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-1,
+						4
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						0,
+						1
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						1,
+						1
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-1,
+						1
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				}
+			],
+			"name": "EditorCustom",
+			"pillars": [],
+			"props": [],
+			"tiles": [],
+			"torches": [],
+			"windows": []
+		}
+	]
+}

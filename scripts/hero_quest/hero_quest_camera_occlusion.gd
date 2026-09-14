@@ -75,9 +75,10 @@ func process_occlusion(delta: float) -> void:
 
 	# Update linger timers and restore meshes that have cleared occlusion
 	var to_restore: Array[MeshInstance3D] = []
+	var dead_keys: Array = []
 	for mesh_inst in faded_meshes.keys():
 		if not is_instance_valid(mesh_inst):
-			to_restore.append(mesh_inst)
+			dead_keys.append(mesh_inst)
 			continue
 		if not active_mesh_instances.has(mesh_inst):
 			var rem = mesh_linger.get(mesh_inst, 0.0) - delta
@@ -85,6 +86,10 @@ func process_occlusion(delta: float) -> void:
 				to_restore.append(mesh_inst)
 			else:
 				mesh_linger[mesh_inst] = rem
+
+	for k in dead_keys:
+		faded_meshes.erase(k)
+		mesh_linger.erase(k)
 
 	for mesh_inst in to_restore:
 		_restore_mesh(mesh_inst)

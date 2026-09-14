@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/hero_quest/hero_quest_hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/hero_quest/hero_quest_character_sheet.tscn" id="2_sheet"]
+[ext_resource type="PackedScene" path="res://scenes/hero_quest/hero_quest_loot_dialog.tscn" id="3_loot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_top"]
 bg_color = Color(0.08, 0.09, 0.12, 0.85)
@@ -100,6 +102,24 @@ theme_override_font_sizes/font_size = 22
 text = "⚔️  THE GRAND CHAPEL"
 horizontal_alignment = 1
 
+[node name="HeroSheetButton" type="Button" parent="TopBar"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -340.0
+offset_top = 18.0
+offset_right = -176.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0.9, 0.7, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_hover")
+text = "🛡️ HERO SHEET (C)"
+
 [node name="MenuButton" type="Button" parent="TopBar"]
 layout_mode = 1
 anchors_preset = 1
@@ -122,7 +142,7 @@ text = "🏰 MENU (ESC)"
 layout_mode = 1
 offset_left = 24.0
 offset_top = 18.0
-offset_right = 320.0
+offset_right = 380.0
 offset_bottom = 60.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_top")
 
@@ -130,7 +150,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_top")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.9, 0.9)
 theme_override_font_sizes/font_size = 14
-text = "🎮 WASD: Move | E / Space: Interact | Wheel: Zoom"
+text = "🎮 WASD: Move | E: Interact | C: Hero Sheet | Wheel: Zoom"
 vertical_alignment = 1
 
 [node name="BottomPrompt" type="PanelContainer" parent="."]
@@ -190,3 +210,10 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 20
 text = "✨ Discovered: Holy Chalice of Light!"
 horizontal_alignment = 1
+
+[node name="HeroQuestCharacterSheet" parent="." instance=ExtResource("2_sheet")]
+visible = false
+
+[node name="HeroQuestLootDialog" parent="." instance=ExtResource("3_loot")]
+visible = false
+

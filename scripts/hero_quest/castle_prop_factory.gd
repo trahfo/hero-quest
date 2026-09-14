@@ -176,13 +176,15 @@ func create_arms_shelf(parent: Node3D, pos: Vector3, rot_y: float) -> StaticBody
 # INTERACTIVE WORLD ENTITIES & BLOCKERS
 # ---------------------------------------------------------
 
-func create_treasure_chest(parent: Node3D, pos: Vector3, rot_y: float, loot_name: String) -> StaticBody3D:
+func create_treasure_chest(parent: Node3D, pos: Vector3, rot_y: float, loot_name: String, mini_game_id: String = "") -> StaticBody3D:
 	var body = StaticBody3D.new()
 	body.position = pos
 	body.rotation.y = rot_y
 	body.set_meta("is_chest", true)
 	body.set_meta("loot_name", loot_name)
 	body.set_meta("is_opened", false)
+	if mini_game_id != "":
+		body.set_meta("mini_game_id", mini_game_id)
 
 	var size = Vector3(1.2, 0.9, 0.8)
 	var col = CollisionShape3D.new()
@@ -225,6 +227,8 @@ func create_treasure_chest(parent: Node3D, pos: Vector3, rot_y: float, loot_name
 	interactable.name = "Interactable"
 	interactable.interact_type = HeroQuestInteractable.InteractType.CHEST
 	interactable.loot_name = loot_name
+	if mini_game_id != "":
+		interactable.mini_game_id = mini_game_id
 	body.add_child(interactable)
 
 	parent.add_child(body)
