@@ -9,7 +9,139 @@
 			"modular_walls": [
 				{
 					"cell": [
-						-1,
+						-1.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-1.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-1.0,
+						3.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-1.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						0.0,
+						1.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						1.0,
+						1.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-1.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						2,
+						-2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						3,
+						-2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						4,
+						-2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						5,
+						-2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						5,
 						0
 					],
 					"down": true,
@@ -21,33 +153,21 @@
 				},
 				{
 					"cell": [
-						-1,
+						5,
+						1
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						5,
 						2
 					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-1,
-						3
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-1,
-						4
-					],
 					"down": false,
 					"height": 4.5,
 					"left": false,
@@ -57,20 +177,8 @@
 				},
 				{
 					"cell": [
-						0,
-						1
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						1,
-						1
+						6,
+						-2
 					],
 					"down": false,
 					"height": 4.5,
@@ -78,26 +186,813 @@
 					"right": false,
 					"type": "modular",
 					"up": false
-				},
-				{
-					"cell": [
-						-1,
-						1
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": true,
-					"type": "modular",
-					"up": true
 				}
 			],
 			"name": "EditorCustom",
 			"pillars": [],
-			"props": [],
-			"tiles": [],
+			"props": [
+				{
+					"cell": [
+						2,
+						0
+					],
+					"pos": [
+						4.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "anvil"
+				},
+				{
+					"cell": [
+						2,
+						1
+					],
+					"pos": [
+						4.0,
+						0.0,
+						2.0
+					],
+					"rot_y": 0.0,
+					"type": "candelabra"
+				},
+				{
+					"cell": [
+						2,
+						2
+					],
+					"pos": [
+						4.0,
+						0.0,
+						4.0
+					],
+					"rot_y": 0.0,
+					"type": "anvil"
+				}
+			],
+			"tiles": [
+				{
+					"cell": [
+						0,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-8
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-7
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-6
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-5
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-4
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						-1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						0
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						1
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				}
+			],
 			"torches": [],
 			"windows": []
 		}
-	]
+	],
+	"spawn": {
+		"grid": [
+			0.0,
+			0.0
+		],
+		"yaw": 45.0
+	},
+	"version": 1.0
 }
