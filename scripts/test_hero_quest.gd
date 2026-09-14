@@ -1267,8 +1267,232 @@ func _init() -> void:
 
 	print("  -> Passed! Complete Room / Area management, blueprint mode, and level renaming confirmed.")
 
+	# =========================================================================
+	# [TEST 21] Verifying Gapless Floor Tiles, PBR Boundary Textures & Editor Wall Transparency
+	# =========================================================================
+	print("\n[TEST 21] Verifying Gapless Floor Tiles, PBR Boundary Textures & Editor Wall Transparency...")
+
+	# 1. Floor mesh size has 0.0m gaps (full 2.0m x 2.0m)
+	var test_parent = Node3D.new()
+	builder.add_child(test_parent)
+	var test_tile = builder.mesh_builder.create_square_tile_mesh(test_parent, Vector2i(99, 99), builder.materials.mat_floor_stone)
+	assert(test_tile != null, "Floor tile must be instantiated")
+	var found_box_mesh = false
+	for child in test_tile.get_children():
+		if child is MeshInstance3D and child.mesh is BoxMesh:
+			var bm = child.mesh as BoxMesh
+			assert(bm.size.x == 2.0 and bm.size.z == 2.0, "Floor box mesh size must be exactly 2.0x2.0m (no physical gaps)")
+			found_box_mesh = true
+			break
+	assert(found_box_mesh, "Floor tile must contain BoxMesh")
+	test_parent.queue_free()
+	print("  - Gapless floor mesh verified: BoxMesh size is 2.0m x 2.0m with 0.0m physical gaps.")
+
+	# 2. PBR Floor Textures & Normal Maps
+	var mats = builder.materials
+	assert(mats.mat_floor_stone.albedo_texture != null, "Stone floor must have procedural albedo texture")
+	assert(mats.mat_floor_stone.normal_texture != null, "Stone floor must have procedural normal map")
+	assert(mats.mat_floor_stone.normal_enabled == true, "Stone floor normal mapping must be enabled")
+	assert(mats.mat_floor_chapel.albedo_texture != null, "Chapel floor must have procedural albedo texture")
+	assert(mats.mat_floor_wood.albedo_texture != null, "Wood floor must have procedural albedo texture")
+	assert(mats.mat_floor_wood.normal_enabled == true, "Wood floor normal mapping must be enabled")
+	print("  - PBR procedural textures & beveled normal maps verified across all floor materials.")
+
+	# 3. Wall Transparency Toggling on Materials
+	mats.set_walls_transparent(true)
+	assert(mats.walls_transparent == true, "walls_transparent should be true")
+	assert(mats.mat_wall_stone.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA, "Wall stone transparency must be ALPHA")
+	assert(mats.mat_wall_stone.albedo_color.a <= 0.35, "Wall stone alpha should be <= 0.35")
+	assert(mats.mat_wall_trim.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA, "Wall trim transparency must be ALPHA")
+
+	mats.set_walls_transparent(false)
+	assert(mats.walls_transparent == false, "walls_transparent should be false")
+	assert(mats.mat_wall_stone.transparency == BaseMaterial3D.TRANSPARENCY_DISABLED, "Wall stone transparency must be DISABLED")
+	assert(mats.mat_wall_stone.albedo_color.a == 1.0, "Wall stone alpha must be 1.0")
+	print("  - CastleMaterials wall transparency toggle verified: alpha smoothly transitions and restores.")
+
+	# 4. Level Editor Floor Tool Wall Transparency Integration
+	var LevelEditorClass = load("res://scripts/hero_quest/editor/level_editor.gd")
+	var t_ed_game = Node3D.new()
+	root.add_child(t_ed_game)
+	var test_cam = Camera3D.new()
+	var test_pivot = Node3D.new()
+	t_ed_game.add_child(test_cam)
+	t_ed_game.add_child(test_pivot)
+	var ed = LevelEditorClass.new()
+	t_ed_game.add_child(ed)
+	var test_lvl_path = "res://data/levels/test_transparency_level.json"
+	ed.setup(t_ed_game, builder, test_cam, test_pivot, test_lvl_path)
+	ed.toggle_editor()
+	assert(ed.is_active == true, "Editor must be active")
+
+	# Select floor tool
+	ed.tool_handler.set_tool("floor", {"mat": "stone", "type": 1, "walkable": true})
+	assert(mats.walls_transparent == true, "Selecting floor tool must make walls transparent")
+	assert(mats.mat_wall_stone.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA, "Wall stone must be transparent while floor tool active")
+
+	# Select wall tool -> walls become solid
+	ed.tool_handler.set_tool("wall", {})
+	assert(mats.walls_transparent == false, "Switching away from floor tool must restore solid walls")
+	assert(mats.mat_wall_stone.transparency == BaseMaterial3D.TRANSPARENCY_DISABLED, "Wall stone must be solid while wall tool active")
+
+	# Select floor tool again and exit editor -> walls restored to solid
+	ed.tool_handler.set_tool("floor", {"mat": "stone", "type": 1, "walkable": true})
+	assert(mats.walls_transparent == true, "Selecting floor tool must make walls transparent")
+	ed.toggle_editor()
+	assert(ed.is_active == false, "Editor must be closed")
+	assert(mats.walls_transparent == false, "Exiting editor must restore solid walls")
+	assert(mats.mat_wall_stone.transparency == BaseMaterial3D.TRANSPARENCY_DISABLED, "Wall stone must be solid when editor exits")
+
+	t_ed_game.queue_free()
+	if FileAccess.file_exists(test_lvl_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(test_lvl_path))
+	print("  - Level Editor integration verified: floor tool triggers transparent walls and restores solid walls on tool switch / exit.")
+	print("  -> Passed! Gapless floor tiles, PBR tile boundary maps, and transparent floor-building walls all confirmed.")
+
+	# =========================================================================
+	# [TEST 22] Verifying Level Editor Lossless Multi-Session Persistence, Equal Treatment & Pre-Save Validation
+	# =========================================================================
+	print("\n[TEST 22] Verifying Level Editor Lossless Multi-Session Persistence & Pre-Save Validation...")
+
+	# Part 1: Multi-Session Retention on Custom Level
+	var ms_path = "res://data/levels/test_multisession_persist.json"
+	if FileAccess.file_exists(ms_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(ms_path))
+
+	# Session 1: Place 3 floors, 2 walls, 1 chest
+	var session1_model = LevelEditorModelClass.new(builder, ms_path, "Dungeon Keep")
+	assert(session1_model.get_level_name() == "Dungeon Keep", "Level name should match custom name")
+	session1_model.set_floor(Vector2i(10, 10), "stone", 1, true)
+	session1_model.set_floor(Vector2i(10, 11), "stone", 1, true)
+	session1_model.set_floor(Vector2i(10, 12), "stone", 1, true)
+	session1_model.set_wall(Vector2i(11, 10))
+	session1_model.set_wall(Vector2i(11, 11))
+	session1_model.spawn_custom_prop(Vector2i(10, 10), {"type": "chest", "gold": 100})
+
+	var s1_ok = session1_model.save_to_json(ms_path)
+	assert(s1_ok, "Session 1 save must succeed")
+	assert(FileAccess.file_exists(ms_path), "Session 1 level file must exist")
+
+	var s1_parsed = JSON.parse_string(FileAccess.get_file_as_string(ms_path))
+	var s1_custom = {}
+	for r in s1_parsed.get("rooms", []):
+		if r.get("name") == "EditorCustom": s1_custom = r
+	assert(not s1_custom.is_empty(), "EditorCustom room must be saved in Session 1")
+	assert(s1_custom.get("tiles", []).size() >= 3, "Session 1 must have at least 3 tiles")
+	assert(s1_custom.get("modular_walls", []).size() >= 2, "Session 1 must have at least 2 walls")
+	assert(s1_custom.get("props", []).size() >= 1, "Session 1 must have at least 1 prop")
+	print("  - Session 1 saved: 3 floors, 2 walls, 1 chest.")
+
+	# Session 2: Reload level from disk into a fresh builder and model, add 1 new floor and 1 torch
+	var s2_reader = CastleLevelReaderClass.new(builder, builder.materials, builder.mesh_builder, builder.prop_factory)
+	var s2_load_ok = s2_reader.load_level(ms_path)
+	assert(s2_load_ok, "Session 2 level reload must succeed")
+
+	var session2_model = LevelEditorModelClass.new(builder, ms_path, "Dungeon Keep")
+	assert(session2_model.get_level_name() == "Dungeon Keep", "Session 2 level name must be preserved")
+	# Place 1 new floor at (10, 13) and 1 torch at (10, 11)
+	session2_model.set_floor(Vector2i(10, 13), "wood", 3, true)
+	session2_model.spawn_custom_prop(Vector2i(10, 11), {"type": "torch"})
+	var s2_ok = session2_model.save_to_json(ms_path)
+	assert(s2_ok, "Session 2 save must succeed")
+
+	# Verify Session 2 file contains BOTH Session 1 items AND Session 2 items!
+	var s2_parsed = JSON.parse_string(FileAccess.get_file_as_string(ms_path))
+	var s2_custom = {}
+	for r in s2_parsed.get("rooms", []):
+		if r.get("name") == "EditorCustom": s2_custom = r
+	assert(not s2_custom.is_empty(), "EditorCustom room must exist after Session 2")
+
+	# Verify all 4 tiles exist (3 from S1 + 1 from S2)
+	var s2_tile_cells = []
+	for t in s2_custom.get("tiles", []):
+		s2_tile_cells.append(Vector2i(int(t["cell"][0]), int(t["cell"][1])))
+	assert(Vector2i(10, 10) in s2_tile_cells, "Tile (10, 10) from Session 1 must be preserved")
+	assert(Vector2i(10, 11) in s2_tile_cells, "Tile (10, 11) from Session 1 must be preserved")
+	assert(Vector2i(10, 12) in s2_tile_cells, "Tile (10, 12) from Session 1 must be preserved")
+	assert(Vector2i(10, 13) in s2_tile_cells, "Tile (10, 13) from Session 2 must be present")
+	assert(s2_custom.get("modular_walls", []).size() >= 2, "Walls from Session 1 must be preserved")
+	assert(s2_custom.get("props", []).size() >= 2, "Props from Session 1 (chest) and Session 2 (torch) must both be preserved")
+	print("  - Lossless multi-session persistence verified: all Session 1 elements preserved alongside Session 2 additions.")
+
+	# Part 2: Prop Erasure Preserves Underlying Floor
+	var s3_reader = CastleLevelReaderClass.new(builder, builder.materials, builder.mesh_builder, builder.prop_factory)
+	s3_reader.load_level(ms_path)
+	var session3_model = LevelEditorModelClass.new(builder, ms_path, "Dungeon Keep")
+	# Erase chest at (10, 10)
+	var erased_obj = session3_model.erase_object_at_cell(Vector2i(10, 10))
+	assert(erased_obj, "Chest object should be erased")
+	assert(builder.grid.has(Vector2i(10, 10)), "Floor at (10, 10) must remain in grid after prop erase")
+	assert(builder.grid[Vector2i(10, 10)]["walkable"] == true, "Floor must be walkable after prop erase")
+	session3_model.save_to_json(ms_path)
+
+	var s3_parsed = JSON.parse_string(FileAccess.get_file_as_string(ms_path))
+	var s3_custom = {}
+	for r in s3_parsed.get("rooms", []):
+		if r.get("name") == "EditorCustom": s3_custom = r
+	var s3_has_chest = false
+	for p in s3_custom.get("props", []):
+		if Vector2i(int(p["cell"][0]), int(p["cell"][1])) == Vector2i(10, 10):
+			s3_has_chest = true
+	assert(not s3_has_chest, "Chest at (10, 10) must be erased from save file")
+
+	var s3_tile_cells = []
+	for t in s3_custom.get("tiles", []):
+		s3_tile_cells.append(Vector2i(int(t["cell"][0]), int(t["cell"][1])))
+	assert(Vector2i(10, 10) in s3_tile_cells, "Floor tile at (10, 10) must be preserved in save file after prop erasure")
+	print("  - Prop erasure preservation verified: prop removed from file, underlying floor retained.")
+
+	if FileAccess.file_exists(ms_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(ms_path))
+
+	# Part 3: New Level Starting Canvas Retention & Equal Treatment
+	var new_lvl_path = "res://data/levels/test_crypt_realm.json"
+	if FileAccess.file_exists(new_lvl_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(new_lvl_path))
+
+	builder.init_new_level("Crypt of the Undead")
+	assert(builder.grid.size() == 25, "Fresh new level should have 25 starting floor tiles")
+
+	var new_model = LevelEditorModelClass.new(builder, new_lvl_path, "Crypt of the Undead")
+	assert(new_model.get_level_name() == "Crypt of the Undead", "Level name must equal Crypt of the Undead")
+	# Add 1 wall at (5, 5)
+	new_model.set_wall(Vector2i(5, 5))
+	var new_save_ok = new_model.save_to_json(new_lvl_path)
+	assert(new_save_ok, "New level with starting canvas must save successfully")
+
+	# Reload new level via CastleLevelReader
+	var new_reader = CastleLevelReaderClass.new(builder, builder.materials, builder.mesh_builder, builder.prop_factory)
+	var new_load_ok = new_reader.load_level(new_lvl_path)
+	assert(new_load_ok, "New level must load cleanly from file")
+	assert(builder.grid.has(Vector2i(5, 5)), "Added wall at (5, 5) must exist")
+	# Assert all 25 starting floor tiles exist
+	var starting_found = 0
+	for gx in range(-2, 3):
+		for gz in range(-2, 3):
+			if builder.grid.has(Vector2i(gx, gz)):
+				starting_found += 1
+	assert(starting_found == 25, "All 25 starting floor tiles must be preserved on disk, found %d" % starting_found)
+	print("  - New level starting canvas verified: 25 StartingHall tiles and new wall persisted without loss.")
+
+	# Part 4: Pre-Save Health Check & Spawn Floor Auto-Healing
+	var val_model = LevelEditorModelClass.new(builder, new_lvl_path, "Crypt of the Undead")
+	val_model.erase_cell(Vector2i(0, 0))
+	assert(not builder.grid.has(Vector2i(0, 0)), "Spawn cell (0, 0) should be erased in editor")
+	val_model.save_to_json(new_lvl_path)
+	assert(val_model.last_save_result.get("notice", "").contains("spawn"), "Validation notice should report spawn auto-heal")
+	assert(builder.grid.has(Vector2i(0, 0)), "Spawn cell (0, 0) floor must be auto-restored upon save")
+	assert(builder.is_tile_walkable(Vector2i(0, 0)), "Spawn cell (0, 0) must be walkable to prevent falling into void")
+	print("  - Pre-save validation verified: missing spawn floor detected and auto-restored.")
+
+	if FileAccess.file_exists(new_lvl_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(new_lvl_path))
+
+	print("  -> Passed! Complete Lossless Multi-Session Level Persistence, Equal Level Treatment & Pre-Save Validation confirmed.")
+
 	print("\n=== ALL HERO QUEST TESTS PASSED SUCCESSFULLY! ===")
 	quit(0)
+
 
 
 
