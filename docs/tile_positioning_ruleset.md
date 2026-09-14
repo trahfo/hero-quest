@@ -657,4 +657,31 @@ Blocking furniture with a flat back (cupboards, drawers, bookshelves, weapon rac
   3. **Auto-Healing Spawn Floor**: If the floor at spawn was accidentally erased or missing, save logic automatically restores a walkable stone floor tile at spawn so the player never falls into the void upon level load.
   4. **Metadata Preservation**: `"spawn"` position, yaw, and `"version"` fields are preserved in the JSON structure.
 
+---
+
+## 34. Editor Grid Line Alignment & In-World Room Signs
+
+### 34.1. Editor Grid Line Alignment (Tile Perimeter Framing)
+- Grid lines in the Level Editor must frame the perimeter boundaries around tiles, never slice through tile centers.
+- Mathematical coordinates:
+  - **Tile Center**: `Vector3(gx * TILE_SIZE, 0, gz * TILE_SIZE)` = `(gx * 2.0, 0, gz * 2.0)`.
+  - **Tile Boundaries (Perimeter)**: `Vector3((gx ± 0.5) * TILE_SIZE, 0, (gz ± 0.5) * TILE_SIZE)` = `(gx * 2.0 ± 1.0, 0, gz * 2.0 ± 1.0)`.
+- Shader distance formula in `LevelEditorGrid`:
+  - `vec2 f = abs(fract(coord / tile_size) - 0.5) * tile_size;`
+  - Do not add `+ 0.5` phase shift to `coord / tile_size`, as this shifts distance zeroes directly onto tile centers.
+- Dotted line interval:
+  - `dot_spacing = 0.25m` (clean integer subdivision of `TILE_SIZE = 2.0m`, resulting in exactly 8 dots per tile boundary edge with matching corner intersections).
+
+### 34.2. In-World 3D Room Signs (`LevelEditorRoomSignBuilder`)
+- When the Room / Area tool is active in the Level Editor, every room with painted tiles renders a physical 3D dungeon sign in the 3D viewport.
+- Spatial specifications:
+  - **Centroid Snapping**: Calculate average coordinates `(avg_x, avg_z)` across all member cells of the room, and snap the sign anchor to the nearest valid floor cell inside the room (`LevelEditorRoomSignBuilder.calculate_room_center_cell`). This guarantees signs never float inside courtyards or holes of hollow/C-shaped rooms.
+  - **Ground Post**: Slender dark oak timber post (`0.12m x 1.6m x 0.12m`) anchored firmly to the ground plane from `y = 0.0m` to `y = 1.6m` (`center = y = 0.8m`).
+  - **Crossbeam Bracket**: Horizontal bracket at `y = 1.56m` supporting the placard.
+  - **Signboard Placard**: Backing board (`width = clampf(length * 0.10 + 0.55, 1.3, 3.2)`, `height = 0.52m`, `depth = 0.06m`) positioned at `y = 1.82m` with `billboard_mode = BaseMaterial3D.BILLBOARD_FIXED_Y`.
+  - **Border Trim**: Accent border tinted to the room's palette color (`get_room_color(r_name)`), featuring an active emission glow when the room is currently selected.
+  - **Room Name Label3D**: `font_size = 28`, `outline_size = 7`, `pixel_size = 0.0055`, `billboard = BaseMaterial3D.BILLBOARD_FIXED_Y` with high-contrast text and dark outline for clear legibility across all 4 camera rotation angles.
+  - **Lifecycle**: Child of `overlay_root`; visible only during Room Editor mode and completely hidden/freed outside of room editing and during gameplay.
+
+
 
