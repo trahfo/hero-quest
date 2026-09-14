@@ -613,3 +613,48 @@ Blocking furniture with a flat back (cupboards, drawers, bookshelves, weapon rac
   - All non-`EditorCustom` rooms must be pruned of any entries matching modified or erased coordinates.
   - Erasing a wall from `PerimeterBarriers` and placing a floor in `EditorCustom` must immediately purge that wall from `PerimeterBarriers` in the saved JSON.
   - Prevents "ghost walls" where a visual wall from a base room co-exists with a walkable floor tile from a custom room upon level reload.
+
+---
+
+## 32. Gapless Floor Tiles, PBR Boundary Delineation & Editor Wall Transparency
+
+### 32.1. Gapless Floor Tile Dimensions (0.0m Gaps)
+- Floor tiles must be modeled with full contiguous grid dimensions: `Vector3(TILE_SIZE, 0.28, TILE_SIZE)` (`2.0m x 0.28m x 2.0m`).
+- Physical voids/gaps between tiles (e.g. `TILE_SIZE - 0.08`) are strictly prohibited. Adjacent floor tiles must touch edge-to-edge seamlessly.
+
+### 32.2. Procedural PBR Boundary Delineation (Albedo + Normal Maps)
+- Because tiles touch seamlessly without physical gaps, boundary delineation is achieved via procedural PBR materials generated in `CastleFloorTextureGenerator`:
+  - **Mortar / Border Seam (Albedo)**: Outer 2–3 pixels around the tile perimeter feature a darker recessed mortar seam (30–45% darker than base tone) with a smooth shoulder transition.
+  - **Beveled Chamfer (Normal Map)**: Tangent-space normal map with rounded bevels along all 4 perimeter edges so directional sunlight, ambient light, and torch flickers dynamically highlight tile borders.
+  - **Surface Micro-Grain**: Flagstone granite noise, gothic diamond inlays (chapel), or longitudinal timber plank grooving (wood/bridge) provides surface richness.
+
+### 32.3. Wall Transparency & Raycast Penetration During Floor Placement
+- When the Level Editor Floor tool is active (`active_tool == "floor"`):
+  - All wall materials (`mat_wall_stone`, `mat_wall_trim`) switch to `BaseMaterial3D.TRANSPARENCY_ALPHA` at `28%` opacity (`albedo_color.a = 0.28`), revealing floor grids, corridors, and rooms hidden behind walls.
+  - High-object physics raycasts are bypassed so mouse clicks and drag selections penetrate directly to the ground plane (`y = 0.0`), allowing unobstructed floor building through walls.
+  - Switching away from the Floor tool or exiting the Level Editor immediately restores wall materials to solid opaque (`TRANSPARENCY_DISABLED`, `albedo_color.a = 1.0`).
+
+---
+
+## 33. Lossless Multi-Session Persistence, Equal Level Treatment & Pre-Save Validation
+
+### 33.1. Lossless Multi-Session Persistence (`LevelEditorPersistence`)
+- When saving an edited level, all rooms (including `EditorCustom` from prior edit sessions) must be preserved.
+- Existing rooms must only be pruned of items whose specific coordinates were explicitly modified or erased in the current edit session.
+- Untouched items in `EditorCustom` from previous edit sessions must never be overwritten or discarded.
+- Additions and modifications from `cell_data` are merged losslessly into `EditorCustom`.
+
+### 33.2. Equal Treatment of All Levels (Zero Hardcoding)
+- All levels (campaign or user-created) use identical room data structures and standard room loader routines.
+- Fallback level names must be dynamically derived from the file basename (`active_file_path.get_file().get_basename().capitalize()`), never hardcoded campaign strings.
+- When creating a new level with a starting canvas (`builder.init_new_level()`), the initial 5x5 floor tiles are automatically seeded into `StartingHall` in the JSON data so they are never lost on first save.
+- Room management (`LevelEditorRoomManager`) dynamically selects the level's existing rooms for default active room selection and deletion fallbacks rather than hardcoded room names.
+
+### 33.3. Pre-Save Health & Integrity Checks
+- Before serializing a level to disk, `LevelEditorPersistence.validate_level()` must enforce:
+  1. **Rooms and Tiles Exist**: The level must contain at least one room with walkable floor tiles. Empty levels are rejected with an informative error.
+  2. **Player Spawn Walkability**: The player's spawn tile (`spawn.grid`, default `(0, 0)`) must have a valid floor tile and be walkable.
+  3. **Auto-Healing Spawn Floor**: If the floor at spawn was accidentally erased or missing, save logic automatically restores a walkable stone floor tile at spawn so the player never falls into the void upon level load.
+  4. **Metadata Preservation**: `"spawn"` position, yaw, and `"version"` fields are preserved in the JSON structure.
+
+
