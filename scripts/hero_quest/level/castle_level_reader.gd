@@ -91,9 +91,9 @@ func _build_standard_room(room_data: Dictionary) -> void:
 	for t_info in room_data.get("torches", []):
 		prop_spawner.spawn_torch(room_node, t_info)
 
-	# 5. Arches
+	# 5. Arches & Doors
 	for a_info in room_data.get("arches", []):
-		prop_spawner.spawn_arch(room_node, a_info)
+		prop_spawner.spawn_arch(room_node, a_info, builder)
 
 	# 6. Props
 	for pr_info in room_data.get("props", []):
@@ -149,9 +149,6 @@ func _build_round_towers(room_data: Dictionary) -> void:
 		builder.place_blocking_prop(t_node, center, "Brazier", func(p, pos):
 			return prop_factory.create_brazier(p, pos)
 		)
-
-		if t_def.get("has_portal", false):
-			mesh_builder.build_arch_3tile(t_node, Vector2i(-16, -15), 1, "NorthWestTowerPortal")
 
 func _build_perimeter_barriers(room_data: Dictionary) -> void:
 	var walls = Node3D.new()

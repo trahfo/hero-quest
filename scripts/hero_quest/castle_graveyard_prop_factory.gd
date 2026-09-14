@@ -103,9 +103,9 @@ func create_gravestone(parent: Node3D, pos: Vector3, rot_y: float = 0.0, epitaph
 	parent.add_child(body)
 	return body
 
-func create_skeleton(parent: Node3D, pos: Vector3, rot_y: float = 0.0) -> StaticBody3D:
+func create_skeleton(parent: Node3D, pos: Vector3, rot_y: float = 0.0, s_name: String = "BleachedSkeleton") -> StaticBody3D:
 	var body = StaticBody3D.new()
-	body.name = "BleachedSkeleton"
+	body.name = s_name
 	body.position = pos
 	body.rotation.y = rot_y
 
@@ -207,28 +207,44 @@ func create_cemetery_tree(parent: Node3D, pos: Vector3) -> StaticBody3D:
 		root.position = Vector3(sin(rot) * 0.55, 0.16, cos(rot) * 0.55)
 		body.add_child(root)
 
-	# Heavy twisted boughs
-	var branch_angles = [0.2, 1.5, 2.9, 4.4]
-	for i in range(branch_angles.size()):
-		var angle = branch_angles[i]
-		var branch = MeshInstance3D.new()
-		var b_mesh = CylinderMesh.new()
-		b_mesh.top_radius = 0.16
-		b_mesh.bottom_radius = 0.28
-		b_mesh.height = 2.4
-		b_mesh.material = materials.mat_wood_dark
-		branch.mesh = b_mesh
-		branch.position = Vector3(sin(angle) * 0.9, 3.1, cos(angle) * 0.9)
-		branch.rotation.z = 0.6 if i % 2 == 0 else -0.6
-		branch.rotation.y = angle
-		body.add_child(branch)
+	# Foliage clusters and connecting boughs
+	var foliage_clusters = [
+		{"pos": Vector3(0.0, 4.4, 0.0), "rad": 1.1, "h": 1.5},
+		{"pos": Vector3(1.2, 3.9, 0.8), "rad": 0.95, "h": 1.3},
+		{"pos": Vector3(-1.1, 4.0, -0.7), "rad": 0.95, "h": 1.3},
+		{"pos": Vector3(-1.0, 3.7, 0.9), "rad": 0.90, "h": 1.2},
+		{"pos": Vector3(0.9, 3.7, -1.0), "rad": 0.90, "h": 1.2}
+	]
 
-	# Dark eerie foliage clusters
-	for f_pos in [Vector3(0, 4.2, 0), Vector3(1.2, 3.8, 0.8), Vector3(-1.1, 3.9, -0.6)]:
+	var trunk_top_y = 2.8
+	for cluster in foliage_clusters:
+		var f_pos: Vector3 = cluster["pos"]
+		var start_pos = Vector3(f_pos.x * 0.25, trunk_top_y, f_pos.z * 0.25)
+		var dir = f_pos - start_pos
+		var branch_len = dir.length()
+		if branch_len > 0.01:
+			var branch = MeshInstance3D.new()
+			var b_mesh = CylinderMesh.new()
+			b_mesh.top_radius = 0.16
+			b_mesh.bottom_radius = 0.28
+			b_mesh.height = branch_len
+			b_mesh.material = materials.mat_wood_dark
+			branch.mesh = b_mesh
+			branch.position = (start_pos + f_pos) * 0.5
+
+			var up = dir.normalized()
+			var right = Vector3.UP.cross(up)
+			if right.length_squared() < 0.0001:
+				right = Vector3.RIGHT.cross(up)
+			right = right.normalized()
+			var forward = up.cross(right).normalized()
+			branch.transform.basis = Basis(right, up, forward)
+			body.add_child(branch)
+
 		var leaf = MeshInstance3D.new()
 		var lf_mesh = SphereMesh.new()
-		lf_mesh.radius = 0.95
-		lf_mesh.height = 1.3
+		lf_mesh.radius = cluster["rad"]
+		lf_mesh.height = cluster["h"]
 		lf_mesh.material = materials.mat_floor_garden_green
 		leaf.mesh = lf_mesh
 		leaf.position = f_pos

@@ -42,7 +42,7 @@ var current_archetype_index: int = 1
 var nearby_interactable_node: Node3D = null
 var nearby_interactable_comp: HeroQuestInteractable = null
 var nearby_interactable: Node3D:
-	get: return nearby_interactable_node
+	get: return nearby_interactable_node if is_instance_valid(nearby_interactable_node) else null
 
 func _ready() -> void:
 	add_to_group("player")
@@ -233,23 +233,24 @@ func _get_prop_at_cell(cell: Vector2i) -> Node3D:
 	if not castle_builder or not castle_builder.grid.has(cell):
 		return null
 	var prop = castle_builder.grid[cell].get("prop", null)
-	if not prop:
-		for item in floor_items:
-			if is_instance_valid(item) and castle_builder.world_to_grid(item.global_position) == cell:
-				return item
-		for chest in castle_builder.interactive_chests:
-			if is_instance_valid(chest) and castle_builder.world_to_grid(chest.global_position) == cell:
-				return chest
-		if castle_builder.interactive_anvil and is_instance_valid(castle_builder.interactive_anvil):
-			if castle_builder.world_to_grid(castle_builder.interactive_anvil.global_position) == cell:
-				return castle_builder.interactive_anvil
-		if castle_builder.interactive_bell and is_instance_valid(castle_builder.interactive_bell):
-			if castle_builder.world_to_grid(castle_builder.interactive_bell.global_position) == cell:
-				return castle_builder.interactive_bell
-		if castle_builder.interactive_altar and is_instance_valid(castle_builder.interactive_altar):
-			if castle_builder.world_to_grid(castle_builder.interactive_altar.global_position) == cell:
-				return castle_builder.interactive_altar
-	return prop
+	if is_instance_valid(prop):
+		return prop
+	for item in floor_items:
+		if is_instance_valid(item) and castle_builder.world_to_grid(item.global_position) == cell:
+			return item
+	for chest in castle_builder.interactive_chests:
+		if is_instance_valid(chest) and castle_builder.world_to_grid(chest.global_position) == cell:
+			return chest
+	if is_instance_valid(castle_builder.interactive_anvil):
+		if castle_builder.world_to_grid(castle_builder.interactive_anvil.global_position) == cell:
+			return castle_builder.interactive_anvil
+	if is_instance_valid(castle_builder.interactive_bell):
+		if castle_builder.world_to_grid(castle_builder.interactive_bell.global_position) == cell:
+			return castle_builder.interactive_bell
+	if is_instance_valid(castle_builder.interactive_altar):
+		if castle_builder.world_to_grid(castle_builder.interactive_altar.global_position) == cell:
+			return castle_builder.interactive_altar
+	return null
 
 func _check_interaction_proximity() -> void:
 	if not castle_builder:
@@ -261,8 +262,8 @@ func _check_interaction_proximity() -> void:
 	# 1. Directly facing cell has highest priority
 	var facing_cell = current_tile + facing_dir
 	var facing_prop = _get_prop_at_cell(facing_cell)
-	if facing_prop and is_instance_valid(facing_prop):
-		var comp = facing_prop.get_node_or_null("Interactable") as HeroQuestInteractable
+	if is_instance_valid(facing_prop):
+		var comp = _find_interactable(facing_prop)
 		if not comp:
 			comp = _create_fallback_interactable(facing_prop)
 		if comp:
@@ -277,8 +278,8 @@ func _check_interaction_proximity() -> void:
 		for offset in check_offsets:
 			var check_cell = current_tile + offset
 			var prop = _get_prop_at_cell(check_cell)
-			if prop and is_instance_valid(prop):
-				var comp = prop.get_node_or_null("Interactable") as HeroQuestInteractable
+			if is_instance_valid(prop):
+				var comp = _find_interactable(prop)
 				if not comp and (prop.has_meta("is_chest") or prop.name in ["BlacksmithAnvil", "ChapelBell", "AltarTable"]):
 					comp = _create_fallback_interactable(prop)
 				if comp and comp.interact_type != HeroQuestInteractable.InteractType.INSPECT:
@@ -286,13 +287,33 @@ func _check_interaction_proximity() -> void:
 					found_comp = comp
 					break
 
+	if not is_instance_valid(found_node):
+		found_node = null
+		found_comp = null
+
 	if found_node != nearby_interactable_node:
 		nearby_interactable_node = found_node
 		nearby_interactable_comp = found_comp
-		var prompt = nearby_interactable_comp.get_prompt_text() if nearby_interactable_comp else ""
+		var prompt = nearby_interactable_comp.get_prompt_text() if is_instance_valid(nearby_interactable_comp) else ""
 		nearby_interactable_changed.emit(prompt)
 
+func _find_interactable(prop: Node3D) -> HeroQuestInteractable:
+	if not is_instance_valid(prop): return null
+	var comp = prop.get_node_or_null("Interactable") as HeroQuestInteractable
+	if comp and is_instance_valid(comp): return comp
+	var door_ctrl = prop.get_node_or_null("DoorController")
+	if is_instance_valid(door_ctrl):
+		comp = door_ctrl.get_node_or_null("Interactable") as HeroQuestInteractable
+		if comp and is_instance_valid(comp): return comp
+	for child in prop.get_children():
+		if child is HeroQuestInteractable and is_instance_valid(child): return child
+		if child is HeroQuestDoor and is_instance_valid(child):
+			var door_comp = child.get_node_or_null("Interactable") as HeroQuestInteractable
+			if door_comp and is_instance_valid(door_comp): return door_comp
+	return null
+
 func _create_fallback_interactable(prop: Node3D) -> HeroQuestInteractable:
+	if not is_instance_valid(prop): return null
 	var comp = HeroQuestInteractable.new()
 	comp.name = "Interactable"
 	if prop.has_meta("is_chest"):
@@ -317,12 +338,15 @@ func _create_fallback_interactable(prop: Node3D) -> HeroQuestInteractable:
 	return comp
 
 func _try_interact() -> void:
-	if not nearby_interactable_comp:
+	if not is_instance_valid(nearby_interactable_comp):
+		nearby_interactable_comp = null
+		nearby_interactable_node = null
 		return
 
 	var notice = nearby_interactable_comp.interact(self, audio_manager)
 	interaction_triggered.emit(notice)
-	nearby_interactable_changed.emit(nearby_interactable_comp.get_prompt_text())
+	var prompt = nearby_interactable_comp.get_prompt_text() if is_instance_valid(nearby_interactable_comp) else ""
+	nearby_interactable_changed.emit(prompt)
 
 func on_mini_game_triggered(game_id: String, source_node: Node3D = null) -> void:
 	active_loot_source_node = source_node
@@ -333,11 +357,16 @@ func on_loot_opened(item: ItemData, pos: Vector3, source_node: Node3D = null) ->
 	open_loot_dialog_requested.emit(item, pos)
 
 func on_loot_collected(item: ItemData) -> void:
-	if active_loot_source_node and is_instance_valid(active_loot_source_node):
+	if is_instance_valid(active_loot_source_node):
 		if active_loot_source_node is HeroQuestFloorItem:
 			floor_items.erase(active_loot_source_node)
 			active_loot_source_node.queue_free()
 	active_loot_source_node = null
+	var valid_floor_items: Array = []
+	for fi in floor_items:
+		if is_instance_valid(fi):
+			valid_floor_items.append(fi)
+	floor_items = valid_floor_items
 	_check_interaction_proximity()
 
 func drop_item_to_world(item: ItemData, drop_pos: Vector3 = Vector3.ZERO) -> HeroQuestFloorItem:

@@ -15,10 +15,10 @@
 					"type": "arch_3tile"
 				},
 				{
-					"axis": 0,
+					"axis": 0.0,
 					"cell": [
-						0,
-						3
+						0.0,
+						3.0
 					],
 					"is_arch": true,
 					"name": "PortalX",
@@ -368,20 +368,6 @@
 				},
 				{
 					"cell": [
-						1.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"orientation": 0.0,
-					"right": true,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
 						3.0,
 						2.0
 					],
@@ -508,48 +494,6 @@
 				},
 				{
 					"cell": [
-						4.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"orientation": 0.0,
-					"right": true,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						3.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"orientation": 0.0,
-					"right": true,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						2.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"orientation": 0.0,
-					"right": true,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
 						5.0,
 						2.0
 					],
@@ -578,10 +522,38 @@
 				},
 				{
 					"cell": [
-						2,
-						2
+						2.0,
+						2.0
 					],
 					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-2.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						4,
+						-2
+					],
+					"down": true,
 					"height": 4.5,
 					"left": false,
 					"orientation": 0,
@@ -592,10 +564,10 @@
 				},
 				{
 					"cell": [
-						-2,
-						2
+						1,
+						-2
 					],
-					"down": false,
+					"down": true,
 					"height": 4.5,
 					"left": true,
 					"orientation": 0,
@@ -883,16 +855,16 @@
 				},
 				{
 					"cell": [
-						1,
-						2
+						1.0,
+						2.0
 					],
 					"rot_y": 0.0,
 					"type": "lower_wall"
 				},
 				{
 					"cell": [
-						-1,
-						2
+						-1.0,
+						2.0
 					],
 					"rot_y": 0.0,
 					"type": "lower_wall"
@@ -2391,26 +2363,6 @@
 				},
 				{
 					"cell": [
-						3.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Castle Walls"
-				},
-				{
-					"cell": [
-						2.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Castle Walls"
-				},
-				{
-					"cell": [
 						5.0,
 						2.0
 					],
@@ -2911,93 +2863,113 @@
 				},
 				{
 					"cell": [
-						-2,
-						0
+						-2.0,
+						0.0
 					],
 					"mat": "stone_alt",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-1,
-						0
+						-1.0,
+						0.0
 					],
 					"mat": "stone_alt",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						0,
-						0
+						0.0,
+						0.0
 					],
 					"mat": "stone_alt",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						1,
-						0
+						1.0,
+						0.0
 					],
 					"mat": "stone_alt",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						1,
-						2
+						1.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
-						1,
-						3
+						1.0,
+						3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
-						-1,
-						2
+						-1.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
-						-1,
-						3
+						-1.0,
+						3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
-						0,
-						3
+						0.0,
+						3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						2,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3,
+						-2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
 				}
 			],
 			"torches": [],

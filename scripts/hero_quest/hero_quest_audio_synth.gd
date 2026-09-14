@@ -228,3 +228,119 @@ static func generate_ui_click() -> AudioStreamWAV:
 	stream.mix_rate = sample_rate
 	stream.data = bytes
 	return stream
+
+static func generate_door_open() -> AudioStreamWAV:
+	var sample_rate = 22050
+	var duration = 0.45
+	var total_samples = int(sample_rate * duration)
+	var bytes = PackedByteArray()
+	bytes.resize(total_samples * 2)
+	var p_hinge: float = 0.0
+	var p_wood: float = 0.0
+	for i in range(total_samples):
+		var t = float(i) / float(total_samples)
+		var f_hinge = lerpf(380.0, 520.0, sin(t * PI))
+		var f_wood = lerpf(90.0, 140.0, t)
+		p_hinge += 2.0 * PI * f_hinge / sample_rate
+		p_wood += 2.0 * PI * f_wood / sample_rate
+		var env = sin(t * PI)
+		var creak = sin(p_hinge) * (0.3 + 0.2 * sin(t * 40.0))
+		var body = sin(p_wood) * 0.5
+		var sample_val = (creak + body) * env * 0.5
+		bytes.encode_s16(i * 2, int(clampf(sample_val, -1.0, 1.0) * 32767.0))
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.data = bytes
+	return stream
+
+static func generate_door_close() -> AudioStreamWAV:
+	var sample_rate = 22050
+	var duration = 0.25
+	var total_samples = int(sample_rate * duration)
+	var bytes = PackedByteArray()
+	bytes.resize(total_samples * 2)
+	var p1: float = 0.0
+	for i in range(total_samples):
+		var t = float(i) / float(total_samples)
+		var f = lerpf(120.0, 45.0, t)
+		p1 += 2.0 * PI * f / sample_rate
+		var env = exp(-t * 12.0)
+		var noise = randf_range(-1.0, 1.0) * exp(-t * 30.0) * 0.4
+		var sample_val = (sin(p1) * 0.7 + noise) * env * 0.7
+		bytes.encode_s16(i * 2, int(clampf(sample_val, -1.0, 1.0) * 32767.0))
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.data = bytes
+	return stream
+
+static func generate_door_unlock() -> AudioStreamWAV:
+	var sample_rate = 22050
+	var duration = 0.32
+	var total_samples = int(sample_rate * duration)
+	var bytes = PackedByteArray()
+	bytes.resize(total_samples * 2)
+	var p1: float = 0.0
+	var p2: float = 0.0
+	for i in range(total_samples):
+		var t = float(i) / float(total_samples)
+		p1 += 2.0 * PI * 1850.0 / sample_rate
+		p2 += 2.0 * PI * 2400.0 / sample_rate
+		# Two distinct mechanical clicks: at t=0 and t=0.45
+		var env1 = exp(-t * 35.0)
+		var t2 = maxf(0.0, t - 0.14)
+		var env2 = exp(-t2 * 28.0) if t >= 0.14 else 0.0
+		var bolt = sin(p1) * env1 * 0.5 + sin(p2) * env2 * 0.6
+		bytes.encode_s16(i * 2, int(clampf(bolt, -1.0, 1.0) * 32767.0))
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.data = bytes
+	return stream
+
+static func generate_door_locked() -> AudioStreamWAV:
+	var sample_rate = 22050
+	var duration = 0.2
+	var total_samples = int(sample_rate * duration)
+	var bytes = PackedByteArray()
+	bytes.resize(total_samples * 2)
+	var p1: float = 0.0
+	for i in range(total_samples):
+		var t = float(i) / float(total_samples)
+		p1 += 2.0 * PI * 580.0 / sample_rate
+		var env1 = exp(-t * 30.0)
+		var t2 = maxf(0.0, t - 0.08)
+		var env2 = exp(-t2 * 30.0) if t >= 0.08 else 0.0
+		var rattle = (sin(p1) + randf_range(-0.4, 0.4)) * (env1 + env2) * 0.4
+		bytes.encode_s16(i * 2, int(clampf(rattle, -1.0, 1.0) * 32767.0))
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.data = bytes
+	return stream
+
+static func generate_portcullis() -> AudioStreamWAV:
+	var sample_rate = 22050
+	var duration = 0.5
+	var total_samples = int(sample_rate * duration)
+	var bytes = PackedByteArray()
+	bytes.resize(total_samples * 2)
+	var p_chain: float = 0.0
+	var p_gate: float = 0.0
+	for i in range(total_samples):
+		var t = float(i) / float(total_samples)
+		p_chain += 2.0 * PI * 820.0 / sample_rate
+		p_gate += 2.0 * PI * 130.0 / sample_rate
+		var env = sin(t * PI)
+		var ratchet = sin(p_chain * (1.0 + sin(t * 80.0) * 0.2)) * 0.35
+		var heavy_iron = sin(p_gate) * 0.45
+		var scrape = randf_range(-0.3, 0.3) * 0.25
+		var sample_val = (ratchet + heavy_iron + scrape) * env * 0.55
+		bytes.encode_s16(i * 2, int(clampf(sample_val, -1.0, 1.0) * 32767.0))
+	var stream = AudioStreamWAV.new()
+	stream.format = AudioStreamWAV.FORMAT_16_BITS
+	stream.mix_rate = sample_rate
+	stream.data = bytes
+	return stream
+

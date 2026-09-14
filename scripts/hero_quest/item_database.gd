@@ -160,6 +160,31 @@ static func create_item(id: String) -> ItemData:
 			item.description = "A humming arcane cube inscribed with neon maze runes. Grants +2 Mind Points and opens an easter egg portal to the Pac-Man labyrinth."
 			item.rarity_color = Color(1.0, 0.85, 0.2)
 
+		# --- KEYS & UTILITIES ---
+		"iron_key":
+			item.name = "Iron Key"
+			item.slot_type = ItemData.SlotType.ANY
+			item.size = Vector2i(1, 1)
+			item.icon_symbol = "🗝️"
+			item.description = "A heavy, notched iron key. Turns the tumblers of locked iron and wooden castle doors."
+			item.rarity_color = Color(0.75, 0.75, 0.8)
+
+		"golden_key":
+			item.name = "Golden Key"
+			item.slot_type = ItemData.SlotType.ANY
+			item.size = Vector2i(1, 1)
+			item.icon_symbol = "🔑"
+			item.description = "An ornate gilded key engraved with royal crests. Unlocks guarded sanctuaries."
+			item.rarity_color = Color(1.0, 0.85, 0.3)
+
+		"skeleton_key":
+			item.name = "Skeleton Key"
+			item.slot_type = ItemData.SlotType.ANY
+			item.size = Vector2i(1, 1)
+			item.icon_symbol = "🗝️"
+			item.description = "An ancient master key whose teeth shift to pick many locks."
+			item.rarity_color = Color(0.9, 0.5, 0.9)
+
 		_:
 			item.name = id.replace("_", " ").capitalize()
 			item.description = "An intriguing treasure found within the castle."
@@ -168,7 +193,13 @@ static func create_item(id: String) -> ItemData:
 
 static func get_item_by_name(name_str: String) -> ItemData:
 	var lower = name_str.to_lower()
-	if "steel blade" in lower or "blade" in lower or "sword" in lower:
+	if "skeleton key" in lower:
+		return create_item("skeleton_key")
+	elif "golden key" in lower or "gold key" in lower:
+		return create_item("golden_key")
+	elif "iron key" in lower or "key" in lower:
+		return create_item("iron_key")
+	elif "steel blade" in lower or "blade" in lower or "sword" in lower:
 		return create_item("mastercrafted_steel_blade")
 	elif "boots" in lower or "rider" in lower:
 		return create_item("swift_boots")

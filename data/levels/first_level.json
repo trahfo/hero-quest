@@ -249,14 +249,6 @@
 				{
 					"cell": [
 						-3.0,
-						-5.0
-					],
-					"rot_y": 1.5707963267949,
-					"type": "cupboard"
-				},
-				{
-					"cell": [
-						-3.0,
 						5.0
 					],
 					"rot_y": 1.5707963267949,
@@ -302,16 +294,6 @@
 					"mat": "stone_alt",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Corridor"
-				},
-				{
-					"cell": [
-						-3.0,
-						-5.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": false,
 					"zone": "The Great Corridor"
 				},
 				{
@@ -430,16 +412,6 @@
 						-6.0
 					],
 					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Corridor"
-				},
-				{
-					"cell": [
-						-2.0,
-						-5.0
-					],
-					"mat": "stone_alt",
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Great Corridor"
@@ -5423,36 +5395,7 @@
 				}
 			],
 			"name": "IndoorGarden",
-			"pillars": [
-				{
-					"cell": [
-						-13.0,
-						-18.0
-					],
-					"height": 3.6
-				},
-				{
-					"cell": [
-						-10.0,
-						-18.0
-					],
-					"height": 3.6
-				},
-				{
-					"cell": [
-						-13.0,
-						-13.0
-					],
-					"height": 3.6
-				},
-				{
-					"cell": [
-						-10.0,
-						-13.0
-					],
-					"height": 3.6
-				}
-			],
+			"pillars": [],
 			"props": [
 				{
 					"cells": [
@@ -6134,16 +6077,6 @@
 				{
 					"cell": [
 						-12.0,
-						-18.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-12.0,
 						-17.0
 					],
 					"mat": "stone",
@@ -6175,16 +6108,6 @@
 					"cell": [
 						-12.0,
 						-14.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-12.0,
-						-13.0
 					],
 					"mat": "stone",
 					"type": 1.0,
@@ -8020,7 +7943,7 @@
 				{
 					"cell": [
 						-15.0,
-						-29.0
+						-28.0
 					],
 					"epitaph": "Brother Alistair (1130 - 1195) - Devoted monk of the Grand Chapel",
 					"name": "Gravestone_3",
@@ -8075,7 +7998,7 @@
 				{
 					"cell": [
 						-9.0,
-						-29.0
+						-28.0
 					],
 					"epitaph": "High Steward Balin (1122 - 1180) - Faithful keeper of the castle vaults",
 					"name": "Gravestone_8",
@@ -8134,14 +8057,6 @@
 						-26.0
 					],
 					"name": "TorchOnStick_2",
-					"type": "torch_on_stick"
-				},
-				{
-					"cell": [
-						-13.0,
-						-29.0
-					],
-					"name": "TorchOnStick_3",
 					"type": "torch_on_stick"
 				},
 				{
@@ -8408,23 +8323,13 @@
 					],
 					"mat": "stone_alt",
 					"type": 8.0,
-					"walkable": false,
-					"zone": "The Graveyard"
-				},
-				{
-					"cell": [
-						-15.0,
-						-28.0
-					],
-					"mat": "graveyard_dirt",
-					"type": 8.0,
 					"walkable": true,
 					"zone": "The Graveyard"
 				},
 				{
 					"cell": [
 						-15.0,
-						-27.0
+						-28.0
 					],
 					"mat": "graveyard_dirt",
 					"type": 8.0,
@@ -8434,6 +8339,16 @@
 				{
 					"cell": [
 						-15.0,
+						-27.0
+					],
+					"mat": "graveyard_dirt",
+					"type": 8.0,
+					"walkable": false,
+					"zone": "The Graveyard"
+				},
+				{
+					"cell": [
+						-15.0,
 						-26.0
 					],
 					"mat": "graveyard_dirt",
@@ -8568,32 +8483,32 @@
 					],
 					"mat": "stone_alt",
 					"type": 8.0,
-					"walkable": false,
-					"zone": "The Graveyard"
-				},
-				{
-					"cell": [
-						-13.0,
-						-28.0
-					],
-					"mat": "graveyard_dirt",
-					"type": 8.0,
-					"walkable": false,
-					"zone": "The Graveyard"
-				},
-				{
-					"cell": [
-						-13.0,
-						-27.0
-					],
-					"mat": "graveyard_dirt",
-					"type": 8.0,
 					"walkable": true,
 					"zone": "The Graveyard"
 				},
 				{
 					"cell": [
 						-13.0,
+						-28.0
+					],
+					"mat": "graveyard_dirt",
+					"type": 8.0,
+					"walkable": false,
+					"zone": "The Graveyard"
+				},
+				{
+					"cell": [
+						-13.0,
+						-27.0
+					],
+					"mat": "graveyard_dirt",
+					"type": 8.0,
+					"walkable": true,
+					"zone": "The Graveyard"
+				},
+				{
+					"cell": [
+						-13.0,
 						-26.0
 					],
 					"mat": "graveyard_dirt",
@@ -8888,7 +8803,7 @@
 					],
 					"mat": "stone_alt",
 					"type": 8.0,
-					"walkable": false,
+					"walkable": true,
 					"zone": "The Graveyard"
 				},
 				{
@@ -8898,7 +8813,7 @@
 					],
 					"mat": "graveyard_dirt",
 					"type": 8.0,
-					"walkable": true,
+					"walkable": false,
 					"zone": "The Graveyard"
 				},
 				{
@@ -11573,16 +11488,6 @@
 				{
 					"cell": [
 						-7.0,
-						16.0
-					],
-					"mat": "courtyard",
-					"type": 5.0,
-					"walkable": true,
-					"zone": "South Castle Courtyard"
-				},
-				{
-					"cell": [
-						-7.0,
 						17.0
 					],
 					"mat": "courtyard",
@@ -11624,16 +11529,6 @@
 					"cell": [
 						-6.0,
 						15.0
-					],
-					"mat": "courtyard",
-					"type": 5.0,
-					"walkable": true,
-					"zone": "South Castle Courtyard"
-				},
-				{
-					"cell": [
-						-6.0,
-						16.0
 					],
 					"mat": "courtyard",
 					"type": 5.0,
@@ -12454,7 +12349,7 @@
 						-15.0,
 						-15.0
 					],
-					"has_portal": true,
+					"has_portal": false,
 					"name": "North-West Watchtower",
 					"tiles": [
 						{
@@ -12636,16 +12531,6 @@
 							"type": 1.0,
 							"walkable": true,
 							"zone": "North-West Watchtower"
-						},
-						{
-							"cell": [
-								-16.0,
-								-16.0
-							],
-							"mat": "stone",
-							"type": 6.0,
-							"walkable": false,
-							"zone": "Arch Pier"
 						},
 						{
 							"cell": [
@@ -13647,17 +13532,6 @@
 				},
 				{
 					"cell": [
-						-4.0,
-						-6.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
 						-3.0,
 						-7.0
 					],
@@ -13677,17 +13551,6 @@
 					"left": false,
 					"right": true,
 					"up": false
-				},
-				{
-					"cell": [
-						-4.0,
-						-2.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": true,
-					"right": false,
-					"up": true
 				},
 				{
 					"cell": [
@@ -14671,17 +14534,6 @@
 				{
 					"cell": [
 						16.0,
-						5.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						16.0,
 						6.0
 					],
 					"down": true,
@@ -14824,17 +14676,6 @@
 				},
 				{
 					"cell": [
-						-9.0,
-						-7.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
 						-8.0,
 						-6.0
 					],
@@ -14854,17 +14695,6 @@
 					"left": false,
 					"right": false,
 					"up": true
-				},
-				{
-					"cell": [
-						-8.0,
-						-7.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": true,
-					"right": false,
-					"up": false
 				},
 				{
 					"cell": [
@@ -15034,28 +14864,6 @@
 				{
 					"cell": [
 						-16.0,
-						-18.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": true,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-16.0,
-						-12.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": true,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-16.0,
 						-11.0
 					],
 					"down": true,
@@ -15121,30 +14929,8 @@
 				},
 				{
 					"cell": [
-						-9.0,
-						-9.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
 						-8.0,
 						-25.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
-						-8.0,
-						-9.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -15199,17 +14985,6 @@
 				{
 					"cell": [
 						-14.0,
-						-8.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-10.0,
 						-8.0
 					],
 					"down": true,
@@ -16815,34 +16590,100 @@
 		{
 			"arches": [
 				{
-					"axis": 1,
+					"arch_type": "portcullis_1tile",
+					"axis": 1.0,
 					"cell": [
-						-7,
-						-13
+						-8.0,
+						16.0
 					],
+					"consumes_key": true,
 					"is_arch": true,
-					"name": "PortalZ",
-					"type": "arch_3tile"
+					"is_door": true,
+					"is_locked": false,
+					"is_open": false,
+					"name": "Portcullis1",
+					"required_key": "Iron Key",
+					"type": "portcullis_1tile"
 				},
 				{
-					"axis": 1,
+					"arch_type": "wooden_door_1tile",
+					"axis": 1.0,
 					"cell": [
-						-16,
-						-15
+						-4.0,
+						-4.0
 					],
+					"consumes_key": true,
 					"is_arch": true,
-					"name": "PortalZ",
-					"type": "arch_3tile"
+					"is_door": true,
+					"is_locked": false,
+					"is_open": false,
+					"name": "WoodDoor1",
+					"required_key": "Iron Key",
+					"type": "wooden_door_1tile"
 				},
 				{
-					"axis": 1,
+					"arch_type": "wooden_door_2tile",
+					"axis": 1.0,
 					"cell": [
-						-7,
-						-14
+						-7.0,
+						-14.0
 					],
+					"consumes_key": true,
 					"is_arch": true,
-					"name": "PortalZ",
-					"type": "arch_3tile"
+					"is_door": true,
+					"is_locked": false,
+					"is_open": false,
+					"name": "WoodDoor2",
+					"required_key": "Iron Key",
+					"type": "wooden_door_2tile"
+				},
+				{
+					"arch_type": "arch_4tile",
+					"axis": 0.0,
+					"cell": [
+						-12.0,
+						-13.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": false,
+					"is_locked": false,
+					"is_open": true,
+					"name": "Portal4",
+					"required_key": "Iron Key",
+					"type": "arch_4tile"
+				},
+				{
+					"arch_type": "arch_4tile",
+					"axis": 0.0,
+					"cell": [
+						-12.0,
+						-18.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": false,
+					"is_locked": false,
+					"is_open": true,
+					"name": "Portal4",
+					"required_key": "Iron Key",
+					"type": "arch_4tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 1.0,
+					"cell": [
+						-16.0,
+						-15.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": false,
+					"is_open": true,
+					"name": "NorthWestTowerPortal",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
 				}
 			],
 			"carpets": [],
@@ -16850,27 +16691,69 @@
 			"modular_walls": [
 				{
 					"cell": [
-						-7,
-						-12
+						-7.0,
+						-11.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": false,
-					"orientation": 1,
-					"right": false,
+					"orientation": 1.0,
+					"right": true,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-6.0,
+						-11.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 1.0,
+					"right": true,
 					"rot_y": 1.5707963267949,
 					"type": "modular",
 					"up": false
 				},
 				{
 					"cell": [
-						-7,
-						-16
+						-7.0,
+						-10.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1.0,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-5.0,
+						-11.0
 					],
 					"down": false,
 					"height": 4.5,
-					"left": false,
-					"orientation": 0,
+					"left": true,
+					"orientation": 1.0,
+					"right": true,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-7.0,
+						-9.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
 					"right": false,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -16878,80 +16761,332 @@
 				},
 				{
 					"cell": [
-						-7,
-						-11
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"orientation": 1,
-					"right": true,
-					"rot_y": 1.5707963267949,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-6,
-						-11
+						-4.0,
+						-11.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
-					"orientation": 1,
+					"orientation": 0.0,
 					"right": true,
-					"rot_y": 1.5707963267949,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": false
 				},
 				{
 					"cell": [
-						-7,
-						-10
+						-7.0,
+						-17.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": false,
-					"orientation": 1,
+					"orientation": 0.0,
 					"right": false,
-					"rot_y": 1.5707963267949,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": true
 				},
 				{
 					"cell": [
-						-5,
-						-11
+						-7.0,
+						-16.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						3.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
-					"orientation": 1,
+					"orientation": 0.0,
 					"right": true,
-					"rot_y": 1.5707963267949,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						3.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": false
 				},
 				{
 					"cell": [
-						-7,
+						30.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						33.0,
+						3.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-4.0,
+						-3.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-4.0,
+						-2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-4.0,
+						-5.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-4.0,
+						-6.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-7.0,
+						-15.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-7.0,
+						-12.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16.0,
+						-18.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16.0,
+						-17.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16.0,
+						-13.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16.0,
+						-12.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16.0,
+						-16.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-9,
+						-8
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-10,
+						-8
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-9,
 						-9
 					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"orientation": 0,
-					"right": false,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-4,
-						-11
-					],
-					"down": false,
+					"down": true,
 					"height": 4.5,
 					"left": true,
 					"orientation": 0,
@@ -16962,12 +17097,40 @@
 				},
 				{
 					"cell": [
-						-7,
-						-17
+						-9,
+						-7
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-8,
+						-9
 					],
 					"down": true,
 					"height": 4.5,
-					"left": false,
+					"left": true,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-8,
+						-7
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
 					"orientation": 0,
 					"right": false,
 					"rot_y": 0.0,
@@ -16976,26 +17139,12 @@
 				},
 				{
 					"cell": [
-						-16,
-						-13
+						-8,
+						-8
 					],
 					"down": true,
 					"height": 4.5,
-					"left": false,
-					"orientation": 0,
-					"right": false,
-					"rot_y": 0.0,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						-16,
-						-17
-					],
-					"down": false,
-					"height": 4.5,
-					"left": false,
+					"left": true,
 					"orientation": 0,
 					"right": false,
 					"rot_y": 0.0,
@@ -17008,8 +17157,8 @@
 			"props": [
 				{
 					"cell": [
-						-14,
-						-23
+						-14.0,
+						-23.0
 					],
 					"pos": [
 						-28.0,
@@ -17021,8 +17170,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-24
+						-10.0,
+						-24.0
 					],
 					"pos": [
 						-20.0,
@@ -17034,8 +17183,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-24
+						-12.0,
+						-24.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17043,8 +17192,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-23
+						-12.0,
+						-23.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17052,8 +17201,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-22
+						-12.0,
+						-22.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17061,8 +17210,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-21
+						-12.0,
+						-21.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17070,8 +17219,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-20
+						-12.0,
+						-20.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17079,8 +17228,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-19
+						-12.0,
+						-19.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17088,8 +17237,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-18
+						-12.0,
+						-17.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17097,8 +17246,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-17
+						-13.0,
+						-17.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17106,8 +17255,8 @@
 				},
 				{
 					"cell": [
-						-13,
-						-17
+						-13.0,
+						-16.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17115,8 +17264,8 @@
 				},
 				{
 					"cell": [
-						-13,
-						-16
+						-13.0,
+						-15.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17124,8 +17273,8 @@
 				},
 				{
 					"cell": [
-						-13,
-						-15
+						-13.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17133,8 +17282,8 @@
 				},
 				{
 					"cell": [
-						-13,
-						-14
+						-12.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17142,8 +17291,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-14
+						-11.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17151,8 +17300,8 @@
 				},
 				{
 					"cell": [
-						-11,
-						-14
+						-10.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17160,8 +17309,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-14
+						-10.0,
+						-15.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17169,8 +17318,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-15
+						-10.0,
+						-16.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17178,8 +17327,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-16
+						-10.0,
+						-17.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17187,8 +17336,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-17
+						-11.0,
+						-17.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17196,8 +17345,8 @@
 				},
 				{
 					"cell": [
-						-11,
-						-17
+						-12.0,
+						-12.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17205,8 +17354,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-13
+						-12.0,
+						-11.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17214,8 +17363,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-12
+						-12.0,
+						-10.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17223,8 +17372,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-11
+						-15.0,
+						-15.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17232,8 +17381,8 @@
 				},
 				{
 					"cell": [
-						-12,
-						-10
+						-14.0,
+						-15.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17241,8 +17390,8 @@
 				},
 				{
 					"cell": [
-						-15,
-						-15
+						-9.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17250,8 +17399,8 @@
 				},
 				{
 					"cell": [
-						-14,
-						-15
+						-8.0,
+						-14.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17259,8 +17408,8 @@
 				},
 				{
 					"cell": [
-						-9,
-						-14
+						-1.0,
+						-19.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17268,8 +17417,8 @@
 				},
 				{
 					"cell": [
-						-8,
-						-14
+						0.0,
+						-19.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17277,8 +17426,8 @@
 				},
 				{
 					"cell": [
-						-1,
-						-19
+						1.0,
+						-19.0
 					],
 					"mat": "cloth_red",
 					"rot_y": 0.0,
@@ -17286,26 +17435,8 @@
 				},
 				{
 					"cell": [
-						0,
-						-19
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						1,
-						-19
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						-10,
-						-23
+						-10.0,
+						-23.0
 					],
 					"pos": [
 						-20.0,
@@ -17317,8 +17448,8 @@
 				},
 				{
 					"cell": [
-						-10,
-						-21
+						-10.0,
+						-21.0
 					],
 					"pos": [
 						-20.0,
@@ -17330,8 +17461,8 @@
 				},
 				{
 					"cell": [
-						-13,
-						-22
+						-13.0,
+						-22.0
 					],
 					"pos": [
 						-26.0,
@@ -17340,6 +17471,280 @@
 					],
 					"rot_y": 0.0,
 					"type": "flower_patch"
+				},
+				{
+					"cell": [
+						-7.0,
+						-5.0
+					],
+					"has_chair": true,
+					"pos": [
+						-14.0,
+						0.0,
+						-10.0
+					],
+					"rot_y": 0.0,
+					"type": "table"
+				},
+				{
+					"cell": [
+						-7.0,
+						-7.0
+					],
+					"has_chair": true,
+					"pos": [
+						-14.0,
+						0.0,
+						-14.0
+					],
+					"rot_y": 0.0,
+					"type": "table"
+				},
+				{
+					"cell": [
+						-6.0,
+						-10.0
+					],
+					"pos": [
+						-12.0,
+						0.0,
+						-20.0
+					],
+					"rot_y": 0.0,
+					"type": "bookshelf"
+				},
+				{
+					"cell": [
+						-5.0,
+						-10.0
+					],
+					"pos": [
+						-10.0,
+						0.0,
+						-20.0
+					],
+					"rot_y": 0.0,
+					"type": "bookshelf"
+				},
+				{
+					"cell": [
+						-5.0,
+						-6.0
+					],
+					"pos": [
+						-10.0,
+						0.0,
+						-12.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "bookshelf"
+				},
+				{
+					"cell": [
+						-3.0,
+						-6.0
+					],
+					"rot_y": 0.0,
+					"type": "chimney"
+				},
+				{
+					"cell": [
+						30.0,
+						3.0
+					],
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"rot_y": 0.0,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						27.0,
+						3.0
+					],
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"rot_y": 0.0,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-16.0,
+						-13.0
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-16.0,
+						-16.0
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						7,
+						-11
+					],
+					"index": 1,
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "painting"
+				},
+				{
+					"cell": [
+						33,
+						5
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33,
+						6
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33,
+						7
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32,
+						5
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32,
+						4
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33,
+						4
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32,
+						6
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32,
+						7
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-8,
+						-8
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-8,
+						-6
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-8,
+						-4
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-4,
+						-10
+					],
+					"pos": [
+						-8.0,
+						0.0,
+						-20.0
+					],
+					"rot_y": 0.0,
+					"type": "bookshelf"
+				},
+				{
+					"cell": [
+						-7,
+						-3
+					],
+					"rot_y": 3.14159265358979,
+					"type": "pew",
+					"with_back": false
 				}
 			],
 			"tiles": [
@@ -17351,7 +17756,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17361,7 +17766,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17371,7 +17776,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17381,7 +17786,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17391,7 +17796,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17401,7 +17806,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17411,7 +17816,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17421,7 +17826,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17431,7 +17836,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17441,7 +17846,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17451,7 +17856,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
@@ -17461,7 +17866,347 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-7.0,
+						-12.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-7.0,
+						-16.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-6.0,
+						-14.0
+					],
+					"mat": "chapel",
+					"type": 2.0,
+					"walkable": true,
 					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-14.0
+					],
+					"mat": "chapel",
+					"type": 2.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-7.0,
+						-11.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-6.0,
+						-11.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-7.0,
+						-7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-8.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-6.0,
+						-10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-5.0,
+						-10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-6.0,
+						-9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-6.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-6.0,
+						-7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-5.0,
+						-9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-5.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-5.0,
+						-7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-4.0,
+						-10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-4.0,
+						-9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-4.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-9.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-7.0,
+						-8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						-3.0,
+						-5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-2.0,
+						-5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-8.0,
+						-14.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-8.0,
+						16.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "South-West Watchtower"
+				},
+				{
+					"cell": [
+						-7.0,
+						16.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						16.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						27.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						27.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						27.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						30.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						30.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						33.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-4.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
@@ -17471,7 +18216,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
@@ -17481,12 +18226,12 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						-4.0,
-						-3.0
+						-7.0,
+						-14.0
 					],
 					"mat": "stone",
 					"type": 1.0,
@@ -17495,186 +18240,3121 @@
 				},
 				{
 					"cell": [
-						-16,
-						-15
+						-16.0,
+						-13.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-16.0,
+						-14.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-20.0,
+						-16.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
 					"walkable": true,
 					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
-						-7,
-						-13
+						-20.0,
+						-15.0
 					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "stone_alt",
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Castle Walls"
+					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
-						-7,
-						-12
+						-20.0,
+						-14.0
 					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "stone_alt",
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Arch Pier"
+					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
-						-7,
-						-15
+						-19.0,
+						-17.0
 					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "stone_alt",
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Castle Walls"
+					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
-						-7,
-						-16
+						-19.0,
+						-16.0
 					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "stone_alt",
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Castle Walls"
+					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
-						-6,
-						-14
+						-19.0,
+						-15.0
 					],
-					"mat": "chapel",
-					"type": 2,
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-19.0,
+						-14.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-18.0,
+						-17.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-18.0,
+						-16.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-18.0,
+						-15.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-18.0,
+						-14.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-17.0,
+						-17.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-17.0,
+						-16.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-17.0,
+						-15.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-17.0,
+						-14.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "North-West Watchtower"
+				},
+				{
+					"cell": [
+						-16.0,
+						-15.0
+					],
+					"mat": "stone",
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-5,
-						-14
-					],
-					"mat": "chapel",
-					"type": 2,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-10,
-						-13
-					],
-					"mat": "garden_green",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-13,
-						-13
-					],
-					"mat": "garden_green",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-13,
-						-18
-					],
-					"mat": "garden_green",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-10,
-						-18
-					],
-					"mat": "garden_green",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-8,
-						-14
-					],
-					"mat": "garden_green",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-7,
-						-14
-					],
-					"mat": "chapel",
-					"type": 2,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						0,
-						0
+						0.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Arch Pier"
+					"zone": "Spawn"
 				},
 				{
 					"cell": [
-						-7,
-						-11
+						-12.0,
+						-13.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Castle Walls"
+					"zone": "The Cloister Garden"
 				},
 				{
 					"cell": [
-						-6,
-						-11
+						-12.0,
+						-18.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Castle Walls"
-				},
-				{
-					"cell": [
-						-16,
-						-14
-					],
-					"mat": "stone",
-					"type": 1,
-					"walkable": true,
-					"zone": "Arch Pier"
-				},
-				{
-					"cell": [
-						-16,
-						-16
-					],
-					"mat": "stone",
-					"type": 1,
-					"walkable": true,
-					"zone": "Arch Pier"
+					"zone": "The Cloister Garden"
 				}
 			],
 			"torches": [],
+			"windows": []
+		},
+		{
+			"arches": [
+				{
+					"arch_type": "iron_door_1tile",
+					"axis": 1.0,
+					"cell": [
+						16.0,
+						5.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": false,
+					"is_open": false,
+					"name": "Prison Iron Entrance",
+					"required_key": "Iron Key",
+					"type": "iron_door_1tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 0.0,
+					"cell": [
+						25.0,
+						3.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": true,
+					"is_open": false,
+					"name": "Cell 1 Portcullis",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 0.0,
+					"cell": [
+						28.0,
+						3.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": true,
+					"is_open": false,
+					"name": "Cell 2 Portcullis",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 0.0,
+					"cell": [
+						31.0,
+						3.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": true,
+					"is_open": false,
+					"name": "Cell 3 Portcullis",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 0.0,
+					"cell": [
+						25.0,
+						7.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": true,
+					"is_open": false,
+					"name": "Cell 4 Portcullis",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
+				},
+				{
+					"arch_type": "portcullis_2tile",
+					"axis": 0.0,
+					"cell": [
+						28.0,
+						7.0
+					],
+					"consumes_key": true,
+					"is_arch": true,
+					"is_door": true,
+					"is_locked": true,
+					"is_open": false,
+					"name": "Cell 5 Portcullis",
+					"required_key": "Iron Key",
+					"type": "portcullis_2tile"
+				}
+			],
+			"carpets": [],
+			"lights": [],
+			"modular_walls": [
+				{
+					"cell": [
+						16.0,
+						4.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						16.0,
+						6.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						17.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						17.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						18.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						18.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						19.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						19.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						20.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						20.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						21.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						21.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						22.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						22.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						23.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						23.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						24.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						24.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						3.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						6.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						24.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						8.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						9.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						24.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						25.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						25.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						26.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						26.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						27.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						27.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						3.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						27.0,
+						8.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						9.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						27.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						28.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						28.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						29.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						29.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						30.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						30.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						3.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						30.0,
+						8.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						9.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						30.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						31.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						31.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						32.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						32.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						33.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						33.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						33.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						33.0,
+						3.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						33.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						34.0,
+						0.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						34.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						35.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						35.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						3.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						4.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						5.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						6.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						8.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						9.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						35.0,
+						10.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": true
+				}
+			],
+			"name": "PrisonDungeon",
+			"pillars": [],
+			"props": [
+				{
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"pos": [
+						36.0,
+						2.2,
+						8.45
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"pos": [
+						44.0,
+						2.2,
+						8.45
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						-1.0
+					],
+					"pos": [
+						40.0,
+						2.2,
+						11.55
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						-1.0
+					],
+					"pos": [
+						48.0,
+						2.2,
+						11.55
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"pos": [
+						54.0,
+						2.2,
+						6.45
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"pos": [
+						60.0,
+						2.2,
+						6.45
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"pos": [
+						66.0,
+						2.2,
+						6.45
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						-1.0
+					],
+					"pos": [
+						54.0,
+						2.2,
+						13.55
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						-1.0
+					],
+					"pos": [
+						60.0,
+						2.2,
+						13.55
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"pos": [
+						48.45,
+						2.2,
+						6.0
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"pos": [
+						48.45,
+						2.2,
+						14.0
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						-1.0,
+						0.0,
+						0.0
+					],
+					"pos": [
+						69.55,
+						2.2,
+						8.0
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						-1.0,
+						0.0,
+						0.0
+					],
+					"pos": [
+						69.55,
+						2.2,
+						14.0
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						-1.0,
+						0.0,
+						0.0
+					],
+					"pos": [
+						69.55,
+						2.2,
+						18.0
+					],
+					"type": "torch"
+				},
+				{
+					"norm": [
+						0.0,
+						0.0,
+						-1.0
+					],
+					"pos": [
+						66.0,
+						2.2,
+						19.55
+					],
+					"type": "torch"
+				},
+				{
+					"cell": [
+						25.0,
+						1.0
+					],
+					"name": "Bench_1",
+					"pos": [
+						50.0,
+						0.0,
+						2.0
+					],
+					"rot_y": 0.0,
+					"type": "bench",
+					"with_back": false
+				},
+				{
+					"cell": [
+						26.0,
+						2.0
+					],
+					"name": "BleachedSkeleton_1",
+					"pos": [
+						52.0,
+						0.0,
+						4.0
+					],
+					"rot_y": 0.5,
+					"type": "skeleton"
+				},
+				{
+					"cell": [
+						28.0,
+						1.0
+					],
+					"name": "Bench_2",
+					"pos": [
+						56.0,
+						0.0,
+						2.0
+					],
+					"rot_y": 0.0,
+					"type": "bench",
+					"with_back": false
+				},
+				{
+					"cell": [
+						31.0,
+						2.0
+					],
+					"name": "BleachedSkeleton_2",
+					"pos": [
+						62.0,
+						0.0,
+						4.0
+					],
+					"rot_y": -0.8,
+					"type": "skeleton"
+				},
+				{
+					"cell": [
+						25.0,
+						9.0
+					],
+					"name": "Bench_3",
+					"pos": [
+						50.0,
+						0.0,
+						18.0
+					],
+					"rot_y": 3.14159265358979,
+					"type": "bench",
+					"with_back": false
+				},
+				{
+					"cell": [
+						26.0,
+						8.0
+					],
+					"name": "BleachedSkeleton_3",
+					"pos": [
+						52.0,
+						0.0,
+						16.0
+					],
+					"rot_y": 1.2,
+					"type": "skeleton"
+				},
+				{
+					"cell": [
+						28.0,
+						9.0
+					],
+					"name": "Bench_4",
+					"pos": [
+						56.0,
+						0.0,
+						18.0
+					],
+					"rot_y": 3.14159265358979,
+					"type": "bench",
+					"with_back": false
+				},
+				{
+					"cell": [
+						28.0,
+						5.0
+					],
+					"chair_offset": [
+						0.0,
+						0.0,
+						0.7
+					],
+					"chair_rot": 0.0,
+					"has_chair": true,
+					"pos": [
+						56.0,
+						0.0,
+						10.0
+					],
+					"size": [
+						1.8,
+						1.0,
+						1.8
+					],
+					"type": "table"
+				},
+				{
+					"cell": [
+						34.0,
+						5.0
+					],
+					"cells": [
+						[
+							34.0,
+							5.0
+						],
+						[
+							34.0,
+							6.0
+						]
+					],
+					"pos": [
+						68.0,
+						0.0,
+						11.0
+					],
+					"rot_y": -1.5707963267949,
+					"type": "chimney"
+				},
+				{
+					"cell": [
+						34.0,
+						4.0
+					],
+					"pos": [
+						68.0,
+						0.0,
+						8.0
+					],
+					"rot_y": -1.5707963267949,
+					"type": "arms_shelf"
+				},
+				{
+					"cell": [
+						34.0,
+						7.0
+					],
+					"pos": [
+						68.0,
+						0.0,
+						14.0
+					],
+					"rot_y": -1.5707963267949,
+					"type": "arms_shelf"
+				}
+			],
+			"tiles": [
+				{
+					"cell": [
+						16.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						16.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						16.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						17.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						17.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						17.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						18.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						18.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						18.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						19.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						19.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						19.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						20.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						20.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						20.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						21.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						21.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						21.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						22.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						22.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						22.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						23.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						23.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						23.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						24.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						25.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						26.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						27.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						28.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						29.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						30.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						31.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						32.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						33.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						34.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						7.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						8.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						9.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				},
+				{
+					"cell": [
+						35.0,
+						10.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": false,
+					"zone": "Prison Dungeon & Cells"
+				}
+			],
 			"windows": []
 		}
 	],

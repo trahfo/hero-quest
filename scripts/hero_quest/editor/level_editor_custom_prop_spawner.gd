@@ -8,6 +8,10 @@ const CastleDecorationFactory = preload("res://scripts/hero_quest/castle_decorat
 const CastleGraveyardPropFactory = preload("res://scripts/hero_quest/castle_graveyard_prop_factory.gd")
 const CastleLevelPropSpawner = preload("res://scripts/hero_quest/level/castle_level_prop_spawner.gd")
 const CastleLevelData = preload("res://scripts/hero_quest/level/castle_level_data.gd")
+const CastleDoorBuilder = preload("res://scripts/hero_quest/castle_door_builder.gd")
+const HeroQuestDoor = preload("res://scripts/hero_quest/hero_quest_door.gd")
+const HeroQuestFloorItem = preload("res://scripts/hero_quest/hero_quest_floor_item.gd")
+const ItemDatabase = preload("res://scripts/hero_quest/item_database.gd")
 
 var builder: Node3D
 var materials: CastleMaterials
@@ -16,6 +20,7 @@ var prop_factory: CastlePropFactory
 var decors: CastleDecorationFactory
 var graveyard_props: CastleGraveyardPropFactory
 var prop_spawner: CastleLevelPropSpawner
+var door_builder: CastleDoorBuilder
 
 func _init(p_builder: Node3D, p_mat: CastleMaterials, p_mb: CastleMeshBuilder, p_pf: CastlePropFactory, p_dec: CastleDecorationFactory, p_gy: CastleGraveyardPropFactory, p_ps: CastleLevelPropSpawner) -> void:
 	builder = p_builder
@@ -25,6 +30,7 @@ func _init(p_builder: Node3D, p_mat: CastleMaterials, p_mb: CastleMeshBuilder, p
 	decors = p_dec
 	graveyard_props = p_gy
 	prop_spawner = p_ps
+	door_builder = CastleDoorBuilder.new(materials)
 
 func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 	var p_type = p_info.get("type", "")
@@ -40,7 +46,19 @@ func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 		builder.interactive_chests.append(chest)
 		_register_blocking(cell, chest)
 		return chest
-	if p_info.get("is_arch", false) or p_type.begins_with("arch") or p_type == "door":
+	if p_type == "floor_item" or p_type == "floor_key":
+		var item_id = p_info.get("item_id", "iron_key")
+		var item_data = ItemDatabase.create_item(item_id)
+		var floor_item = HeroQuestFloorItem.new()
+		parent.add_child(floor_item)
+		floor_item.setup(item_data, pos)
+		if not builder.grid.has(cell):
+			builder.register_tile(cell, 1, true, "Floor")
+		else:
+			builder.grid[cell]["walkable"] = true
+		builder.grid[cell]["prop"] = floor_item
+		return floor_item
+	if p_info.get("is_arch", false) or p_type.begins_with("arch") or p_type == "door" or "door" in p_type or "portcullis" in p_type:
 		return _spawn_arch(parent, cell, p_info)
 	if p_type == "carpet":
 		return prop_spawner.spawn_carpet(parent, {"pos": CastleLevelData.vec3_to_arr(pos + Vector3(0, 0.01, 0)), "size": [2.0, 0.02, 2.0], "mat": p_info.get("mat", "cloth_red")})
@@ -52,8 +70,8 @@ func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 		var p = mesh_builder.create_pillar(parent, pos, float(p_info.get("height", 4.5))); _register_blocking(cell, p); return p
 	if p_type == "golden_cross":
 		var cr = _create_altar_cross(parent, pos); cr.rotation.y = rot_y; _register_blocking(cell, cr); return cr
-	if p_type == "pew":
-		var pew = prop_factory.create_bench_2tile(parent, pos, p_info.get("with_back", true), rot_y); _register_blocking(cell, pew); return pew
+	if p_type == "pew" or p_type == "bench":
+		var pew = prop_factory.create_bench_2tile(parent, pos, p_info.get("with_back", p_type == "pew"), rot_y); _register_blocking(cell, pew); return pew
 	if p_type == "lower_wall":
 		var w = mesh_builder.create_wall_segment(parent, cell, 1.8); w.rotation.y = rot_y; _register_blocking(cell, w); return w
 	if p_type == "stone_pillar":
@@ -102,13 +120,63 @@ func _spawn_arch(parent: Node3D, cell: Vector2i, a_info: Dictionary) -> Node3D:
 	arch_node.name = a_name
 	parent.add_child(arch_node)
 
+	var off = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
+	var is_door = ("door" in a_type or "portcullis" in a_type)
+
+	if is_door:
+		var is_2tile = ("2tile" in a_type)
+		var door_sub = Node3D.new()
+		var center_pos = builder.grid_to_world(cell) if not is_2tile else (builder.grid_to_world(cell) + builder.grid_to_world(cell + off)) * 0.5
+		door_sub.position = center_pos
+		arch_node.add_child(door_sub)
+
+		var door_res: Dictionary
+		match a_type:
+			"wooden_door_1tile":
+				door_res = door_builder.build_wooden_door_1tile(door_sub, axis)
+			"wooden_door_2tile":
+				door_res = door_builder.build_wooden_door_2tile(door_sub, axis)
+			"iron_door_1tile":
+				door_res = door_builder.build_iron_door_1tile(door_sub, axis)
+			"iron_door_2tile":
+				door_res = door_builder.build_iron_door_2tile(door_sub, axis)
+			"portcullis_1tile":
+				door_res = door_builder.build_portcullis(door_sub, 1, axis)
+			"portcullis_2tile":
+				door_res = door_builder.build_portcullis(door_sub, 2, axis)
+			_:
+				door_res = door_builder.build_wooden_door_1tile(door_sub, axis)
+
+		var occupied_cells: Array[Vector2i] = []
+		occupied_cells.append(cell)
+		if is_2tile:
+			occupied_cells.append(cell + off)
+		var is_open = bool(a_info.get("is_open", false))
+		for c in occupied_cells:
+			if not builder.grid.has(c):
+				builder.register_tile(c, 1, is_open, "Doorway")
+			else:
+				builder.grid[c]["walkable"] = is_open
+				builder.grid[c]["type"] = 1
+			builder.grid[c]["prop"] = arch_node
+
+		var door_controller = HeroQuestDoor.new()
+		door_controller.name = "DoorController"
+		arch_node.add_child(door_controller)
+		var audio_mgr = builder.get_node_or_null("AudioManager") if builder.has_node("AudioManager") else null
+		var d_info = a_info.duplicate()
+		d_info["occupied_cells"] = occupied_cells
+		var pivots: Array[Node3D] = []
+		pivots.assign(door_res.get("pivots", []))
+		door_controller.setup(builder, audio_mgr, d_info, pivots, door_res.get("is_slide", false))
+		return arch_node
+
 	if not builder.grid.has(cell):
 		builder.register_tile(cell, 1, true, "Portal")
 	else:
 		builder.grid[cell]["walkable"] = true
 		builder.grid[cell]["type"] = 1
 
-	var off = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
 	if a_type == "arch_spanning_3tiles":
 		mesh_builder.build_arch_spanning_3tiles(arch_node, cell, axis, a_name)
 		builder.register_tile(cell - off * 2, 6, false, "Arch Pier")
@@ -118,6 +186,16 @@ func _spawn_arch(parent: Node3D, cell: Vector2i, a_info: Dictionary) -> Node3D:
 		builder.register_tile(cell - off * 2, 6, false, "Arch Pier")
 		builder.register_tile(cell, 6, false, "Arch Pier")
 		builder.register_tile(cell + off * 2, 6, false, "Arch Pier")
+	elif a_type == "arch_4tile":
+		mesh_builder.build_arch_4tile(arch_node, cell, cell + off, axis, a_name)
+		builder.register_tile(cell - off, 6, false, "Arch Pier")
+		builder.register_tile(cell + off * 2, 6, false, "Arch Pier")
+		if not builder.grid.has(cell + off):
+			builder.register_tile(cell + off, 1, true, "Portal")
+		else:
+			builder.grid[cell + off]["walkable"] = true
+			builder.grid[cell + off]["type"] = 1
+		builder.grid[cell + off]["prop"] = arch_node
 	else:
 		mesh_builder.build_arch_3tile(arch_node, cell, axis, a_name)
 		builder.register_tile(cell - off, 6, false, "Arch Pier")

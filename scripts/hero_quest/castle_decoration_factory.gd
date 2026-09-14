@@ -182,14 +182,24 @@ func create_chimney_fireplace(parent: Node3D, pos: Vector3, rot_y: float = 0.0) 
 	mantle.position = Vector3(0, 2.1, 0.1)
 	body.add_child(mantle)
 
-	var cavity = MeshInstance3D.new()
-	var c_mesh = BoxMesh.new()
-	c_mesh.size = Vector3(1.8, 1.5, 0.9)
+	# Fireback interior rear wall
+	var fireback = MeshInstance3D.new()
+	var fb_mesh = BoxMesh.new()
+	fb_mesh.size = Vector3(1.8, 1.5, 0.1)
 	var cav_mat = StandardMaterial3D.new()
 	cav_mat.albedo_color = Color(0.06, 0.06, 0.07)
+	fireback.mesh = fb_mesh
+	fireback.material_override = cav_mat
+	fireback.position = Vector3(0, 1.0, 0.0)
+	body.add_child(fireback)
+
+	# Black hearth front curb/plate (1/3 height = 0.5m, allows seeing fire behind it)
+	var cavity = MeshInstance3D.new()
+	var c_mesh = BoxMesh.new()
+	c_mesh.size = Vector3(1.8, 0.5, 0.9)
 	cavity.mesh = c_mesh
 	cavity.material_override = cav_mat
-	cavity.position = Vector3(0, 0.85, 0.4)
+	cavity.position = Vector3(0, 0.25, 0.4)
 	body.add_child(cavity)
 
 	for lx in [-0.4, 0.0, 0.4]:

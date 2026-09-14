@@ -2,6 +2,7 @@ class_name LevelEditorUI
 extends CanvasLayer
 
 const LevelEditorChestPanel = preload("res://scripts/hero_quest/editor/level_editor_chest_panel.gd")
+const LevelEditorDoorPanel = preload("res://scripts/hero_quest/editor/level_editor_door_panel.gd")
 
 signal tool_selected(tool_name: String, data: Dictionary)
 signal undo_pressed
@@ -10,6 +11,7 @@ signal save_pressed
 signal exit_pressed
 signal discard_pressed
 signal chest_config_changed(cfg: Dictionary)
+signal door_config_changed(cfg: Dictionary)
 signal level_name_changed(new_name: String)
 
 var root_panel: Control
@@ -17,6 +19,7 @@ var top_bar: HBoxContainer
 var category_tabs: TabContainer
 var category_buttons: Array[Button] = []
 var chest_panel: PanelContainer
+var door_panel: PanelContainer
 var room_panel: PanelContainer = null
 var status_label: Label
 var action_label: Label
@@ -36,15 +39,9 @@ func _init() -> void:
 func _init_styles() -> void:
 	active_style = StyleBoxFlat.new()
 	active_style.bg_color = Color(0.18, 0.38, 0.62, 0.95)
-	active_style.border_width_left = 3
-	active_style.border_width_top = 3
-	active_style.border_width_right = 3
-	active_style.border_width_bottom = 3
+	active_style.set_border_width_all(3)
 	active_style.border_color = Color(1.0, 0.84, 0.2, 1.0)
-	active_style.corner_radius_top_left = 4
-	active_style.corner_radius_top_right = 4
-	active_style.corner_radius_bottom_right = 4
-	active_style.corner_radius_bottom_left = 4
+	active_style.set_corner_radius_all(4)
 
 	active_cat_style = StyleBoxFlat.new()
 	active_cat_style.bg_color = Color(0.2, 0.32, 0.48, 0.95)
@@ -60,6 +57,7 @@ func _build_ui() -> void:
 	_build_top_bar()
 	_build_palette()
 	_build_chest_panel()
+	_build_door_panel()
 	_build_status_bar()
 
 func _build_top_bar() -> void:
@@ -240,6 +238,9 @@ func _on_palette_item_clicked(tool_name: String, label: String, data: Dictionary
 
 	if chest_panel:
 		chest_panel.visible = (tool_name == "chest")
+	if door_panel:
+		var arch_t = data.get("arch_type", "")
+		door_panel.visible = (tool_name == "door" and ("door" in arch_t or "portcullis" in arch_t))
 	if room_panel:
 		room_panel.visible = (tool_name == "room")
 	if action_label:
@@ -259,6 +260,8 @@ func clear_selection_highlight() -> void:
 		action_label.text = "Action: None (Ready)"
 	if chest_panel:
 		chest_panel.visible = false
+	if door_panel:
+		door_panel.visible = false
 	if room_panel:
 		room_panel.visible = false
 
@@ -282,8 +285,14 @@ func _add_walls_tab() -> void:
 
 func _add_doors_tab() -> void:
 	var g = _create_grid_scroll("Doors")
-	_add_tool_button(g, "3-Tile Portal (X)", "door", {"arch_type": "arch_3tile", "name": "PortalX", "axis": 0})
-	_add_tool_button(g, "3-Tile Portal (Z)", "door", {"arch_type": "arch_3tile", "name": "PortalZ", "axis": 1})
+	_add_tool_button(g, "Wooden Door (1-Tile)", "door", {"arch_type": "wooden_door_1tile", "name": "WoodDoor1", "axis": 0})
+	_add_tool_button(g, "Wooden Door (2-Tile)", "door", {"arch_type": "wooden_door_2tile", "name": "WoodDoor2", "axis": 0})
+	_add_tool_button(g, "Iron Door (1-Tile)", "door", {"arch_type": "iron_door_1tile", "name": "IronDoor1", "axis": 0})
+	_add_tool_button(g, "Iron Door (2-Tile)", "door", {"arch_type": "iron_door_2tile", "name": "IronDoor2", "axis": 0})
+	_add_tool_button(g, "Portcullis (1-Tile)", "door", {"arch_type": "portcullis_1tile", "name": "Portcullis1", "axis": 0})
+	_add_tool_button(g, "Portcullis (2-Tile)", "door", {"arch_type": "portcullis_2tile", "name": "Portcullis2", "axis": 0})
+	_add_tool_button(g, "3-Tile Portal", "door", {"arch_type": "arch_3tile", "name": "Portal3", "axis": 0})
+	_add_tool_button(g, "4-Tile Portal", "door", {"arch_type": "arch_4tile", "name": "Portal4", "axis": 0})
 	_add_tool_button(g, "Spanning Arch", "door", {"arch_type": "arch_spanning_3tiles", "name": "SpanningGate", "axis": 0})
 	_add_tool_button(g, "5-Tile Twin Arch", "door", {"arch_type": "arch_5tile_twin", "name": "TwinPortal", "axis": 0})
 
@@ -338,8 +347,9 @@ func _add_graveyard_tab() -> void:
 	_add_tool_button(g, "Weathered Stone", "prop", {"type": "gravestone", "style": 3, "epitaph": "Rest in Peace"})
 
 func _add_chests_tab() -> void:
-	var g = _create_grid_scroll("Chests")
+	var g = _create_grid_scroll("Chests & Items")
 	_add_tool_button(g, "Treasure Chest", "chest", {"type": "treasure_chest"})
+	_add_tool_button(g, "Floor Key", "item", {"type": "floor_key", "item_id": "iron_key"})
 
 func _add_tools_tab() -> void:
 	var g = _create_grid_scroll("Tools")
@@ -350,6 +360,11 @@ func _build_chest_panel() -> void:
 	chest_panel = LevelEditorChestPanel.new()
 	chest_panel.chest_config_changed.connect(func(cfg): chest_config_changed.emit(cfg))
 	root_panel.add_child(chest_panel)
+
+func _build_door_panel() -> void:
+	door_panel = LevelEditorDoorPanel.new()
+	door_panel.door_config_changed.connect(func(cfg): door_config_changed.emit(cfg))
+	root_panel.add_child(door_panel)
 
 func set_room_panel(p_panel: PanelContainer) -> void:
 	room_panel = p_panel

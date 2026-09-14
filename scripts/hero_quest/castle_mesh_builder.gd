@@ -290,68 +290,74 @@ func create_gothic_window(parent: Node3D, pos: Vector3, wall_normal: Vector3) ->
 	return win
 
 func build_arch_3tile(parent: Node3D, open_cell: Vector2i, axis: int, arch_name: String = "") -> Node3D:
+	var root = Node3D.new()
+	if arch_name != "": root.name = arch_name
+	parent.add_child(root)
+
 	var offset = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
 	var left_pier = open_cell - offset
 	var right_pier = open_cell + offset
 
-	create_arch_pier(parent, left_pier, 3.6, -offset)
-	create_arch_pier(parent, right_pier, 3.6, offset)
+	create_arch_pier(root, left_pier, 3.6, -offset)
+	create_arch_pier(root, right_pier, 3.6, offset)
 
 	var center_world = grid_to_world_fn.call(open_cell)
-	var arch = create_curved_arch_mesh(parent, center_world, TILE_SIZE * 2.0, 3.6, axis, 0.9)
-	if arch_name != "":
-		arch.name = arch_name
-	return arch
+	create_curved_arch_mesh(root, center_world, TILE_SIZE * 2.0, 3.6, axis, 0.9)
+	return root
 
 func build_arch_4tile(parent: Node3D, open_1: Vector2i, open_2: Vector2i, axis: int, arch_name: String = "") -> Node3D:
+	var root = Node3D.new()
+	if arch_name != "": root.name = arch_name
+	parent.add_child(root)
+
 	var offset = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
 	var left_pier = open_1 - offset
 	var right_pier = open_2 + offset
 
-	create_arch_pier(parent, left_pier, 3.6, -offset)
-	create_arch_pier(parent, right_pier, 3.6, offset)
+	create_arch_pier(root, left_pier, 3.6, -offset)
+	create_arch_pier(root, right_pier, 3.6, offset)
 
 	var center_world = (grid_to_world_fn.call(open_1) + grid_to_world_fn.call(open_2)) * 0.5
-	var arch = create_curved_arch_mesh(parent, center_world, TILE_SIZE * 3.0, 3.6, axis, 0.9)
-	if arch_name != "":
-		arch.name = arch_name
-	return arch
+	create_curved_arch_mesh(root, center_world, TILE_SIZE * 3.0, 3.6, axis, 0.9)
+	return root
 
 func build_arch_5tile_twin(parent: Node3D, center_pier_cell: Vector2i, axis: int, arch_name: String = "") -> Node3D:
+	var root = Node3D.new()
+	if arch_name != "": root.name = arch_name
+	parent.add_child(root)
+
 	var offset = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
 	var left_pier = center_pier_cell - offset * 2
 	var left_open = center_pier_cell - offset
 	var right_open = center_pier_cell + offset
 	var right_pier = center_pier_cell + offset * 2
 
-	create_arch_pier(parent, left_pier, 3.6, -offset)
-	create_arch_pier(parent, center_pier_cell, 3.6, Vector2i.ZERO)
-	create_arch_pier(parent, right_pier, 3.6, offset)
-
-	var group = Node3D.new()
-	if arch_name != "":
-		group.name = arch_name
-	parent.add_child(group)
+	create_arch_pier(root, left_pier, 3.6, -offset)
+	create_arch_pier(root, center_pier_cell, 3.6, Vector2i.ZERO)
+	create_arch_pier(root, right_pier, 3.6, offset)
 
 	var left_center = grid_to_world_fn.call(left_open)
-	create_curved_arch_mesh(group, left_center, TILE_SIZE * 2.0, 3.6, axis, 0.9)
+	create_curved_arch_mesh(root, left_center, TILE_SIZE * 2.0, 3.6, axis, 0.9)
 
 	var right_center = grid_to_world_fn.call(right_open)
-	create_curved_arch_mesh(group, right_center, TILE_SIZE * 2.0, 3.6, axis, 0.9)
-	return group
+	create_curved_arch_mesh(root, right_center, TILE_SIZE * 2.0, 3.6, axis, 0.9)
+	return root
 
-func build_arch_spanning_3tiles(parent: Node3D, center_cell: Vector2i, axis: int, arch_name: String) -> Node3D:
+func build_arch_spanning_3tiles(parent: Node3D, center_cell: Vector2i, axis: int, arch_name: String = "") -> Node3D:
+	var root = Node3D.new()
+	if arch_name != "": root.name = arch_name
+	parent.add_child(root)
+
 	var offset = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
 	var left_pier = center_cell - offset * 2
 	var right_pier = center_cell + offset * 2
 
-	create_arch_pier(parent, left_pier, 3.6, -offset)
-	create_arch_pier(parent, right_pier, 3.6, offset)
+	create_arch_pier(root, left_pier, 3.6, -offset)
+	create_arch_pier(root, right_pier, 3.6, offset)
 
 	var center_world = grid_to_world_fn.call(center_cell)
-	var arch = create_curved_arch_mesh(parent, center_world, TILE_SIZE * 4.0, 3.6, axis, 0.9)
-	arch.name = arch_name
-	return arch
+	create_curved_arch_mesh(root, center_world, TILE_SIZE * 4.0, 3.6, axis, 0.9)
+	return root
 
 func create_pillar(parent: Node3D, pos: Vector3, height: float = 4.0) -> StaticBody3D:
 	var body = StaticBody3D.new()

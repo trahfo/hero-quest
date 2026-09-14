@@ -56,8 +56,9 @@ func create_table(parent: Node3D, pos: Vector3, size: Vector3, custom_mat: Mater
 	parent.add_child(body)
 	return body
 
-func create_bench(parent: Node3D, pos: Vector3, length: float, is_pew: bool = false, rot_y: float = 0.0) -> StaticBody3D:
+func create_bench(parent: Node3D, pos: Vector3, length: float, is_pew: bool = false, rot_y: float = 0.0, bench_name: String = "") -> StaticBody3D:
 	var body = StaticBody3D.new()
+	body.name = bench_name if bench_name != "" else ("ChapelPew" if is_pew else "WoodenBench")
 	body.position = pos
 	body.rotation.y = rot_y
 
@@ -128,8 +129,8 @@ func create_bench(parent: Node3D, pos: Vector3, length: float, is_pew: bool = fa
 	parent.add_child(body)
 	return body
 
-func create_bench_2tile(parent: Node3D, pos: Vector3, is_pew: bool = true, rot_y: float = 0.0) -> StaticBody3D:
-	return create_bench(parent, pos, 3.6, is_pew, rot_y)
+func create_bench_2tile(parent: Node3D, pos: Vector3, is_pew: bool = true, rot_y: float = 0.0, bench_name: String = "") -> StaticBody3D:
+	return create_bench(parent, pos, 3.6, is_pew, rot_y, bench_name)
 
 func create_chair(parent: Node3D, pos: Vector3, rot_y: float = 0.0) -> StaticBody3D:
 	var body = StaticBody3D.new()

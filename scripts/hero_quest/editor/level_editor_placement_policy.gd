@@ -37,7 +37,7 @@ static func is_same_tile(cell: Vector2i, tool_name: String, item_data: Dictionar
 		var ep = c_info.get("prop")
 		if ep == null: return false
 		var ep_type = str(ep.get("type", ""))
-		return ep.get("is_arch", false) or ep_type.begins_with("arch") or ep_type == "door"
+		return ep.get("is_arch", false) or ep_type.begins_with("arch") or "door" in ep_type or "portcullis" in ep_type
 
 	if tool_name == "chest":
 		var ep = c_info.get("prop")
@@ -113,7 +113,18 @@ static func get_effective_placement(cell: Vector2i, tool_name: String, item_data
 			return { "has_same": true, "is_exception": false, "rot_y": next_rot, "orientation": next_orient }
 		return { "has_same": false, "is_exception": false, "rot_y": default_rot, "orientation": default_orient }
 
-	# 2. Doors & Arches
+	# 2. Windows
+	if tool_name == "window":
+		var check = LevelEditorWallAutoTiler.validate_window_placement(cell, model.is_wall_at, model.is_door_or_arch_at)
+		var base_norm = check.get("norm", Vector3.FORWARD)
+		if has_same:
+			var cur_w = model.cell_data[cell].get("wall", {})
+			var cur_n = CastleLevelData.arr_to_vec3(cur_w.get("norm", [base_norm.x, base_norm.y, base_norm.z]))
+			var next_n = Vector3(cur_n.z, 0, -cur_n.x)
+			return { "has_same": true, "is_exception": false, "norm": next_n, "rot_y": atan2(next_n.x, next_n.z) }
+		return { "has_same": false, "is_exception": false, "norm": base_norm, "rot_y": atan2(base_norm.x, base_norm.z) }
+
+	# 3. Doors & Arches
 	if is_arch:
 		var base_axis = int(item_data.get("axis", 0))
 		if has_same:

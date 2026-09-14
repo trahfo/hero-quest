@@ -62,6 +62,7 @@ func _init_subsystems() -> void:
 	tool_handler = LevelEditorToolHandler.new(camera, grid, history, model, ghost_preview)
 	tool_handler.tool_action_performed.connect(_on_tool_action)
 	tool_handler.tool_warning.connect(_on_tool_warning)
+	tool_handler.tile_hovered.connect(func(msg): ui.set_status_notice(msg))
 
 	ui = LevelEditorUI.new()
 	ui.visible = false
@@ -83,6 +84,7 @@ func _init_subsystems() -> void:
 	ui.exit_pressed.connect(toggle_editor)
 	ui.discard_pressed.connect(exit_without_saving)
 	ui.chest_config_changed.connect(_on_chest_config_changed)
+	ui.door_config_changed.connect(_on_door_config_changed)
 	history.history_changed.connect(ui.update_history_counts)
 
 func toggle_editor() -> bool:
@@ -198,6 +200,12 @@ func _on_ui_tool_selected(tool_name: String, data: Dictionary) -> void:
 func _on_chest_config_changed(cfg: Dictionary) -> void:
 	if tool_handler:
 		tool_handler.chest_config = cfg
+
+func _on_door_config_changed(cfg: Dictionary) -> void:
+	if tool_handler:
+		tool_handler.door_config = cfg
+	if ghost_preview and ghost_preview.has_method("set_door_config"):
+		ghost_preview.set_door_config(cfg)
 
 func _on_tool_action(desc: String) -> void:
 	if ui:

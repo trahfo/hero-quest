@@ -12,6 +12,11 @@ var stream_chest_open: AudioStreamWAV
 var stream_anvil_clink: AudioStreamWAV
 var stream_chapel_bell: AudioStreamWAV
 var stream_ui_click: AudioStreamWAV
+var stream_door_open: AudioStreamWAV
+var stream_door_close: AudioStreamWAV
+var stream_door_unlock: AudioStreamWAV
+var stream_door_locked: AudioStreamWAV
+var stream_portcullis: AudioStreamWAV
 
 func _ready() -> void:
 	music_player = AudioStreamPlayer.new()
@@ -35,6 +40,11 @@ func _generate_all_audio() -> void:
 	stream_anvil_clink = HeroQuestAudioSynth.generate_anvil_clink()
 	stream_chapel_bell = HeroQuestAudioSynth.generate_chapel_bell()
 	stream_ui_click = HeroQuestAudioSynth.generate_ui_click()
+	stream_door_open = HeroQuestAudioSynth.generate_door_open()
+	stream_door_close = HeroQuestAudioSynth.generate_door_close()
+	stream_door_unlock = HeroQuestAudioSynth.generate_door_unlock()
+	stream_door_locked = HeroQuestAudioSynth.generate_door_locked()
+	stream_portcullis = HeroQuestAudioSynth.generate_portcullis()
 
 func play_music() -> void:
 	if stream_dark_music:
@@ -84,3 +94,39 @@ func play_ui() -> void:
 	p.pitch_scale = 1.0
 	p.volume_db = -6.0
 	p.play()
+
+func play_door_open() -> void:
+	var p = _get_free_sfx_player()
+	p.stream = stream_door_open
+	p.pitch_scale = randf_range(0.95, 1.05)
+	p.volume_db = -3.0
+	p.play()
+
+func play_door_close() -> void:
+	var p = _get_free_sfx_player()
+	p.stream = stream_door_close
+	p.pitch_scale = randf_range(0.95, 1.05)
+	p.volume_db = -2.0
+	p.play()
+
+func play_door_unlock() -> void:
+	var p = _get_free_sfx_player()
+	p.stream = stream_door_unlock
+	p.pitch_scale = randf_range(0.98, 1.02)
+	p.volume_db = -2.0
+	p.play()
+
+func play_door_locked() -> void:
+	var p = _get_free_sfx_player()
+	p.stream = stream_door_locked
+	p.pitch_scale = randf_range(0.95, 1.05)
+	p.volume_db = -2.0
+	p.play()
+
+func play_portcullis() -> void:
+	var p = _get_free_sfx_player()
+	p.stream = stream_portcullis
+	p.pitch_scale = randf_range(0.95, 1.05)
+	p.volume_db = -3.0
+	p.play()
+

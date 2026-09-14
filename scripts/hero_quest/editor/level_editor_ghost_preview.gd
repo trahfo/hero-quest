@@ -8,6 +8,7 @@ const CastleGraveyardPropFactory = preload("res://scripts/hero_quest/castle_grav
 const CastleMeshBuilder = preload("res://scripts/hero_quest/castle_mesh_builder.gd")
 const CastleWallTileFactory = preload("res://scripts/hero_quest/castle_wall_tile_factory.gd")
 const LevelEditorPlacementPolicy = preload("res://scripts/hero_quest/editor/level_editor_placement_policy.gd")
+const CastleDoorBuilder = preload("res://scripts/hero_quest/castle_door_builder.gd")
 
 var preview_node: Node3D = null
 var ghost_mat: StandardMaterial3D
@@ -18,6 +19,8 @@ var decor_factory: CastleDecorationFactory
 var graveyard_factory: CastleGraveyardPropFactory
 var mesh_builder: CastleMeshBuilder
 var wall_factory: CastleWallTileFactory
+var door_builder: CastleDoorBuilder
+var door_config: Dictionary = {}
 
 func _init(p_materials: CastleMaterials, p_builder: Node3D) -> void:
 	name = "LevelEditorGhostPreview"
@@ -27,6 +30,7 @@ func _init(p_materials: CastleMaterials, p_builder: Node3D) -> void:
 	graveyard_factory = CastleGraveyardPropFactory.new(materials)
 	mesh_builder = p_builder.mesh_builder if p_builder.mesh_builder else CastleMeshBuilder.new(materials, p_builder.grid_to_world, p_builder.register_tile)
 	wall_factory = CastleWallTileFactory.new(materials)
+	door_builder = CastleDoorBuilder.new(materials)
 
 	ghost_mat = StandardMaterial3D.new()
 	ghost_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -57,12 +61,39 @@ func update_preview_mesh(tool_name: String, item_data: Dictionary) -> void:
 		"door", "arch":
 			var axis = int(item_data.get("axis", 0))
 			var a_type = item_data.get("arch_type", item_data.get("type", "arch_3tile"))
-			if a_type == "arch_spanning_3tiles":
-				mesh_builder.build_arch_spanning_3tiles(preview_node, Vector2i.ZERO, axis, "GhostArch")
-			elif a_type == "arch_5tile_twin":
-				mesh_builder.build_arch_5tile_twin(preview_node, Vector2i.ZERO, axis, "GhostArch")
-			else:
-				mesh_builder.build_arch_3tile(preview_node, Vector2i.ZERO, axis, "GhostArch")
+			match a_type:
+				"wooden_door_1tile":
+					var res = door_builder.build_wooden_door_1tile(preview_node, axis)
+					_apply_door_preview_pose(res)
+				"wooden_door_2tile":
+					var res = door_builder.build_wooden_door_2tile(preview_node, axis)
+					_apply_door_preview_pose(res)
+				"iron_door_1tile":
+					var res = door_builder.build_iron_door_1tile(preview_node, axis)
+					_apply_door_preview_pose(res)
+				"iron_door_2tile":
+					var res = door_builder.build_iron_door_2tile(preview_node, axis)
+					_apply_door_preview_pose(res)
+				"portcullis_1tile":
+					var res = door_builder.build_portcullis(preview_node, 1, axis)
+					_apply_door_preview_pose(res)
+				"portcullis_2tile":
+					var res = door_builder.build_portcullis(preview_node, 2, axis)
+					_apply_door_preview_pose(res)
+				"arch_spanning_3tiles":
+					mesh_builder.build_arch_spanning_3tiles(preview_node, Vector2i.ZERO, axis, "GhostArch")
+				"arch_5tile_twin":
+					mesh_builder.build_arch_5tile_twin(preview_node, Vector2i.ZERO, axis, "GhostArch")
+				"arch_4tile":
+					var off = Vector2i(1, 0) if axis == 0 else Vector2i(0, 1)
+					mesh_builder.build_arch_4tile(preview_node, Vector2i.ZERO, off, axis, "GhostArch")
+				_:
+					mesh_builder.build_arch_3tile(preview_node, Vector2i.ZERO, axis, "GhostArch")
+		"item":
+			var m = MeshInstance3D.new()
+			var b = BoxMesh.new(); b.size = Vector3(0.35, 0.35, 0.35)
+			m.mesh = b; m.position = Vector3(0, 0.25, 0)
+			preview_node.add_child(m)
 		"prop":
 			_spawn_prop_preview(item_data)
 		_:
@@ -72,6 +103,24 @@ func update_preview_mesh(tool_name: String, item_data: Dictionary) -> void:
 			preview_node.add_child(m)
 
 	_apply_ghost_material(preview_node)
+
+func set_door_config(cfg: Dictionary) -> void:
+	door_config = cfg
+
+func _apply_door_preview_pose(res: Dictionary) -> void:
+	var is_open = door_config.get("is_open", false)
+	if not is_open: return
+	var is_slide = res.get("is_slide", false)
+	var pivots = res.get("pivots", [])
+	if is_slide:
+		for p in pivots:
+			if is_instance_valid(p): p.position.y = 3.2
+	elif pivots.size() == 1:
+		if is_instance_valid(pivots[0]):
+			pivots[0].rotation.y = -PI * 0.5 if res.get("axis", 0) == 0 else PI * 0.5
+	elif pivots.size() >= 2:
+		if is_instance_valid(pivots[0]): pivots[0].rotation.y = -PI * 0.5
+		if is_instance_valid(pivots[1]): pivots[1].rotation.y = PI * 0.5
 
 func _spawn_prop_preview(data: Dictionary) -> void:
 	var p_type = data.get("type", "")

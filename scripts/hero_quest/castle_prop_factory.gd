@@ -164,8 +164,8 @@ func create_candelabra(parent: Node3D, pos: Vector3) -> StaticBody3D:
 # ---------------------------------------------------------
 
 func create_table(parent: Node3D, pos: Vector3, size: Vector3, custom_mat: Material = null) -> StaticBody3D: return furniture.create_table(parent, pos, size, custom_mat)
-func create_bench(parent: Node3D, pos: Vector3, length: float, is_pew: bool = false) -> StaticBody3D: return furniture.create_bench(parent, pos, length, is_pew)
-func create_bench_2tile(parent: Node3D, pos: Vector3, is_pew: bool = true, rot_y: float = 0.0) -> StaticBody3D: return furniture.create_bench_2tile(parent, pos, is_pew, rot_y)
+func create_bench(parent: Node3D, pos: Vector3, length: float, is_pew: bool = false, rot_y: float = 0.0, bench_name: String = "") -> StaticBody3D: return furniture.create_bench(parent, pos, length, is_pew, rot_y, bench_name)
+func create_bench_2tile(parent: Node3D, pos: Vector3, is_pew: bool = true, rot_y: float = 0.0, bench_name: String = "") -> StaticBody3D: return furniture.create_bench_2tile(parent, pos, is_pew, rot_y, bench_name)
 func create_chair(parent: Node3D, pos: Vector3, rot_y: float = 0.0) -> StaticBody3D: return furniture.create_chair(parent, pos, rot_y)
 func create_cupboard(parent: Node3D, pos: Vector3, rot_y: float) -> StaticBody3D: return furniture.create_cupboard(parent, pos, rot_y)
 func create_drawer(parent: Node3D, pos: Vector3, rot_y: float) -> StaticBody3D: return furniture.create_drawer(parent, pos, rot_y)

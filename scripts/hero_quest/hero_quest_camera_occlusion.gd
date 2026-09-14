@@ -117,9 +117,9 @@ func _gather_and_fade_meshes(node: Node, active_list: Array[MeshInstance3D]) -> 
 				_fade_mesh(mesh_inst)
 
 func _fade_mesh(mesh_inst: MeshInstance3D) -> void:
-	var orig_mat = mesh_inst.material_override
-	if not orig_mat and mesh_inst.mesh:
-		orig_mat = mesh_inst.mesh.material
+	var orig_mat: Material = mesh_inst.material_override
+	if not orig_mat:
+		orig_mat = mesh_inst.get_active_material(0)
 
 	faded_meshes[mesh_inst] = orig_mat
 	mesh_linger[mesh_inst] = FADE_LINGER_TIME

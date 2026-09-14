@@ -216,3 +216,44 @@ func remove_from_rucksack(x: int, y: int) -> ItemData:
 
 	inventory_changed.emit()
 	return item
+
+# --- ITEM LOOKUP & CONSUMPTION (Keys & Quest Items) ---
+
+func _matches_item(item: ItemData, identifier: String) -> bool:
+	if not item: return false
+	var id_lower = identifier.strip_edges().to_lower()
+	if id_lower.is_empty() or id_lower == "key":
+		return "key" in item.id.to_lower() or "key" in item.name.to_lower()
+	return item.id.to_lower() == id_lower or item.name.to_lower() == id_lower or id_lower in item.name.to_lower()
+
+func has_item(identifier: String) -> bool:
+	return get_item(identifier) != null
+
+func get_item(identifier: String) -> ItemData:
+	for pouch in [belt_pouch_0, belt_pouch_1, belt_pouch_2]:
+		for it in pouch:
+			if it is ItemData and _matches_item(it, identifier):
+				return it
+	for it in rucksack:
+		if it is ItemData and _matches_item(it, identifier):
+			return it
+	return null
+
+func consume_item(identifier: String) -> bool:
+	# Check belt pouches first
+	for pouch_idx in range(3):
+		var pouch = belt_pouch_0 if pouch_idx == 0 else (belt_pouch_1 if pouch_idx == 1 else belt_pouch_2)
+		for sub_idx in range(pouch.size()):
+			var it = pouch[sub_idx]
+			if it is ItemData and _matches_item(it, identifier):
+				remove_from_belt(pouch_idx, sub_idx)
+				return true
+	# Check rucksack
+	for y in range(4):
+		for x in range(4):
+			var it = rucksack[y * 4 + x]
+			if it is ItemData and _matches_item(it, identifier):
+				remove_from_rucksack(x, y)
+				return true
+	return false
+

@@ -15,6 +15,7 @@ enum InteractType {
 	ALTAR,
 	INSPECT,
 	ITEM,
+	DOOR,
 	CUSTOM
 }
 
@@ -26,7 +27,13 @@ enum InteractType {
 var item_data: ItemData = null
 
 func get_prompt_text() -> String:
+	var raw_parent = get_parent()
+	var parent = raw_parent as Node3D if is_instance_valid(raw_parent) else null
 	match interact_type:
+		InteractType.DOOR:
+			if is_instance_valid(parent) and parent.has_method("get_door_prompt"):
+				return parent.get_door_prompt()
+			return "Press [E] or [SPACE] to operate Door"
 		InteractType.CHEST:
 			var effective_mini = _get_effective_mini_game()
 			if is_opened:
@@ -47,18 +54,19 @@ func get_prompt_text() -> String:
 
 func interact(actor: Node3D, audio_manager: Node = null) -> String:
 	var notice = ""
-	var parent = get_parent() as Node3D
+	var raw_parent = get_parent()
+	var parent = raw_parent as Node3D if is_instance_valid(raw_parent) else null
 
 	match interact_type:
 		InteractType.CHEST:
 			var effective_mini = _get_effective_mini_game()
 			if not is_opened:
 				is_opened = true
-				if parent and parent.has_meta("is_opened"):
+				if is_instance_valid(parent) and parent.has_meta("is_opened"):
 					parent.set_meta("is_opened", true)
-				if parent:
+				if is_instance_valid(parent):
 					var lid = parent.get_node_or_null("ChestLid")
-					if lid:
+					if is_instance_valid(lid):
 						var tween = parent.create_tween()
 						tween.tween_property(lid, "rotation:x", -PI * 0.45, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 				if audio_manager and audio_manager.has_method("play_chest"):
@@ -71,7 +79,7 @@ func interact(actor: Node3D, audio_manager: Node = null) -> String:
 				else:
 					if not item_data:
 						item_data = ItemDatabase.get_item_by_name(loot_name)
-					var pos = parent.global_position if parent else Vector3.ZERO
+					var pos = parent.global_position if is_instance_valid(parent) else Vector3.ZERO
 					loot_opened.emit(item_data, pos, parent)
 					if actor and actor.has_method("on_loot_opened"):
 						actor.on_loot_opened(item_data, pos, parent)
@@ -88,7 +96,7 @@ func interact(actor: Node3D, audio_manager: Node = null) -> String:
 		InteractType.ITEM:
 			if not item_data:
 				item_data = ItemDatabase.get_item_by_name(loot_name)
-			var pos = parent.global_position if parent else Vector3.ZERO
+			var pos = parent.global_position if is_instance_valid(parent) else Vector3.ZERO
 			loot_opened.emit(item_data, pos, parent)
 			if actor and actor.has_method("on_loot_opened"):
 				actor.on_loot_opened(item_data, pos, parent)
@@ -107,7 +115,7 @@ func interact(actor: Node3D, audio_manager: Node = null) -> String:
 		InteractType.BELL:
 			if audio_manager and audio_manager.has_method("play_chapel_bell"):
 				audio_manager.play_chapel_bell()
-			if parent:
+			if is_instance_valid(parent):
 				var tween = parent.create_tween()
 				tween.tween_property(parent, "rotation:z", 0.35, 0.15)
 				tween.tween_property(parent, "rotation:z", -0.3, 0.2)
@@ -118,6 +126,12 @@ func interact(actor: Node3D, audio_manager: Node = null) -> String:
 			if audio_manager and audio_manager.has_method("play_chapel_bell"):
 				audio_manager.play_chapel_bell()
 			notice = "Prayed at the Altar. Blessed with courage and light."
+
+		InteractType.DOOR:
+			if is_instance_valid(parent) and parent.has_method("on_door_interacted"):
+				notice = parent.on_door_interacted(actor, audio_manager)
+			else:
+				notice = "Operated door."
 
 		InteractType.INSPECT:
 			notice = custom_prompt
@@ -131,7 +145,8 @@ func interact(actor: Node3D, audio_manager: Node = null) -> String:
 func _get_effective_mini_game() -> String:
 	if mini_game_id != "":
 		return mini_game_id
-	var parent = get_parent() as Node3D
-	if parent and parent.has_meta("mini_game_id"):
+	var raw_parent = get_parent()
+	var parent = raw_parent as Node3D if is_instance_valid(raw_parent) else null
+	if is_instance_valid(parent) and parent.has_meta("mini_game_id"):
 		return str(parent.get_meta("mini_game_id"))
 	return ""
