@@ -3,7 +3,18 @@
 	"name": "Custom Level 3",
 	"rooms": [
 		{
-			"arches": [],
+			"arches": [
+				{
+					"axis": 1.0,
+					"cell": [
+						8.0,
+						-3.0
+					],
+					"is_arch": true,
+					"name": "PortalZ",
+					"type": "arch_3tile"
+				}
+			],
 			"carpets": [],
 			"lights": [],
 			"modular_walls": [
@@ -93,8 +104,8 @@
 				},
 				{
 					"cell": [
-						2,
-						-2
+						2.0,
+						-2.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -105,8 +116,8 @@
 				},
 				{
 					"cell": [
-						3,
-						-2
+						3.0,
+						-2.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -117,8 +128,8 @@
 				},
 				{
 					"cell": [
-						4,
-						-2
+						4.0,
+						-2.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -129,20 +140,8 @@
 				},
 				{
 					"cell": [
-						5,
-						-2
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						5,
-						0
+						5.0,
+						0.0
 					],
 					"down": true,
 					"height": 4.5,
@@ -153,8 +152,8 @@
 				},
 				{
 					"cell": [
-						5,
-						1
+						5.0,
+						1.0
 					],
 					"down": true,
 					"height": 4.5,
@@ -165,8 +164,8 @@
 				},
 				{
 					"cell": [
-						5,
-						2
+						5.0,
+						2.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -177,8 +176,200 @@
 				},
 				{
 					"cell": [
-						6,
-						-2
+						0.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						1.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						2.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						3.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						4.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						5.0,
+						-8.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						6.0,
+						-8.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						6.0,
+						-5.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						-6.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						-7.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"right": false,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						-4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"right": true,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						7.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						8.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						5.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						7.0,
+						-4.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"right": true,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						8.0,
+						-4.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -193,8 +384,8 @@
 			"props": [
 				{
 					"cell": [
-						2,
-						0
+						2.0,
+						0.0
 					],
 					"pos": [
 						4.0,
@@ -206,8 +397,8 @@
 				},
 				{
 					"cell": [
-						2,
-						1
+						2.0,
+						1.0
 					],
 					"pos": [
 						4.0,
@@ -219,8 +410,8 @@
 				},
 				{
 					"cell": [
-						2,
-						2
+						2.0,
+						2.0
 					],
 					"pos": [
 						4.0,
@@ -229,758 +420,1484 @@
 					],
 					"rot_y": 0.0,
 					"type": "anvil"
+				},
+				{
+					"cell": [
+						7.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						8.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						8.0,
+						-7.0
+					],
+					"pos": [
+						16.0,
+						0.0,
+						-14.0
+					],
+					"rot_y": 0.0,
+					"type": "bush"
+				},
+				{
+					"cell": [
+						9.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						10.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						10.0,
+						-5.0
+					],
+					"rot_y": 0.0,
+					"type": "fountain"
+				},
+				{
+					"cell": [
+						11.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						11.0,
+						-7.0
+					],
+					"epitaph": "Rest in Peace",
+					"rot_y": 0.0,
+					"style": 2.0,
+					"type": "gravestone"
+				},
+				{
+					"cell": [
+						12.0,
+						-8.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						1.0,
+						-6.0
+					],
+					"rot_y": 0.0,
+					"type": "brazier"
+				},
+				{
+					"cell": [
+						5.0,
+						-6.0
+					],
+					"rot_y": 0.0,
+					"type": "brazier"
+				},
+				{
+					"cell": [
+						10.0,
+						-10.0
+					],
+					"rot_y": 0.0,
+					"type": "cemetery_fence"
+				},
+				{
+					"cell": [
+						0,
+						3
+					],
+					"pos": [
+						0.0,
+						0.0,
+						6.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "bookshelf"
 				}
 			],
 			"tiles": [
 				{
 					"cell": [
-						0,
-						-8
+						0.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						0,
-						-7
+						0.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-6
+						0.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-5
+						0.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-4
+						0.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-3
+						0.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-2
+						0.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						0,
-						-1
+						0.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						0,
-						0
+						0.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						0,
-						2
+						0.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						1,
-						-8
+						1.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						1,
-						-7
+						1.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-6
+						1.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-5
+						1.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-4
+						1.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-3
+						1.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-2
+						1.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						1,
-						-1
+						1.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						1,
-						0
+						1.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						1,
-						2
+						1.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						2,
-						-8
+						2.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						2,
-						-7
+						2.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						2,
-						-6
+						2.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						2,
-						-5
+						2.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						2,
-						-4
+						2.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						2,
-						-3
+						2.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						2,
-						-2
+						2.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						2,
-						-1
+						2.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						2,
-						0
+						2.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						2,
-						1
+						2.0,
+						1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						2,
-						2
+						2.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						3,
-						-8
+						3.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						3,
-						-7
+						3.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						3,
-						-6
+						3.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						3,
-						-5
+						3.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						3,
-						-4
+						3.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						3,
-						-3
+						3.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						3,
-						-2
+						3.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						3,
-						-1
+						3.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						3,
-						0
+						3.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						3,
-						1
+						3.0,
+						1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						3,
-						2
+						3.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						4,
-						-8
+						4.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						4,
-						-7
+						4.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						4,
-						-6
+						4.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						4,
-						-5
+						4.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						4,
-						-4
+						4.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						4,
-						-3
+						4.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						4,
-						-2
+						4.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						4,
-						-1
+						4.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						4,
-						0
+						4.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						4,
-						1
+						4.0,
+						1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						4,
-						2
+						4.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						5,
-						-8
+						5.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						5,
-						-7
+						5.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						5,
-						-6
+						5.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						5,
-						-5
+						5.0,
+						-5.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						5,
-						-4
+						5.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						5,
-						-3
+						5.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						5,
-						-2
+						5.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						5,
-						-1
+						5.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
-						5,
-						0
+						5.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						5,
-						1
+						5.0,
+						1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						5,
-						2
+						5.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-8
+						6.0,
+						-8.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-7
+						6.0,
+						-7.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-6
+						6.0,
+						-6.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-5
+						6.0,
+						-4.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
 				},
 				{
 					"cell": [
-						6,
-						-4
+						6.0,
+						-2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-3
+						6.0,
+						-1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-2
+						6.0,
+						0.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						-1
+						6.0,
+						1.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						0
+						6.0,
+						2.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
 					"zone": "Custom"
+				},
+				{
+					"cell": [
+						7.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						7.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						7.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						7.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						8.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						8.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						8.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						8.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						8.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						9.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						9.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						9.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						9.0,
+						-5.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						9.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						9.0,
+						-3.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-5.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-4.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-3.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-5.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-4.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
 				},
 				{
 					"cell": [
-						6,
-						1
+						11.0,
+						-3.0
 					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-5.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-4.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-3.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-8.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-7.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-6.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-5.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-4.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-3.0
+					],
+					"mat": "garden_green",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						6.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						7.0,
+						-2.0
+					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						8.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						7.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						6,
-						2
+						7.0,
+						-3.0
 					],
 					"mat": "stone",
-					"type": 1,
+					"type": 1.0,
 					"walkable": true,
+					"zone": "Library"
+				},
+				{
+					"cell": [
+						8.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
 					"zone": "Custom"
+				},
+				{
+					"cell": [
+						9.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						10.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						11.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						12.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						13.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Garden"
+				},
+				{
+					"cell": [
+						1.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						1.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						2.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						2.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						3.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						3.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						4.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						4.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						5.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						5.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						0.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
+				},
+				{
+					"cell": [
+						0.0,
+						4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "The Great Hall"
 				}
 			],
 			"torches": [],
