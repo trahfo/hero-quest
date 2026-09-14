@@ -2,6 +2,7 @@ class_name LevelEditorRoomManager
 extends RefCounted
 
 const TILE_SIZE: float = 2.0
+const LevelEditorRoomSignBuilder = preload("res://scripts/hero_quest/editor/level_editor_room_sign_builder.gd")
 
 signal rooms_updated
 signal active_room_changed(new_name: String)
@@ -17,6 +18,7 @@ var hidden_nodes: Array[Node3D] = []
 
 var overlay_root: Node3D
 var overlay_instances: Dictionary = {} # Vector2i -> MeshInstance3D
+var sign_instances: Dictionary = {} # String -> Node3D
 
 var palette_colors: Array[Color] = [
 	Color(0.2, 0.45, 0.95, 0.45), # Royal Blue
@@ -76,7 +78,23 @@ func cycle_room_color(r_name: String) -> Color:
 func set_active_room(r_name: String) -> void:
 	active_room_name = r_name
 	get_room_color(r_name) # Ensure color allocated
+	_update_sign_highlights()
 	active_room_changed.emit(active_room_name)
+
+func _update_sign_highlights() -> void:
+	for sign_name in sign_instances.keys():
+		var s = sign_instances[sign_name]
+		if not is_instance_valid(s):
+			continue
+		var is_act = (sign_name == active_room_name)
+		var lbl = s.get_node_or_null("PlacardPivot/Label")
+		if lbl is Label3D:
+			lbl.modulate = Color(1.0, 0.92, 0.35) if is_act else Color(0.96, 0.94, 0.9)
+		var trim = s.get_node_or_null("PlacardPivot/Trim")
+		if trim is MeshInstance3D and trim.material_override is StandardMaterial3D:
+			var trim_mat = trim.material_override as StandardMaterial3D
+			trim_mat.emission_enabled = is_act
+			trim_mat.emission = get_room_color(sign_name) * 0.5 if is_act else Color.BLACK
 
 func is_wall_node(node: Node) -> bool:
 	if not (node is Node3D):
@@ -136,17 +154,47 @@ func refresh_overlays() -> void:
 	_clear_overlays()
 	if not builder or not builder.grid:
 		return
+	var room_cells: Dictionary = {}
 	for cell in builder.grid.keys():
 		var z = str(builder.grid[cell].get("zone", ""))
-		if z.is_empty() or z in ["Castle Walls", "Perimeter", "Outside the Castle"]:
+		if z.is_empty() or z in ["Castle Walls", "Perimeter", "Outside the Castle", "Custom"]:
 			continue
 		_create_overlay_quad(cell, z)
+		if not room_cells.has(z):
+			room_cells[z] = []
+		room_cells[z].append(cell)
+
+	_refresh_room_signs(room_cells)
 
 func _clear_overlays() -> void:
 	for inst in overlay_instances.values():
 		if is_instance_valid(inst):
 			inst.queue_free()
 	overlay_instances.clear()
+	_clear_signs()
+
+func _clear_signs() -> void:
+	for inst in sign_instances.values():
+		if is_instance_valid(inst):
+			inst.queue_free()
+	sign_instances.clear()
+
+func _refresh_room_signs(room_cells: Dictionary) -> void:
+	_clear_signs()
+	for r_name in room_cells.keys():
+		var cells: Array = room_cells[r_name]
+		if cells.is_empty():
+			continue
+		var typed_cells: Array[Vector2i] = []
+		for c in cells:
+			typed_cells.append(c)
+		var center_cell = LevelEditorRoomSignBuilder.calculate_room_center_cell(typed_cells)
+		var world_pos = builder.grid_to_world(center_cell)
+		var col = get_room_color(r_name)
+		var is_active = (r_name == active_room_name)
+		var sign_node = LevelEditorRoomSignBuilder.create_room_sign(r_name, world_pos, col, is_active)
+		overlay_root.add_child(sign_node)
+		sign_instances[r_name] = sign_node
 
 func _create_overlay_quad(cell: Vector2i, r_name: String) -> void:
 	var col = get_room_color(r_name)
@@ -266,3 +314,31 @@ func get_room_summary() -> Array[Dictionary]:
 		})
 	list.sort_custom(func(a, b): return a["count"] > b["count"])
 	return list
+
+func get_room_tile_count(r_name: String) -> int:
+	var cnt: int = 0
+	if builder and builder.grid:
+		for c in builder.grid.keys():
+			if str(builder.grid[c].get("zone", "")) == r_name:
+				cnt += 1
+	return cnt
+
+func save_or_rename_active_room(new_name: String) -> Dictionary:
+	var trimmed = new_name.strip_edges()
+	if trimmed.is_empty():
+		return {"success": false, "action": "empty", "message": "Room name cannot be empty."}
+
+	var old_name = active_room_name
+	var tile_count = get_room_tile_count(old_name)
+
+	if trimmed == old_name:
+		return {"success": true, "action": "unchanged", "message": "Room name '%s' kept unchanged (%d tiles)." % [old_name, tile_count]}
+
+	if tile_count > 0:
+		rename_room(old_name, trimmed)
+		return {"success": true, "action": "renamed", "message": "Renamed '%s' to '%s' (%d tiles)." % [old_name, trimmed, tile_count]}
+	else:
+		set_active_room(trimmed)
+		rooms_updated.emit()
+		return {"success": true, "action": "set", "message": "Active room set to '%s' (ready to paint)." % trimmed}
+

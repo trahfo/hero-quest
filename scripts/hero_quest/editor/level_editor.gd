@@ -71,6 +71,7 @@ func _init_subsystems() -> void:
 	tool_handler.room_manager = room_manager
 
 	room_panel = LevelEditorRoomPanel.new(room_manager)
+	room_panel.status_notice.connect(func(msg): ui.set_status_notice(msg))
 	ui.set_room_panel(room_panel)
 	ui.set_level_name(model.get_level_name())
 	ui.level_name_changed.connect(func(n): model.set_level_name(n))
