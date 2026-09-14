@@ -12,6 +12,7 @@ const CastleLevelData = preload("res://scripts/hero_quest/level/castle_level_dat
 const LevelEditorWallAutoTiler = preload("res://scripts/hero_quest/editor/level_editor_wall_autotiler.gd")
 const LevelEditorCustomPropSpawner = preload("res://scripts/hero_quest/editor/level_editor_custom_prop_spawner.gd")
 const LevelEditorPersistence = preload("res://scripts/hero_quest/editor/level_editor_persistence.gd")
+const LevelEditorEraser = preload("res://scripts/hero_quest/editor/level_editor_eraser.gd")
 
 var builder: Node3D
 var materials: CastleMaterials
@@ -22,6 +23,7 @@ var graveyard_props: CastleGraveyardPropFactory
 var wall_factory: CastleWallTileFactory
 var prop_spawner: CastleLevelPropSpawner
 var custom_spawner: LevelEditorCustomPropSpawner
+var eraser: LevelEditorEraser
 
 var custom_room_node: Node3D
 var current_level_data: Dictionary = {}
@@ -45,6 +47,7 @@ func _init(p_builder: Node3D, p_file_path: String = "res://data/levels/first_lev
 	wall_factory = CastleWallTileFactory.new(materials)
 	prop_spawner = CastleLevelPropSpawner.new(materials, builder.grid_to_world, mesh_builder, prop_factory)
 	custom_spawner = LevelEditorCustomPropSpawner.new(builder, materials, mesh_builder, prop_factory, decors, graveyard_props, prop_spawner)
+	eraser = LevelEditorEraser.new(self, builder)
 	_ensure_custom_room()
 	_load_initial_data(p_level_name)
 
@@ -60,16 +63,27 @@ func _load_initial_data(p_level_name: String = "") -> void:
 
 func is_wall_at(cell: Vector2i) -> bool:
 	if cell_data.has(cell) and cell_data[cell].get("wall") != null: return true
-	return builder.grid.has(cell) and builder.grid[cell].get("type", 0) == 6
+	return builder and builder.grid.has(cell) and builder.grid[cell].get("type", 0) == 6
 
 func is_door_or_arch_at(cell: Vector2i) -> bool:
 	if cell_data.has(cell):
 		var p = cell_data[cell].get("prop")
-		if p and p.get("is_arch", false): return true
-	if builder.grid.has(cell):
+		if p:
+			var pt = str(p.get("type", ""))
+			var at = str(p.get("arch_type", ""))
+			if p.get("is_arch", false) or "door" in pt or "portcullis" in pt or "door" in at or "portcullis" in at or pt.begins_with("arch") or at.begins_with("arch"):
+				return true
+	if builder and builder.grid.has(cell):
 		var z = str(builder.grid[cell].get("zone", ""))
-		if "Pier" in z or "Arch" in z or "Gate" in z or "Portal" in z: return true
+		var g_prop = builder.grid[cell].get("prop")
+		if "Pier" in z or "Arch" in z or "Gate" in z or "Portal" in z or "Door" in z:
+			return true
+		if is_instance_valid(g_prop) and (g_prop is HeroQuestDoor or g_prop.get_node_or_null("DoorController") != null or "Door" in g_prop.name or "Gate" in g_prop.name or "Arch" in g_prop.name):
+			return true
 	return false
+
+func is_wall_or_portal_at(cell: Vector2i) -> bool:
+	return is_wall_at(cell) or is_door_or_arch_at(cell)
 
 func capture_cell_states(cells: Array) -> Dictionary:
 	var snapshot: Dictionary = {}
@@ -96,10 +110,7 @@ func apply_cell_states(state_dict: Dictionary) -> void:
 		var st = state_dict[cell]
 		_clear_cell_nodes(cell)
 		if not st["exists"]:
-			cell_data.erase(cell)
-			builder.grid.erase(cell)
-			continue
-
+			cell_data.erase(cell); builder.grid.erase(cell); continue
 		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
 		if st["tile"] != null:
 			set_floor(cell, st["tile"].get("mat", "stone"), st["tile"].get("type", 1), st["tile"].get("walkable", true))
@@ -115,15 +126,13 @@ func apply_cell_states(state_dict: Dictionary) -> void:
 			set_cell_zone(cell, st["zone"])
 
 func set_cell_zone(cell: Vector2i, zone: String) -> void:
-	if builder.grid.has(cell):
-		builder.grid[cell]["zone"] = zone
+	if builder.grid.has(cell): builder.grid[cell]["zone"] = zone
 	if cell_data.has(cell) and cell_data[cell].get("tile") != null:
 		cell_data[cell]["tile"]["zone"] = zone
 	for r in current_level_data.get("rooms", []):
 		for t in r.get("tiles", []):
 			if CastleLevelData.arr_to_vec2i(t.get("cell", [9999, 9999])) == cell:
-				t["zone"] = zone
-				break
+				t["zone"] = zone; break
 
 func get_level_name() -> String:
 	var fallback = active_file_path.get_file().get_basename().capitalize()
@@ -136,18 +145,16 @@ func _clear_cell_nodes(cell: Vector2i) -> void:
 	if cell_data.has(cell):
 		for node in cell_data[cell].get("nodes", []):
 			if is_instance_valid(node):
-				if node in builder.interactive_chests:
-					builder.interactive_chests.erase(node)
+				if node in builder.interactive_chests: builder.interactive_chests.erase(node)
 				node.queue_free()
 		cell_data[cell]["nodes"].clear()
 
 func set_floor(cell: Vector2i, mat_name: String, tile_type: int = 1, walkable: bool = true) -> void:
 	_ensure_custom_room()
-	if not cell_data.has(cell):
-		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
+	if not cell_data.has(cell): cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
 	var was_wall = is_wall_at(cell)
 	if was_wall:
-		_clear_cell_wall_nodes(cell)
+		eraser.free_object_nodes_at_cell(cell, true, false)
 		cell_data[cell]["wall"] = null
 	erased_cells.erase(cell)
 	var cur_zone = builder.grid[cell].get("zone", "Custom") if builder.grid.has(cell) else "Custom"
@@ -163,8 +170,7 @@ func set_floor(cell: Vector2i, mat_name: String, tile_type: int = 1, walkable: b
 		cell_data[cell]["nodes"].append(m_inst)
 
 	if was_wall:
-		var affected = LevelEditorWallAutoTiler.get_affected_neighborhood([cell], is_wall_at)
-		for n in affected:
+		for n in LevelEditorWallAutoTiler.get_affected_neighborhood([cell], is_wall_at):
 			if n != cell and is_wall_at(n): set_wall(n)
 
 func set_walls_batch(cells: Array[Vector2i], orientation: int = -1) -> void:
@@ -179,45 +185,33 @@ func set_walls_batch(cells: Array[Vector2i], orientation: int = -1) -> void:
 
 func set_wall(cell: Vector2i, orientation: int = -1) -> void:
 	_ensure_custom_room()
-	if not cell_data.has(cell):
-		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
-
+	if not cell_data.has(cell): cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
 	var orient = orientation
 	if orient < 0 and cell_data[cell].get("wall") != null:
 		orient = int(cell_data[cell]["wall"].get("orientation", 0))
-	if orient < 0:
-		orient = 0
+	if orient < 0: orient = 0
 
 	_clear_cell_nodes(cell)
-
-	var conn = LevelEditorWallAutoTiler.get_wall_connections(cell, is_wall_at)
+	var conn = LevelEditorWallAutoTiler.get_wall_connections(cell, is_wall_or_portal_at)
 	cell_data[cell]["wall"] = {
 		"type": "modular", "cell": CastleLevelData.vec2i_to_arr(cell),
 		"left": conn["left"], "right": conn["right"], "up": conn["up"], "down": conn["down"],
 		"height": 4.5, "orientation": orient, "rot_y": (PI * 0.5 if orient == 1 else 0.0)
 	}
 	builder.register_tile(cell, 6, false, "Castle Walls")
-
 	_add_floor_base(cell)
 	var wall_node: Node3D
 	if conn["count"] == 0:
-		if orient == 1:
-			wall_node = wall_factory.create_straight_wall_z(custom_room_node, builder.grid_to_world(cell), 4.5)
-		else:
-			wall_node = wall_factory.create_straight_wall_x(custom_room_node, builder.grid_to_world(cell), 4.5)
+		wall_node = wall_factory.create_straight_wall_z(custom_room_node, builder.grid_to_world(cell), 4.5) if orient == 1 else wall_factory.create_straight_wall_x(custom_room_node, builder.grid_to_world(cell), 4.5)
 	else:
 		wall_node = wall_factory.create_modular_wall(custom_room_node, builder.grid_to_world(cell), conn["left"], conn["right"], conn["up"], conn["down"], 4.5)
 	cell_data[cell]["nodes"].append(wall_node)
 
 func set_window(cell: Vector2i, norm: Vector3) -> void:
 	_ensure_custom_room()
-	if not cell_data.has(cell):
-		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
-	_clear_cell_nodes(cell)
-	cell_data[cell]["wall"] = {
-		"type": "window", "cell": CastleLevelData.vec2i_to_arr(cell),
-		"norm": CastleLevelData.vec3_to_arr(norm), "height": 4.5
-	}
+	if not cell_data.has(cell): cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
+	eraser.free_object_nodes_at_cell(cell, true)
+	cell_data[cell]["wall"] = { "type": "window", "cell": CastleLevelData.vec2i_to_arr(cell), "norm": CastleLevelData.vec3_to_arr(norm), "height": 4.5 }
 	builder.register_tile(cell, 6, false, "Castle Walls")
 	_add_floor_base(cell)
 	var win_node = wall_factory.create_window_wall(custom_room_node, builder.grid_to_world(cell), norm, 4.5)
@@ -232,139 +226,96 @@ func _add_floor_base(cell: Vector2i) -> void:
 
 func spawn_custom_prop(cell: Vector2i, p_info: Dictionary) -> Node3D:
 	_ensure_custom_room()
-	if not cell_data.has(cell):
-		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
-
+	if not cell_data.has(cell): cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
 	var p_type = p_info.get("type", "")
-	var is_arch = p_info.get("is_arch", false) or p_type.begins_with("arch") or p_type == "door"
-	if is_arch:
+	var is_arch = p_info.get("is_arch", false) or p_type.begins_with("arch") or p_type == "door" or "door" in p_type or "portcullis" in p_type
+	var is_wall_deco = p_type in ["torch", "painting", "wall_shield", "banner"] or p_info.has("norm") or p_info.get("is_wall_deco", false)
+
+	if is_arch or p_type == "floor_item" or p_type == "floor_key":
 		cell_data[cell]["wall"] = null
-		_clear_cell_wall_nodes(cell)
+		eraser.free_object_nodes_at_cell(cell, true, false)
 		if cell_data[cell].get("tile") == null:
 			set_floor(cell, "stone", 1, true)
-		else:
-			builder.grid[cell]["walkable"] = true
+		elif is_arch:
+			builder.grid[cell]["walkable"] = bool(p_info.get("is_open", false))
+	elif is_wall_deco:
+		eraser.free_object_nodes_at_cell(cell, true, true)
 	else:
-		_free_object_nodes_at_cell(cell, true)
+		eraser.free_object_nodes_at_cell(cell, true, false)
 
-	if not p_info.has("cell"):
-		p_info["cell"] = CastleLevelData.vec2i_to_arr(cell)
+	if not p_info.has("cell"): p_info["cell"] = CastleLevelData.vec2i_to_arr(cell)
 	cell_data[cell]["prop"] = p_info
-
 	var created_node = custom_spawner.spawn(custom_room_node, cell, p_info)
-	if created_node:
-		cell_data[cell]["nodes"].append(created_node)
+	if created_node: cell_data[cell]["nodes"].append(created_node)
 	return created_node
 
-func _clear_cell_wall_nodes(cell: Vector2i) -> void:
-	_free_object_nodes_at_cell(cell, true)
-
-func _is_floor_node(node: Node) -> bool:
-	if not (node is Node3D) or not is_instance_valid(node): return false
-	if node is MeshInstance3D and node.position.y < 0.0: return true
-	if node is StaticBody3D and node.position.y < 0.2:
-		for c in node.get_children():
-			if (c is CollisionShape3D or c is MeshInstance3D) and c.position.y > 0.05: return false
-		return true
+func has_object_at_cell(cell: Vector2i) -> bool:
+	if is_wall_at(cell) or (cell_data.has(cell) and cell_data[cell].get("prop") != null): return true
+	if builder and builder.grid.has(cell):
+		if builder.grid[cell].get("prop") != null or not builder.grid[cell].get("walkable", true): return true
+		for ch in builder.interactive_chests:
+			if is_instance_valid(ch) and builder.world_to_grid(ch.global_position) == cell: return true
 	return false
 
-func _free_object_nodes_at_cell(cell: Vector2i, keep_floor: bool = true) -> void:
-	if cell_data.has(cell):
-		var remaining: Array[Node3D] = []
-		for node in cell_data[cell].get("nodes", []):
-			if is_instance_valid(node):
-				if keep_floor and _is_floor_node(node): remaining.append(node)
-				else:
-					if node in builder.interactive_chests: builder.interactive_chests.erase(node)
-					node.queue_free()
-		cell_data[cell]["nodes"] = remaining
+func get_tile_summary_string(cell: Vector2i) -> String:
+	var has_grid = builder and builder.grid.has(cell)
+	var has_cd = cell_data.has(cell)
+	if not has_grid and not has_cd: return "Tile (%d, %d) | Empty (Abyss)" % [cell.x, cell.y]
+	var zone_name = "Custom"
+	if has_grid and builder.grid[cell].has("zone"): zone_name = builder.grid[cell]["zone"]
+	elif has_cd and cell_data[cell].get("tile") != null and cell_data[cell]["tile"].has("zone"):
+		zone_name = cell_data[cell]["tile"]["zone"]
 
-	var target_global = builder.to_global(builder.grid_to_world(cell))
-	_find_and_free_spatial_nodes(builder, target_global, keep_floor)
+	var floor_info = "Floor (Stone)"
+	if has_cd and cell_data[cell].get("tile") != null:
+		floor_info = "Floor (%s)" % cell_data[cell]["tile"].get("mat", "stone").capitalize()
 
-func _find_and_free_spatial_nodes(parent: Node, target_global: Vector3, keep_floor: bool) -> void:
-	if not is_instance_valid(parent): return
-	if parent == builder:
-		for room in builder.get_children():
-			if room is Node3D and is_instance_valid(room) and not room.name.begins_with("LevelEditor") and room.name != "EditorGrid":
-				_find_and_free_spatial_nodes(room, target_global, keep_floor)
-		return
+	var wall_info = "None"
+	if has_cd and cell_data[cell].get("wall") != null:
+		wall_info = "Window Wall" if cell_data[cell]["wall"].get("type", "modular") == "window" else "Modular Wall"
+	elif is_wall_at(cell): wall_info = "Modular Wall"
 
-	for child in parent.get_children():
-		if not (child is Node3D) or not is_instance_valid(child) or child.name.begins_with("LevelEditor"): continue
-		var dist = Vector2(child.global_position.x - target_global.x, child.global_position.z - target_global.z).length()
-		if dist < 0.65:
-			if keep_floor and _is_floor_node(child): continue
-			if child in builder.interactive_chests: builder.interactive_chests.erase(child)
-			child.queue_free()
-		elif child.get_child_count() > 0 and not (child is MeshInstance3D) and not (child is StaticBody3D):
-			_find_and_free_spatial_nodes(child, target_global, keep_floor)
+	var obj_list: Array[String] = []
+	if has_cd and cell_data[cell].get("prop") != null:
+		var p_info = cell_data[cell]["prop"]
+		var p_name = str(p_info.get("name", p_info.get("type", "Prop")))
+		var arch_t = str(p_info.get("arch_type", ""))
+		if arch_t != "": obj_list.append("Door (%s)" % p_name if ("door" in arch_t or "portcullis" in arch_t) else "Arch (%s)" % p_name)
+		elif p_info.get("type") == "chest": obj_list.append("Chest (%s)" % p_name)
+		elif p_info.get("type") == "item": obj_list.append("Item (%s)" % p_name)
+		else: obj_list.append("Prop (%s)" % p_name)
+	elif has_grid and builder.grid[cell].get("prop") != null:
+		var g_prop = builder.grid[cell]["prop"]
+		if is_instance_valid(g_prop): obj_list.append("Arch/Door (%s)" % g_prop.name)
 
-func erase_object_at_cell(cell: Vector2i) -> bool:
-	var had_obj = false
-	var was_wall = is_wall_at(cell)
+	if builder:
+		for ch in builder.interactive_chests:
+			if is_instance_valid(ch) and builder.world_to_grid(ch.global_position) == cell:
+				if "Chest" not in ", ".join(obj_list): obj_list.append("Chest")
+				break
 
-	if cell_data.has(cell):
-		if cell_data[cell].get("prop") != null:
-			had_obj = true
-			cell_data[cell]["prop"] = null
-		if cell_data[cell].get("wall") != null:
-			had_obj = true
-			cell_data[cell]["wall"] = null
+	if wall_info == "None" and obj_list.is_empty(): return "Tile (%d, %d) | Zone: %s | %s" % [cell.x, cell.y, zone_name, floor_info]
+	elif wall_info != "None" and obj_list.is_empty(): return "Tile (%d, %d) | Zone: %s | %s | Wall: %s" % [cell.x, cell.y, zone_name, floor_info, wall_info]
+	return "Tile (%d, %d) | Zone: %s | %s | Wall: %s | Objects: %s" % [cell.x, cell.y, zone_name, floor_info, wall_info, ", ".join(obj_list)]
 
-	var has_grid_prop = false
-	if builder and builder.grid.has(cell):
-		if builder.grid[cell].get("prop") != null:
-			has_grid_prop = true
-		elif not builder.grid[cell].get("walkable", true) and not was_wall:
-			has_grid_prop = true
-		else:
-			for ch in builder.interactive_chests:
-				if is_instance_valid(ch) and builder.world_to_grid(ch.global_position) == cell:
-					has_grid_prop = true
-					break
-	if was_wall or has_grid_prop:
-		had_obj = true
-
-	if not had_obj:
-		return false
-
-	_free_object_nodes_at_cell(cell, true)
-
-	if was_wall:
-		set_floor(cell, "stone", 1, true)
-	else:
-		erased_props[cell] = true
-		if cell_data.has(cell) and cell_data[cell].get("tile") != null:
-			builder.grid[cell]["walkable"] = cell_data[cell]["tile"].get("walkable", true)
-			builder.grid[cell]["type"] = cell_data[cell]["tile"].get("type", 1)
-			builder.grid[cell]["prop"] = null
-		elif builder.grid.has(cell):
-			builder.grid[cell]["walkable"] = true
-			builder.grid[cell]["prop"] = null
-
-	return true
-
-func erase_cell(cell: Vector2i) -> void:
-	var was_wall = is_wall_at(cell)
-	_free_object_nodes_at_cell(cell, false)
-	cell_data.erase(cell)
-	erased_props.erase(cell)
-	erased_cells[cell] = true
-	builder.grid.erase(cell)
-	if was_wall:
-		var affected = LevelEditorWallAutoTiler.get_affected_neighborhood([cell], is_wall_at)
-		for n in affected:
-			if n != cell and is_wall_at(n):
-				set_wall(n)
+# --- Eraser Delegation ---
+func erase_floor_only(cell: Vector2i) -> bool: return eraser.erase_floor_only(cell)
+func erase_wall_only(cell: Vector2i) -> bool: return eraser.erase_wall_only(cell)
+func erase_window_only(cell: Vector2i) -> bool: return eraser.erase_window_only(cell)
+func erase_door_only(cell: Vector2i) -> bool: return eraser.erase_door_only(cell)
+func erase_arch_only(cell: Vector2i) -> bool: return eraser.erase_arch_only(cell)
+func erase_chest_only(cell: Vector2i) -> bool: return eraser.erase_chest_only(cell)
+func erase_item_only(cell: Vector2i) -> bool: return eraser.erase_item_only(cell)
+func erase_prop_only(cell: Vector2i) -> bool: return eraser.erase_prop_only(cell)
+func erase_unselected_fallback(cell: Vector2i) -> bool: return eraser.erase_unselected_fallback(cell)
+func erase_object_at_cell(cell: Vector2i) -> bool: return eraser.erase_object_at_cell(cell)
+func erase_cell(cell: Vector2i) -> void: eraser.erase_cell(cell)
 
 func discard_unsaved_changes() -> void:
 	custom_room_node = null
 	_ensure_custom_room()
-	cell_data.clear()
-	erased_cells.clear()
-	erased_props.clear()
-	_load_initial_data(active_level_name)
+	cell_data.clear(); erased_cells.clear(); erased_props.clear()
+	_load_initial_data()
 
 func save_to_json(file_path: String = "") -> bool:
 	var path = file_path if file_path != "" else active_file_path
