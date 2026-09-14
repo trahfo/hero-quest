@@ -1,0 +1,404 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/hero_quest/hero_quest_character_sheet.gd" id="1_sheet"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_folio"]
+bg_color = Color(0.1, 0.08, 0.06, 0.94)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.85, 0.7, 0.25, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.8)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_slot"]
+bg_color = Color(0.18, 0.14, 0.1, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.55, 0.2, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_drop"]
+bg_color = Color(0.25, 0.1, 0.08, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.35, 0.25, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cell"]
+bg_color = Color(0.14, 0.11, 0.08, 0.8)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.5, 0.4, 0.2, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="HeroQuestCharacterSheet" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -280.0
+offset_right = 460.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sheet")
+
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_folio")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBox" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="StatsCol" type="VBoxContainer" parent="Margin/HBox"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/HBox/StatsCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "⚔️ HERO STATS"
+horizontal_alignment = 1
+
+[node name="HeroName" type="Label" parent="Margin/HBox/StatsCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.8, 1)
+theme_override_font_sizes/font_size = 14
+text = "Sir Christopher\nGuardian Knight"
+horizontal_alignment = 1
+
+[node name="StatsPanel" type="PanelContainer" parent="Margin/HBox/StatsCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="VBox" type="VBoxContainer" parent="Margin/HBox/StatsCol/StatsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HPLabel" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.5, 0.5, 1)
+theme_override_font_sizes/font_size = 12
+text = "BODY POINTS (HP):"
+
+[node name="HPValue" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 16
+text = "8 / 8 ❤️"
+
+[node name="MindLabel" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.5, 0.8, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "MIND POINTS:"
+
+[node name="MindValue" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "3 / 3 🧠"
+
+[node name="AttackLabel" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+text = "ATTACK STRENGTH:"
+
+[node name="AttackValue" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.95, 0.5, 1)
+theme_override_font_sizes/font_size = 16
+text = "2 Dice (🎲🎲)"
+
+[node name="ArmorLabel" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 12
+text = "ARMOR (DEFEND):"
+
+[node name="ArmorValue" type="Label" parent="Margin/HBox/StatsCol/StatsPanel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 1, 0.8, 1)
+theme_override_font_sizes/font_size = 16
+text = "3 Dice (🛡️🛡️🛡️)"
+
+[node name="DollCol" type="VBoxContainer" parent="Margin/HBox"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/HBox/DollCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "🛡️ EQUIPPED GEAR"
+horizontal_alignment = 1
+
+[node name="DollGrid" type="GridContainer" parent="Margin/HBox/DollCol"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 3
+
+[node name="Spacer1" type="Control" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+
+[node name="HelmetSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🪖\nHelmet"
+
+[node name="Spacer2" type="Control" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+
+[node name="MainHandSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "⚔️\nMain Hand"
+
+[node name="BreastSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🥋\nBreast"
+
+[node name="OffHandSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🛡️\nOff Hand"
+
+[node name="GauntletSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🧤\nGauntlet"
+
+[node name="BeltSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🎗️\nBelt"
+
+[node name="FeetSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "🦿\nGreaves"
+
+[node name="Spacer3" type="Control" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+
+[node name="BootsSlot" type="Button" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "👢\nBoots"
+
+[node name="Spacer4" type="Control" parent="Margin/HBox/DollCol/DollGrid"]
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+
+[node name="BeltSection" type="PanelContainer" parent="Margin/HBox/DollCol"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_slot")
+
+[node name="HBox" type="HBoxContainer" parent="Margin/HBox/DollCol/BeltSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BeltSlot1" type="Button" parent="Margin/HBox/DollCol/BeltSection/HBox"]
+custom_minimum_size = Vector2(100, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Belt 1 (Tall)\n[Empty]"
+
+[node name="BeltSlot2" type="Button" parent="Margin/HBox/DollCol/BeltSection/HBox"]
+custom_minimum_size = Vector2(100, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Belt 2 (Tall)\n[Empty]"
+
+[node name="BeltSlot3" type="Button" parent="Margin/HBox/DollCol/BeltSection/HBox"]
+custom_minimum_size = Vector2(100, 72)
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+text = "Belt 3 (1H)\n[Empty]"
+
+[node name="LockedLabel" type="Label" parent="Margin/HBox/DollCol/BeltSection"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 12
+text = "🔒 Belt Pouches (Equip Belt to Unlock)"
+horizontal_alignment = 1
+
+[node name="RucksackCol" type="VBoxContainer" parent="Margin/HBox"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Margin/HBox/RucksackCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.4, 1)
+theme_override_font_sizes/font_size = 18
+text = "🎒 RUCKSACK (4x4)"
+horizontal_alignment = 1
+
+[node name="RucksackGrid" type="GridContainer" parent="Margin/HBox/RucksackCol"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 4
+
+[node name="Cell0" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell1" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell2" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell3" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell4" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell5" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell6" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell7" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell8" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell9" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell10" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell11" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell12" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell13" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell14" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="Cell15" type="Button" parent="Margin/HBox/RucksackCol/RucksackGrid"]
+custom_minimum_size = Vector2(62, 54)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cell")
+
+[node name="FloorDropZone" type="Button" parent="Margin/HBox/RucksackCol"]
+custom_minimum_size = Vector2(0, 42)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.6, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_drop")
+text = "⬇️ DROP ON FLOOR (DISCARD)"
+
+[node name="CloseButton" type="Button" parent="Margin/HBox/RucksackCol"]
+custom_minimum_size = Vector2(0, 36)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_slot")
+text = "❌ CLOSE (C / ESC)"

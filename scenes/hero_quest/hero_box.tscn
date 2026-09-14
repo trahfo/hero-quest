@@ -1,78 +1,22 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/hero_quest/hero_box.gd" id="1_script"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
-size = Vector3(1, 1, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wood"]
-albedo_color = Color(0.35, 0.22, 0.14, 1)
-roughness = 0.65
-
-[sub_resource type="BoxMesh" id="BoxMesh_box"]
-material = SubResource("StandardMaterial3D_wood")
-size = Vector3(0.95, 0.95, 0.95)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_visor"]
-albedo_color = Color(0.1, 0.85, 1, 1)
-emission_enabled = true
-emission = Color(0.1, 0.85, 1, 1)
-emission_energy_multiplier = 3.0
-
-[sub_resource type="BoxMesh" id="BoxMesh_visor"]
-material = SubResource("StandardMaterial3D_visor")
-size = Vector3(0.55, 0.16, 0.1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gold"]
-albedo_color = Color(0.95, 0.78, 0.2, 1)
-metallic = 0.9
-roughness = 0.25
-
-[sub_resource type="BoxMesh" id="BoxMesh_crest"]
-material = SubResource("StandardMaterial3D_gold")
-size = Vector3(0.35, 0.35, 0.08)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tile_cursor"]
-render_priority = 2
-transparency = 1
-albedo_color = Color(1, 0.85, 0.35, 0.45)
-emission_enabled = true
-emission = Color(1, 0.75, 0.2, 1)
-emission_energy_multiplier = 0.8
-
-[sub_resource type="BoxMesh" id="BoxMesh_cursor"]
-material = SubResource("StandardMaterial3D_tile_cursor")
-size = Vector3(1.86, 0.02, 1.86)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hero"]
+radius = 0.42
+height = 1.8
 
 [node name="HeroBox" type="CharacterBody3D"]
 script = ExtResource("1_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_1")
-
-[node name="TileCursor" type="Node3D" parent="."]
-
-[node name="CursorMesh" type="MeshInstance3D" parent="TileCursor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.035, 0)
-mesh = SubResource("BoxMesh_cursor")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_hero")
 
 [node name="Visuals" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="BoxMesh" type="MeshInstance3D" parent="Visuals"]
-mesh = SubResource("BoxMesh_box")
-
-[node name="VisorEyes" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12, 0.45)
-mesh = SubResource("BoxMesh_visor")
-
-[node name="HeroCrest" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0, -0.15, 0.46)
-mesh = SubResource("BoxMesh_crest")
 
 [node name="LanternLight" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
-light_color = Color(1, 0.8, 0.5, 1)
-light_energy = 0.9
-omni_range = 6.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+light_color = Color(1, 0.85, 0.6, 1)
+light_energy = 1.1
+omni_range = 7.0
