@@ -123,10 +123,10 @@ func init_new_level(level_name: String = "New Level") -> void:
 			var alt = (gx + gz) % 2 == 0
 			mesh_builder.create_square_tile_mesh(start_room, cell, materials.mat_floor_stone if alt else materials.mat_floor_stone_alt)
 
-func load_from_level_file(file_path: String = "res://data/levels/first_level.json") -> bool:
+func load_from_level_file(file_path: String = "res://data/levels/first_level.json", force_reload: bool = false) -> bool:
 	if not level_reader:
 		_init_subsystems()
-	if level_file_path == file_path and not grid.is_empty():
+	if not force_reload and level_file_path == file_path and not grid.is_empty():
 		return true
 	level_file_path = file_path
 	if FileAccess.file_exists(file_path):
@@ -168,13 +168,14 @@ func register_tile(cell: Vector2i, type: int, walkable: bool, zone: String) -> v
 		"prop": null
 	}
 
-func place_blocking_prop(parent: Node3D, cell: Vector2i, _prop_name: String, create_fn: Callable) -> void:
+func place_blocking_prop(parent: Node3D, cell: Vector2i, _prop_name: String, create_fn: Callable) -> Node3D:
 	if grid.has(cell):
 		grid[cell]["walkable"] = false
 	var pos = grid_to_world(cell) + Vector3(0, 0.12, 0)
 	var prop_node = create_fn.call(parent, pos)
 	if grid.has(cell) and prop_node:
 		grid[cell]["prop"] = prop_node
+	return prop_node
 
 func place_multitile_prop(parent: Node3D, cells: Array, _prop_name: String, create_fn: Callable) -> Node3D:
 	if cells.is_empty():

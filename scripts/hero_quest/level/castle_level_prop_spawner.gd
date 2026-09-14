@@ -97,60 +97,41 @@ func spawn_prop(room: Node3D, data: Dictionary, builder: Node3D) -> Node3D:
 			var norm = CastleLevelData.arr_to_vec3(data.get("norm", [1, 0, 0]))
 			return prop_factory.create_torch(room, pos, norm)
 		"brazier":
-			var b_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Brazier", func(p, ppos):
-				b_node = prop_factory.create_brazier(p, ppos)
-				return b_node
+			return builder.place_blocking_prop(room, p_cell, "Brazier", func(p, ppos):
+				return prop_factory.create_brazier(p, ppos)
 			)
-			return b_node
 		"table":
 			var size = CastleLevelData.arr_to_vec3(data.get("size", [1.8, 1.0, 1.8]))
 			var mat = CastleLevelData.name_to_mat(data.get("mat", ""), materials) if data.has("mat") else null
-			var t_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Table", func(p, ppos):
-				t_node = prop_factory.create_table(p, ppos, size, mat)
+			var t_node = builder.place_blocking_prop(room, p_cell, "Table", func(p, ppos):
+				var node = prop_factory.create_table(p, ppos, size, mat)
 				if data.get("has_chair", false):
 					var ch_offset = CastleLevelData.arr_to_vec3(data.get("chair_offset", [0, 0, 0.7]))
 					var ch_rot = float(data.get("chair_rot", 0.0))
-					prop_factory.furniture.create_chair(t_node, ch_offset, ch_rot)
-				return t_node
+					prop_factory.furniture.create_chair(node, ch_offset, ch_rot)
+				return node
 			)
 			return t_node
 		"chair":
-			var c_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Chair", func(p, ppos):
-				c_node = prop_factory.furniture.create_chair(p, ppos, rot_y)
-				return c_node
+			return builder.place_blocking_prop(room, p_cell, "Chair", func(p, ppos):
+				return prop_factory.furniture.create_chair(p, ppos, rot_y)
 			)
-			return c_node
 		"cupboard":
-			var cp_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Cupboard", func(p, ppos):
-				cp_node = prop_factory.create_cupboard(p, ppos, rot_y)
-				return cp_node
+			return builder.place_blocking_prop(room, p_cell, "Cupboard", func(p, ppos):
+				return prop_factory.create_cupboard(p, ppos, rot_y)
 			)
-			return cp_node
 		"drawer":
-			var d_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Drawer", func(p, ppos):
-				d_node = prop_factory.create_drawer(p, ppos, rot_y)
-				return d_node
+			return builder.place_blocking_prop(room, p_cell, "Drawer", func(p, ppos):
+				return prop_factory.create_drawer(p, ppos, rot_y)
 			)
-			return d_node
 		"bookshelf":
-			var bs_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Bookshelf", func(p, ppos):
-				bs_node = prop_factory.create_bookshelf(p, ppos, rot_y)
-				return bs_node
+			return builder.place_blocking_prop(room, p_cell, "Bookshelf", func(p, ppos):
+				return prop_factory.create_bookshelf(p, ppos, rot_y)
 			)
-			return bs_node
 		"arms_shelf":
-			var as_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "ArmsShelf", func(p, ppos):
-				as_node = prop_factory.create_arms_shelf(p, ppos, rot_y)
-				return as_node
+			return builder.place_blocking_prop(room, p_cell, "ArmsShelf", func(p, ppos):
+				return prop_factory.create_arms_shelf(p, ppos, rot_y)
 			)
-			return as_node
 		"treasure_chest", "chest":
 			var relic = data.get("relic_name", "Ancient Relic")
 			var mini_game = data.get("mini_game_id", "")
@@ -161,12 +142,9 @@ func spawn_prop(room: Node3D, data: Dictionary, builder: Node3D) -> Node3D:
 				builder.grid[p_cell]["prop"] = chest
 			return chest
 		"candelabra":
-			var cd_node: Node3D
-			builder.place_blocking_prop(room, p_cell, "Candelabra", func(p, ppos):
-				cd_node = prop_factory.create_candelabra(p, ppos)
-				return cd_node
+			return builder.place_blocking_prop(room, p_cell, "Candelabra", func(p, ppos):
+				return prop_factory.create_candelabra(p, ppos)
 			)
-			return cd_node
 		"anvil":
 			var anvil = prop_factory.create_anvil(room, pos)
 			anvil.name = "BlacksmithAnvil"

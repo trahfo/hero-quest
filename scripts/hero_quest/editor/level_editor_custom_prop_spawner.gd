@@ -45,21 +45,21 @@ func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 	if p_type == "carpet":
 		return prop_spawner.spawn_carpet(parent, {"pos": CastleLevelData.vec3_to_arr(pos + Vector3(0, 0.01, 0)), "size": [2.0, 0.02, 2.0], "mat": p_info.get("mat", "cloth_red")})
 	if p_type == "fountain":
-		var f = decors.create_fountain(parent, pos); _register_blocking(cell, f); return f
+		var f = decors.create_fountain(parent, pos); f.rotation.y = rot_y; _register_blocking(cell, f); return f
 	if p_type == "chimney":
 		var c = decors.create_chimney_fireplace(parent, pos, rot_y); _register_blocking(cell, c); return c
 	if p_type == "pillar":
 		var p = mesh_builder.create_pillar(parent, pos, float(p_info.get("height", 4.5))); _register_blocking(cell, p); return p
 	if p_type == "golden_cross":
-		var cr = _create_altar_cross(parent, pos); _register_blocking(cell, cr); return cr
+		var cr = _create_altar_cross(parent, pos); cr.rotation.y = rot_y; _register_blocking(cell, cr); return cr
 	if p_type == "pew":
 		var pew = prop_factory.create_bench_2tile(parent, pos, p_info.get("with_back", true), rot_y); _register_blocking(cell, pew); return pew
 	if p_type == "lower_wall":
-		var w = mesh_builder.create_wall_segment(parent, cell, 1.8); _register_blocking(cell, w); return w
+		var w = mesh_builder.create_wall_segment(parent, cell, 1.8); w.rotation.y = rot_y; _register_blocking(cell, w); return w
 	if p_type == "stone_pillar":
-		var sp = graveyard_props.create_stone_pillar(parent, pos, "StonePillar"); _register_blocking(cell, sp); return sp
+		var sp = graveyard_props.create_stone_pillar(parent, pos, "StonePillar"); sp.rotation.y = rot_y; _register_blocking(cell, sp); return sp
 	if p_type == "brazier":
-		var bz = prop_factory.create_brazier(parent, pos); _register_blocking(cell, bz); return bz
+		var bz = prop_factory.create_brazier(parent, pos); bz.rotation.y = rot_y; _register_blocking(cell, bz); return bz
 	if p_type == "torch":
 		var norm = CastleLevelData.arr_to_vec3(p_info.get("norm", [0, 0, 1]))
 		return prop_factory.create_torch(parent, pos + norm * 0.46 + Vector3(0, 2.2, 0), norm)
@@ -71,18 +71,21 @@ func spawn(parent: Node3D, cell: Vector2i, p_info: Dictionary) -> Node3D:
 	if p_type == "skeleton":
 		var s = graveyard_props.create_skeleton(parent, pos, rot_y); _register_blocking(cell, s); return s
 	if p_type == "ancient_tree":
-		var t = graveyard_props.create_cemetery_tree(parent, pos); _register_blocking(cell, t); return t
+		var t = graveyard_props.create_cemetery_tree(parent, pos); t.rotation.y = rot_y; _register_blocking(cell, t); return t
 	if p_type == "torch_on_stick":
-		return graveyard_props.create_torch_on_stick(parent, pos)
+		var ts = graveyard_props.create_torch_on_stick(parent, pos); ts.rotation.y = rot_y; return ts
 	if p_type == "cemetery_fence":
 		var is_z = absf(rot_y - PI * 0.5) < 0.2 or absf(rot_y - PI * 1.5) < 0.2
-		return graveyard_props.create_cemetery_fence(parent, pos, 2.0, is_z)
+		var cf = graveyard_props.create_cemetery_fence(parent, pos, 2.0, is_z); cf.rotation.y = rot_y; return cf
 	if p_type == "iron_fence":
-		return decors.create_iron_fence(parent, pos, 2.0)
+		var ifc = decors.create_iron_fence(parent, pos, 2.0); ifc.rotation.y = rot_y; return ifc
 
 	p_info["pos"] = CastleLevelData.vec3_to_arr(pos)
 	p_info["cell"] = CastleLevelData.vec2i_to_arr(cell)
-	return prop_spawner.spawn_prop(parent, p_info, builder)
+	var spawned = prop_spawner.spawn_prop(parent, p_info, builder)
+	if spawned and is_instance_valid(spawned) and not (p_type in ["torch", "painting"]):
+		spawned.rotation.y = rot_y
+	return spawned
 
 func _register_blocking(cell: Vector2i, node: Node3D) -> void:
 	if not builder.grid.has(cell):

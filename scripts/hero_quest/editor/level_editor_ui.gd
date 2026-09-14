@@ -8,6 +8,7 @@ signal undo_pressed
 signal redo_pressed
 signal save_pressed
 signal exit_pressed
+signal discard_pressed
 signal chest_config_changed(cfg: Dictionary)
 signal level_name_changed(new_name: String)
 
@@ -122,6 +123,12 @@ func _build_top_bar() -> void:
 	exit_btn.focus_mode = Control.FOCUS_NONE
 	exit_btn.pressed.connect(func(): exit_pressed.emit())
 	top_bar.add_child(exit_btn)
+
+	var discard_btn = Button.new()
+	discard_btn.text = "❌ Discard & Exit [ESC]"
+	discard_btn.focus_mode = Control.FOCUS_NONE
+	discard_btn.pressed.connect(func(): discard_pressed.emit())
+	top_bar.add_child(discard_btn)
 
 func _build_palette() -> void:
 	var side_panel = PanelContainer.new()

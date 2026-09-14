@@ -1,5 +1,5 @@
 {
-	"level_id": "castle_level_01",
+	"level_id": "first_level",
 	"name": "Hero Quest Castle Grounds",
 	"rooms": [
 		{
@@ -740,16 +740,6 @@
 						-1.0
 					],
 					"mat": "stone_alt",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Corridor"
-				},
-				{
-					"cell": [
-						0.0,
-						0.0
-					],
-					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Great Corridor"
@@ -2162,16 +2152,6 @@
 				{
 					"cell": [
 						-6.0,
-						-14.0
-					],
-					"mat": "chapel",
-					"type": 2.0,
-					"walkable": true,
-					"zone": "The Grand Chapel"
-				},
-				{
-					"cell": [
-						-6.0,
 						-13.0
 					],
 					"mat": "chapel",
@@ -2243,16 +2223,6 @@
 					"cell": [
 						-5.0,
 						-15.0
-					],
-					"mat": "chapel",
-					"type": 2.0,
-					"walkable": true,
-					"zone": "The Grand Chapel"
-				},
-				{
-					"cell": [
-						-5.0,
-						-14.0
 					],
 					"mat": "chapel",
 					"type": 2.0,
@@ -5416,15 +5386,6 @@
 					"type": "curved_arch"
 				},
 				{
-					"axis": 1.0,
-					"cell": [
-						-7.0,
-						-14.0
-					],
-					"name": "Garden Chapel Portal",
-					"type": "arch_3tile"
-				},
-				{
 					"axis": 0.0,
 					"cell": [
 						-12.0,
@@ -6043,16 +6004,6 @@
 				{
 					"cell": [
 						-13.0,
-						-18.0
-					],
-					"mat": "garden_green",
-					"type": 6.0,
-					"walkable": false,
-					"zone": "Arch Pier"
-				},
-				{
-					"cell": [
-						-13.0,
 						-17.0
 					],
 					"mat": "stone",
@@ -6089,16 +6040,6 @@
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-13.0,
-						-13.0
-					],
-					"mat": "garden_green",
-					"type": 6.0,
-					"walkable": false,
-					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
@@ -6493,16 +6434,6 @@
 				{
 					"cell": [
 						-10.0,
-						-18.0
-					],
-					"mat": "garden_green",
-					"type": 6.0,
-					"walkable": false,
-					"zone": "Arch Pier"
-				},
-				{
-					"cell": [
-						-10.0,
 						-17.0
 					],
 					"mat": "stone",
@@ -6539,16 +6470,6 @@
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-10.0,
-						-13.0
-					],
-					"mat": "garden_green",
-					"type": 6.0,
-					"walkable": false,
-					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
@@ -6833,16 +6754,6 @@
 				{
 					"cell": [
 						-8.0,
-						-14.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-8.0,
 						-13.0
 					],
 					"mat": "garden_green",
@@ -6879,16 +6790,6 @@
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Cloister Garden"
-				},
-				{
-					"cell": [
-						-7.0,
-						-14.0
-					],
-					"mat": "chapel",
-					"type": 2.0,
-					"walkable": true,
-					"zone": "Garden Cloister Portal"
 				},
 				{
 					"cell": [
@@ -14296,74 +14197,8 @@
 				},
 				{
 					"cell": [
-						-7.0,
-						-17.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-7.0,
-						-12.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-6.0,
-						-11.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
-						-5.0,
-						-11.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
-						-7.0,
-						-11.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": true,
-					"up": true
-				},
-				{
-					"cell": [
 						-4.0,
 						-21.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"up": false
-				},
-				{
-					"cell": [
-						-4.0,
-						-11.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -15210,17 +15045,6 @@
 				{
 					"cell": [
 						-16.0,
-						-17.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-16.0,
 						-12.0
 					],
 					"down": true,
@@ -15369,28 +15193,6 @@
 					"down": true,
 					"height": 4.5,
 					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-7.0,
-						-10.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"up": true
-				},
-				{
-					"cell": [
-						-7.0,
-						-9.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
 					"right": false,
 					"up": true
 				},
@@ -16866,18 +16668,6 @@
 				},
 				{
 					"cell": [
-						-7.0,
-						-16.0
-					],
-					"height": 4.5,
-					"norm": [
-						1.0,
-						0.0,
-						0.0
-					]
-				},
-				{
-					"cell": [
 						-3.0,
 						-21.0
 					],
@@ -16962,18 +16752,6 @@
 				},
 				{
 					"cell": [
-						-16.0,
-						-13.0
-					],
-					"height": 4.5,
-					"norm": [
-						1.0,
-						0.0,
-						0.0
-					]
-				},
-				{
-					"cell": [
 						12.0,
 						-19.0
 					],
@@ -17035,163 +16813,865 @@
 			]
 		},
 		{
-			"arches": [],
+			"arches": [
+				{
+					"axis": 1,
+					"cell": [
+						-7,
+						-13
+					],
+					"is_arch": true,
+					"name": "PortalZ",
+					"type": "arch_3tile"
+				},
+				{
+					"axis": 1,
+					"cell": [
+						-16,
+						-15
+					],
+					"is_arch": true,
+					"name": "PortalZ",
+					"type": "arch_3tile"
+				},
+				{
+					"axis": 1,
+					"cell": [
+						-7,
+						-14
+					],
+					"is_arch": true,
+					"name": "PortalZ",
+					"type": "arch_3tile"
+				}
+			],
 			"carpets": [],
 			"lights": [],
-			"modular_walls": [],
+			"modular_walls": [
+				{
+					"cell": [
+						-7,
+						-12
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-7,
+						-16
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-7,
+						-11
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1,
+					"right": true,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-6,
+						-11
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 1,
+					"right": true,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-7,
+						-10
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-5,
+						-11
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 1,
+					"right": true,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-7,
+						-9
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-4,
+						-11
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-7,
+						-17
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-16,
+						-13
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-16,
+						-17
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				}
+			],
 			"name": "EditorCustom",
 			"pillars": [],
-			"props": [],
+			"props": [
+				{
+					"cell": [
+						-14,
+						-23
+					],
+					"pos": [
+						-28.0,
+						0.0,
+						-46.0
+					],
+					"rot_y": 0.0,
+					"type": "bush"
+				},
+				{
+					"cell": [
+						-10,
+						-24
+					],
+					"pos": [
+						-20.0,
+						0.0,
+						-48.0
+					],
+					"rot_y": 0.0,
+					"type": "bush"
+				},
+				{
+					"cell": [
+						-12,
+						-24
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-23
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-22
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-21
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-20
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-19
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-18
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-17
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-13,
+						-17
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-13,
+						-16
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-13,
+						-15
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-13,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-11,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-10,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-10,
+						-15
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-10,
+						-16
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-10,
+						-17
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-11,
+						-17
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-13
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-12
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-11
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-12,
+						-10
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-15,
+						-15
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-14,
+						-15
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-9,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-8,
+						-14
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-1,
+						-19
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						0,
+						-19
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						1,
+						-19
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-10,
+						-23
+					],
+					"pos": [
+						-20.0,
+						0.0,
+						-46.0
+					],
+					"rot_y": 0.0,
+					"type": "flower_patch"
+				},
+				{
+					"cell": [
+						-10,
+						-21
+					],
+					"pos": [
+						-20.0,
+						0.0,
+						-42.0
+					],
+					"rot_y": 0.0,
+					"type": "flower_patch"
+				},
+				{
+					"cell": [
+						-13,
+						-22
+					],
+					"pos": [
+						-26.0,
+						0.0,
+						-44.0
+					],
+					"rot_y": 0.0,
+					"type": "flower_patch"
+				}
+			],
 			"tiles": [
 				{
 					"cell": [
-						-7,
-						-6
+						-7.0,
+						-6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-7.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-7.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-7.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						-6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-6.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-4.0,
+						-5.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-4.0,
+						-4.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-4.0,
+						-3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-16,
+						-15
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "North-West Watchtower"
 				},
 				{
 					"cell": [
 						-7,
-						-5
+						-13
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
 						-7,
-						-4
+						-12
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
 						-7,
-						-3
+						-15
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
-						-6,
-						-6
+						-7,
+						-16
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Castle Walls"
 				},
 				{
 					"cell": [
 						-6,
-						-5
+						-14
 					],
-					"mat": "stone",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-6,
-						-4
-					],
-					"mat": "stone",
-					"type": 1,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						-6,
-						-3
-					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "chapel",
+					"type": 2,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
 						-5,
-						-6
+						-14
 					],
-					"mat": "stone",
+					"mat": "chapel",
+					"type": 2,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-10,
+						-13
+					],
+					"mat": "garden_green",
 					"type": 1,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-5,
-						-5
+						-13,
+						-13
 					],
-					"mat": "stone",
+					"mat": "garden_green",
 					"type": 1,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-5,
-						-4
+						-13,
+						-18
 					],
-					"mat": "stone",
+					"mat": "garden_green",
 					"type": 1,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-5,
-						-3
+						-10,
+						-18
 					],
-					"mat": "stone",
+					"mat": "garden_green",
 					"type": 1,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-4,
-						-5
+						-8,
+						-14
 					],
-					"mat": "stone",
+					"mat": "garden_green",
 					"type": 1,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-4,
-						-4
+						-7,
+						-14
 					],
-					"mat": "stone",
-					"type": 1,
+					"mat": "chapel",
+					"type": 2,
 					"walkable": true,
 					"zone": "Custom"
 				},
 				{
 					"cell": [
-						-4,
-						-3
+						0,
+						0
 					],
 					"mat": "stone",
 					"type": 1,
 					"walkable": true,
-					"zone": "Custom"
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-7,
+						-11
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-6,
+						-11
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-16,
+						-14
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-16,
+						-16
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Arch Pier"
 				}
 			],
 			"torches": [],

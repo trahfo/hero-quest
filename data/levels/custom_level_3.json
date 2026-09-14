@@ -13,167 +13,21 @@
 					"is_arch": true,
 					"name": "PortalZ",
 					"type": "arch_3tile"
+				},
+				{
+					"axis": 0,
+					"cell": [
+						0,
+						3
+					],
+					"is_arch": true,
+					"name": "PortalX",
+					"type": "arch_3tile"
 				}
 			],
 			"carpets": [],
 			"lights": [],
 			"modular_walls": [
-				{
-					"cell": [
-						-1.0,
-						0.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						-1.0,
-						2.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-1.0,
-						3.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						-1.0,
-						4.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						0.0,
-						1.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						1.0,
-						1.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": false,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						-1.0,
-						1.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": true,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						2.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": false,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						3.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						4.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						5.0,
-						0.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
-						5.0,
-						1.0
-					],
-					"down": true,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
-				{
-					"cell": [
-						5.0,
-						2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": false,
-					"right": false,
-					"type": "modular",
-					"up": true
-				},
 				{
 					"cell": [
 						0.0,
@@ -308,20 +162,8 @@
 				},
 				{
 					"cell": [
-						6.0,
-						-2.0
-					],
-					"down": false,
-					"height": 4.5,
-					"left": true,
-					"right": true,
-					"type": "modular",
-					"up": false
-				},
-				{
-					"cell": [
 						7.0,
-						-2.0
+						-4.0
 					],
 					"down": false,
 					"height": 4.5,
@@ -333,12 +175,320 @@
 				{
 					"cell": [
 						8.0,
-						-2.0
+						-4.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
 					"right": false,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-6.0,
+						-2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-6.0,
+						-1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-6.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-6.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-6.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-5.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-5.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-4.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-4.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-3.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-3.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-2.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						0.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						1.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						3.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						4.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						6.0,
+						-1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1.0,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						0.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1.0,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						1.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": false,
+					"orientation": 1.0,
+					"right": false,
+					"rot_y": 1.5707963267949,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						6.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": true
+				},
+				{
+					"cell": [
+						-1.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						6.0,
+						-2.0
+					],
+					"down": true,
+					"height": 4.5,
+					"left": true,
+					"orientation": 1.0,
+					"right": false,
+					"rot_y": 1.5707963267949,
 					"type": "modular",
 					"up": false
 				},
@@ -350,31 +500,107 @@
 					"down": false,
 					"height": 4.5,
 					"left": true,
+					"orientation": 0.0,
 					"right": true,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": false
 				},
 				{
 					"cell": [
-						7.0,
-						-4.0
+						4.0,
+						-2.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
+					"orientation": 0.0,
 					"right": true,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": false
 				},
 				{
 					"cell": [
-						8.0,
-						-4.0
+						3.0,
+						-2.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						2.0,
+						-2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						5.0,
+						2.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0.0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-29.0,
+						6.0
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0.0,
 					"right": false,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						2,
+						2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": false,
+					"orientation": 0,
+					"right": true,
+					"rot_y": 0.0,
+					"type": "modular",
+					"up": false
+				},
+				{
+					"cell": [
+						-2,
+						2
+					],
+					"down": false,
+					"height": 4.5,
+					"left": true,
+					"orientation": 0,
+					"right": false,
+					"rot_y": 0.0,
 					"type": "modular",
 					"up": false
 				}
@@ -407,19 +633,6 @@
 					],
 					"rot_y": 0.0,
 					"type": "candelabra"
-				},
-				{
-					"cell": [
-						2.0,
-						2.0
-					],
-					"pos": [
-						4.0,
-						0.0,
-						4.0
-					],
-					"rot_y": 0.0,
-					"type": "anvil"
 				},
 				{
 					"cell": [
@@ -526,16 +739,163 @@
 				},
 				{
 					"cell": [
-						0,
-						3
+						2.0,
+						3.0
 					],
-					"pos": [
-						0.0,
-						0.0,
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						4.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						5.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
 						6.0
 					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						7.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						8.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						9.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						10.0
+					],
 					"rot_y": 1.5707963267949,
-					"type": "bookshelf"
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						2.0,
+						11.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						3.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						4.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						5.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						6.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						7.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						8.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						9.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						10.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-2.0,
+						11.0
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						1,
+						2
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
+				},
+				{
+					"cell": [
+						-1,
+						2
+					],
+					"rot_y": 0.0,
+					"type": "lower_wall"
 				}
 			],
 			"tiles": [
@@ -557,7 +917,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -567,7 +927,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -577,7 +937,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -587,7 +947,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -597,47 +957,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						0.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						0.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						0.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						0.0,
-						2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -657,7 +977,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -667,7 +987,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -677,7 +997,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -687,7 +1007,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -697,47 +1017,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						1.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						1.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						1.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						1.0,
-						2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -757,7 +1037,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -767,7 +1047,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -777,7 +1057,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -787,7 +1067,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -797,57 +1077,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						2.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
 					"zone": "Custom"
-				},
-				{
-					"cell": [
-						2.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						2.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						2.0,
-						1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						2.0,
-						2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
@@ -867,7 +1097,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -877,7 +1107,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -887,7 +1117,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -897,7 +1127,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -907,57 +1137,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						3.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
 					"zone": "Custom"
-				},
-				{
-					"cell": [
-						3.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						3.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						3.0,
-						1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						3.0,
-						2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
@@ -977,7 +1157,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -987,7 +1167,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -997,7 +1177,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1007,7 +1187,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1017,57 +1197,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						4.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
 					"zone": "Custom"
-				},
-				{
-					"cell": [
-						4.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						4.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						4.0,
-						1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						4.0,
-						2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
 				},
 				{
 					"cell": [
@@ -1087,7 +1217,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1097,7 +1227,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1107,7 +1237,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1117,62 +1247,12 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
 						5.0,
 						-3.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						5.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						5.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						5.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						5.0,
-						1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						5.0,
-						2.0
 					],
 					"mat": "stone",
 					"type": 1.0,
@@ -1223,56 +1303,6 @@
 					"cell": [
 						6.0,
 						-3.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Library"
-				},
-				{
-					"cell": [
-						6.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						6.0,
-						-1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						6.0,
-						0.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						6.0,
-						1.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Custom"
-				},
-				{
-					"cell": [
-						6.0,
-						2.0
 					],
 					"mat": "stone",
 					"type": 1.0,
@@ -1287,7 +1317,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1297,7 +1327,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1307,7 +1337,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1317,7 +1347,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1327,7 +1357,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1337,7 +1367,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1347,7 +1377,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1357,7 +1387,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1367,7 +1397,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1377,7 +1407,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1387,7 +1417,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1397,7 +1427,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1407,7 +1437,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1417,7 +1447,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1427,7 +1457,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1437,7 +1467,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1447,7 +1477,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1457,7 +1487,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1467,7 +1497,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1477,7 +1507,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1487,7 +1517,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1497,7 +1527,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1507,7 +1537,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1517,7 +1547,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1527,7 +1557,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1537,7 +1567,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1547,7 +1577,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1557,7 +1587,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1567,7 +1597,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1577,7 +1607,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1587,7 +1617,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1597,7 +1627,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1607,7 +1637,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1617,7 +1647,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1627,7 +1657,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1637,7 +1667,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1647,7 +1677,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1657,7 +1687,7 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1667,32 +1697,12 @@
 					"mat": "garden_green",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
 						6.0,
 						-5.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Castle Walls"
-				},
-				{
-					"cell": [
-						7.0,
-						-2.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "Castle Walls"
-				},
-				{
-					"cell": [
-						8.0,
-						-2.0
 					],
 					"mat": "stone",
 					"type": 1.0,
@@ -1717,7 +1727,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Library"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1737,7 +1747,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1747,7 +1757,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1757,7 +1767,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1767,7 +1777,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1777,47 +1787,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "Garden"
-				},
-				{
-					"cell": [
-						1.0,
-						3.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						1.0,
-						4.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						2.0,
-						3.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
-				},
-				{
-					"cell": [
-						2.0,
-						4.0
-					],
-					"mat": "stone",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1827,7 +1797,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
@@ -1837,7 +1807,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1847,7 +1817,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
@@ -1857,7 +1827,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
@@ -1867,7 +1837,7 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Arch Pier"
 				},
 				{
 					"cell": [
@@ -1877,27 +1847,1157 @@
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
 				},
 				{
 					"cell": [
-						0.0,
-						3.0
+						-6.0,
+						-2.0
 					],
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-6.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-5.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-5.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-5.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-5.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-4.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-4.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-4.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-4.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-4.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-3.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-3.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-3.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-3.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-3.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-2.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-2.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-2.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-2.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						1.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						2.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						2.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						2.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						2.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						3.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						3.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						3.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						3.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						4.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						4.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						4.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						4.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						5.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						6.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						6.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-1.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-1.0,
+						-1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-1.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						1.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						6.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						5.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						4.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						3.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						2.0,
+						-2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						5.0,
+						2.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						5.0,
+						1.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						5.0,
+						0.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-1.0,
+						4.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						6.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						7.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						8.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						9.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						10.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-1.0,
+						11.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
 				},
 				{
 					"cell": [
 						0.0,
 						4.0
 					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						6.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						7.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						8.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						9.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						10.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						0.0,
+						11.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						4.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						6.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						7.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						8.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						9.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						10.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						1.0,
+						11.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						3.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						2.0,
+						4.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						6.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						7.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						8.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						9.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						10.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						2.0,
+						11.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						3.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-2.0,
+						4.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						5.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						6.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						7.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						8.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						9.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						10.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-2.0,
+						11.0
+					],
+					"mat": "wood",
+					"type": 3.0,
+					"walkable": true,
+					"zone": "PATHWAY"
+				},
+				{
+					"cell": [
+						-6.0,
+						3.0
+					],
 					"mat": "stone",
 					"type": 1.0,
 					"walkable": true,
-					"zone": "The Great Hall"
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-5.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-4.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-3.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						6.0,
+						3.0
+					],
+					"mat": "stone",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Arch Pier"
+				},
+				{
+					"cell": [
+						-2,
+						0
+					],
+					"mat": "stone_alt",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						-1,
+						0
+					],
+					"mat": "stone_alt",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						0,
+						0
+					],
+					"mat": "stone_alt",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						0
+					],
+					"mat": "stone_alt",
+					"type": 1,
+					"walkable": true,
+					"zone": "Custom"
+				},
+				{
+					"cell": [
+						1,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						1,
+						3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-1,
+						2
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						-1,
+						3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Castle Walls"
+				},
+				{
+					"cell": [
+						0,
+						3
+					],
+					"mat": "stone",
+					"type": 1,
+					"walkable": true,
+					"zone": "Arch Pier"
 				}
 			],
 			"torches": [],

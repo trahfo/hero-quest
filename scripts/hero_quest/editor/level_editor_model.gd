@@ -108,7 +108,7 @@ func apply_cell_states(state_dict: Dictionary) -> void:
 			if w_info.get("type") == "window":
 				set_window(cell, CastleLevelData.arr_to_vec3(w_info.get("norm", [0, 0, 1])))
 			else:
-				set_wall(cell)
+				set_wall(cell, int(w_info.get("orientation", -1)))
 		if st["prop"] != null:
 			spawn_custom_prop(cell, st["prop"])
 		if st.get("zone") != null and st["zone"] != "":
@@ -167,30 +167,46 @@ func set_floor(cell: Vector2i, mat_name: String, tile_type: int = 1, walkable: b
 		for n in affected:
 			if n != cell and is_wall_at(n): set_wall(n)
 
-func set_walls_batch(cells: Array[Vector2i]) -> void:
+func set_walls_batch(cells: Array[Vector2i], orientation: int = -1) -> void:
 	_ensure_custom_room()
 	for cell in cells:
 		if not cell_data.has(cell): cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
-		cell_data[cell]["wall"] = { "type": "modular", "cell": CastleLevelData.vec2i_to_arr(cell), "left": false, "right": false, "up": false, "down": false, "height": 4.5 }
+		cell_data[cell]["wall"] = { "type": "modular", "cell": CastleLevelData.vec2i_to_arr(cell), "left": false, "right": false, "up": false, "down": false, "height": 4.5, "orientation": (orientation if orientation >= 0 else 0) }
 		builder.register_tile(cell, 6, false, "Castle Walls")
-	for cell in LevelEditorWallAutoTiler.get_affected_neighborhood(cells, is_wall_at): set_wall(cell)
+	for cell in LevelEditorWallAutoTiler.get_affected_neighborhood(cells, is_wall_at):
+		var o = orientation if (cells.size() == 1 and cell in cells) else -1
+		set_wall(cell, o)
 
-func set_wall(cell: Vector2i) -> void:
+func set_wall(cell: Vector2i, orientation: int = -1) -> void:
 	_ensure_custom_room()
 	if not cell_data.has(cell):
 		cell_data[cell] = { "tile": null, "wall": null, "prop": null, "nodes": [] }
+
+	var orient = orientation
+	if orient < 0 and cell_data[cell].get("wall") != null:
+		orient = int(cell_data[cell]["wall"].get("orientation", 0))
+	if orient < 0:
+		orient = 0
 
 	_clear_cell_nodes(cell)
 
 	var conn = LevelEditorWallAutoTiler.get_wall_connections(cell, is_wall_at)
 	cell_data[cell]["wall"] = {
 		"type": "modular", "cell": CastleLevelData.vec2i_to_arr(cell),
-		"left": conn["left"], "right": conn["right"], "up": conn["up"], "down": conn["down"], "height": 4.5
+		"left": conn["left"], "right": conn["right"], "up": conn["up"], "down": conn["down"],
+		"height": 4.5, "orientation": orient, "rot_y": (PI * 0.5 if orient == 1 else 0.0)
 	}
 	builder.register_tile(cell, 6, false, "Castle Walls")
 
 	_add_floor_base(cell)
-	var wall_node = wall_factory.create_modular_wall(custom_room_node, builder.grid_to_world(cell), conn["left"], conn["right"], conn["up"], conn["down"], 4.5)
+	var wall_node: Node3D
+	if conn["count"] == 0:
+		if orient == 1:
+			wall_node = wall_factory.create_straight_wall_z(custom_room_node, builder.grid_to_world(cell), 4.5)
+		else:
+			wall_node = wall_factory.create_straight_wall_x(custom_room_node, builder.grid_to_world(cell), 4.5)
+	else:
+		wall_node = wall_factory.create_modular_wall(custom_room_node, builder.grid_to_world(cell), conn["left"], conn["right"], conn["up"], conn["down"], 4.5)
 	cell_data[cell]["nodes"].append(wall_node)
 
 func set_window(cell: Vector2i, norm: Vector3) -> void:
@@ -228,6 +244,8 @@ func spawn_custom_prop(cell: Vector2i, p_info: Dictionary) -> Node3D:
 			set_floor(cell, "stone", 1, true)
 		else:
 			builder.grid[cell]["walkable"] = true
+	else:
+		_free_object_nodes_at_cell(cell, true)
 
 	if not p_info.has("cell"):
 		p_info["cell"] = CastleLevelData.vec2i_to_arr(cell)
@@ -341,13 +359,12 @@ func erase_cell(cell: Vector2i) -> void:
 				set_wall(n)
 
 func discard_unsaved_changes() -> void:
+	custom_room_node = null
 	_ensure_custom_room()
-	for c in custom_room_node.get_children():
-		c.queue_free()
 	cell_data.clear()
 	erased_cells.clear()
 	erased_props.clear()
-	_load_initial_data()
+	_load_initial_data(active_level_name)
 
 func save_to_json(file_path: String = "") -> bool:
 	var path = file_path if file_path != "" else active_file_path

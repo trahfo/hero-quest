@@ -81,6 +81,7 @@ func _init_subsystems() -> void:
 	ui.redo_pressed.connect(redo)
 	ui.save_pressed.connect(save_level)
 	ui.exit_pressed.connect(toggle_editor)
+	ui.discard_pressed.connect(exit_without_saving)
 	ui.chest_config_changed.connect(_on_chest_config_changed)
 	history.history_changed.connect(ui.update_history_counts)
 
@@ -113,14 +114,36 @@ func exit_without_saving() -> bool:
 		room_manager.set_walls_only_visible(false)
 	if model and model.materials:
 		model.materials.set_walls_transparent(false)
+	if tool_handler:
+		tool_handler.clear_selection()
+
+	if builder and builder.has_method("load_from_level_file"):
+		builder.load_from_level_file(active_file_path, true)
+
 	if model:
 		model.discard_unsaved_changes()
+
+	if history:
+		history.clear()
+
+	if room_manager and room_manager.has_method("reset_state"):
+		room_manager.reset_state()
+
+	if room_panel and room_panel.has_method("refresh_list"):
+		room_panel.refresh_list()
+
+	if ui:
+		ui.clear_selection_highlight()
+		ui.set_level_name(model.get_level_name() if model else active_level_name)
+		ui.update_history_counts(0, 0)
+		ui.set_status_notice("Changes discarded. Level restored to last saved state.")
+
 	is_active = false
 	grid.visible = false
 	ui.visible = false
 	if ghost_preview:
 		ghost_preview.visible = false
-	status_message.emit("Level Editor closed without saving.")
+	status_message.emit("Level Editor closed without saving. Restored to last saved state.")
 	editor_toggled.emit(false)
 	return false
 
@@ -134,7 +157,7 @@ func handle_escape() -> void:
 			model.materials.set_walls_transparent(false)
 		if ui:
 			ui.clear_selection_highlight()
-			ui.set_status_notice("Deselected item. (ESC: Exit without save | TAB: Save & Exit)")
+			ui.set_status_notice("Deselected item. (ESC: Discard & Exit | TAB: Save & Exit)")
 	else:
 		exit_without_saving()
 

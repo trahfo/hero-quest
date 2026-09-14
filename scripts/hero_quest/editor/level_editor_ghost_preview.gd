@@ -7,6 +7,7 @@ const CastleDecorationFactory = preload("res://scripts/hero_quest/castle_decorat
 const CastleGraveyardPropFactory = preload("res://scripts/hero_quest/castle_graveyard_prop_factory.gd")
 const CastleMeshBuilder = preload("res://scripts/hero_quest/castle_mesh_builder.gd")
 const CastleWallTileFactory = preload("res://scripts/hero_quest/castle_wall_tile_factory.gd")
+const LevelEditorPlacementPolicy = preload("res://scripts/hero_quest/editor/level_editor_placement_policy.gd")
 
 var preview_node: Node3D = null
 var ghost_mat: StandardMaterial3D
@@ -36,7 +37,7 @@ func _init(p_materials: CastleMaterials, p_builder: Node3D) -> void:
 
 func update_preview_mesh(tool_name: String, item_data: Dictionary) -> void:
 	_clear_preview()
-	if tool_name == "erase":
+	if not LevelEditorPlacementPolicy.should_show_ghost(tool_name):
 		return
 
 	preview_node = Node3D.new()
@@ -44,11 +45,6 @@ func update_preview_mesh(tool_name: String, item_data: Dictionary) -> void:
 	add_child(preview_node)
 
 	match tool_name:
-		"floor":
-			var m = MeshInstance3D.new()
-			var b = BoxMesh.new(); b.size = Vector3(2.0, 0.28, 2.0)
-			m.mesh = b; m.position = Vector3(0, -0.14, 0)
-			preview_node.add_child(m)
 		"wall":
 			var m = MeshInstance3D.new()
 			var b = BoxMesh.new(); b.size = Vector3(2.0, 4.5, 0.9)

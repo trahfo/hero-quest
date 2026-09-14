@@ -7,6 +7,7 @@ const LevelEditorGrid = preload("res://scripts/hero_quest/editor/level_editor_gr
 const LevelEditorHistory = preload("res://scripts/hero_quest/editor/level_editor_history.gd")
 const LevelEditorModel = preload("res://scripts/hero_quest/editor/level_editor_model.gd")
 const LevelEditorGhostPreview = preload("res://scripts/hero_quest/editor/level_editor_ghost_preview.gd")
+const LevelEditorPlacementPolicy = preload("res://scripts/hero_quest/editor/level_editor_placement_policy.gd")
 const CastleLevelData = preload("res://scripts/hero_quest/level/castle_level_data.gd")
 
 signal tool_action_performed(desc: String)
@@ -52,7 +53,7 @@ func set_tool(tool_name: String, item_data: Dictionary = {}) -> void:
 func _update_ghost_mesh() -> void:
 	if not ghost_preview:
 		return
-	if active_tool in ["erase", "none", "", "room"]:
+	if not LevelEditorPlacementPolicy.should_show_ghost(active_tool):
 		ghost_preview.set_preview_visible(false)
 	else:
 		ghost_preview.set_preview_visible(true)
@@ -119,44 +120,7 @@ func _update_cursor_visuals() -> void:
 		grid.show_selection_span(cells, col)
 
 func _get_effective_placement_params(cell: Vector2i) -> Dictionary:
-	var p_type = selected_item_data.get("type", "")
-	var is_arch = active_tool in ["door", "arch"] or selected_item_data.get("is_arch", false)
-	var has_same: bool = false
-	var ep: Dictionary = {}
-
-	if model.cell_data.has(cell) and model.cell_data[cell].get("prop") != null:
-		ep = model.cell_data[cell]["prop"]
-		var ep_type = ep.get("type", "")
-		if is_arch:
-			has_same = ep.get("is_arch", false) or ep_type.begins_with("arch") or ep_type == "door"
-		else:
-			has_same = (str(ep_type) == str(p_type))
-	elif active_tool == "chest" and model.cell_data.has(cell) and model.cell_data[cell].get("prop") != null:
-		if model.cell_data[cell]["prop"].get("type") == "treasure_chest":
-			has_same = true
-			ep = model.cell_data[cell]["prop"]
-
-	if is_arch:
-		var base_axis = int(selected_item_data.get("axis", 0))
-		if has_same:
-			var next_axis = (int(ep.get("axis", base_axis)) + 1) % 2
-			return { "has_same": true, "axis": next_axis, "rot_y": 0.0 }
-		return { "has_same": false, "axis": base_axis, "rot_y": 0.0 }
-
-	if p_type in ["torch", "painting"]:
-		var w_info = _detect_wall_face(cell)
-		var base_norm = w_info["norm"]
-		if has_same:
-			var cur_n = CastleLevelData.arr_to_vec3(ep.get("norm", [base_norm.x, base_norm.y, base_norm.z]))
-			var next_n = Vector3(cur_n.z, 0, -cur_n.x)
-			return { "has_same": true, "wall_cell": w_info["wall_cell"], "norm": next_n, "rot_y": atan2(next_n.x, next_n.z) }
-		return { "has_same": false, "wall_cell": w_info["wall_cell"], "norm": base_norm, "rot_y": atan2(base_norm.x, base_norm.z) }
-
-	var base_rot = placement_rot_y
-	if has_same:
-		var next_rot = fmod(float(ep.get("rot_y", base_rot)) + PI * 0.5, TAU)
-		return { "has_same": true, "rot_y": next_rot }
-	return { "has_same": false, "rot_y": base_rot }
+	return LevelEditorPlacementPolicy.get_effective_placement(cell, active_tool, selected_item_data, model, placement_rot_y)
 
 func _update_ghost_transform() -> void:
 	if not is_instance_valid(ghost_preview) or not ghost_preview.visible or active_tool in ["none", ""]:
@@ -180,20 +144,7 @@ func _update_ghost_transform() -> void:
 	ghost_preview.set_preview_transform(base_pos, rot_y)
 
 func _detect_wall_face(cell: Vector2i) -> Dictionary:
-	if model.is_wall_at(cell):
-		for off in [Vector2i(0, 1), Vector2i(0, -1), Vector2i(1, 0), Vector2i(-1, 0)]:
-			if not model.is_wall_at(cell + off):
-				return { "wall_cell": cell, "norm": Vector3(off.x, 0, off.y) }
-		return { "wall_cell": cell, "norm": Vector3(0, 0, 1) }
-
-	var wall_offsets = [Vector2i(0, -1), Vector2i(0, 1), Vector2i(-1, 0), Vector2i(1, 0)]
-	for off in wall_offsets:
-		if model.is_wall_at(cell + off):
-			return { "wall_cell": cell + off, "norm": Vector3(-off.x, 0, -off.y) }
-
-	var angle = placement_rot_y
-	var approx_norm = Vector3(sin(angle), 0, cos(angle)).snapped(Vector3.ONE)
-	return { "wall_cell": cell, "norm": approx_norm if approx_norm != Vector3.ZERO else Vector3(0, 0, 1) }
+	return LevelEditorPlacementPolicy.detect_wall_face(cell, model, placement_rot_y)
 
 func on_mouse_button(event: InputEventMouseButton) -> void:
 	update_mouse_position(event.position)
@@ -271,8 +222,10 @@ func _apply_wall_drag() -> void:
 	var line_cells = LevelEditorWallAutoTiler.get_line_cells(drag_start_cell, hovered_cell)
 	var affected_cells = LevelEditorWallAutoTiler.get_affected_neighborhood(line_cells, model.is_wall_at)
 	var before_state = model.capture_cell_states(affected_cells)
+	var params = _get_effective_placement_params(hovered_cell)
+	var orient = int(params.get("orientation", -1))
 
-	model.set_walls_batch(line_cells)
+	model.set_walls_batch(line_cells, orient)
 
 	var after_state = model.capture_cell_states(affected_cells)
 	history.record_action("Place Walls (%d tiles)" % line_cells.size(), before_state, after_state)

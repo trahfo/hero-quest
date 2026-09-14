@@ -342,3 +342,18 @@ func save_or_rename_active_room(new_name: String) -> Dictionary:
 		rooms_updated.emit()
 		return {"success": true, "action": "set", "message": "Active room set to '%s' (ready to paint)." % trimmed}
 
+func reset_state() -> void:
+	hidden_nodes.clear()
+	is_walls_only = false
+	overlay_instances.clear()
+	sign_instances.clear()
+	room_colors.clear()
+	if not is_instance_valid(overlay_root) or overlay_root.get_parent() != builder:
+		overlay_root = Node3D.new()
+		overlay_root.name = "EditorRoomOverlays"
+		overlay_root.visible = false
+		builder.add_child(overlay_root)
+	_init_room_colors()
+	refresh_overlays()
+	rooms_updated.emit()
+

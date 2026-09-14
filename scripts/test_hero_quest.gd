@@ -1545,6 +1545,122 @@ func _init() -> void:
 
 	print("  -> Passed! Complete Lossless Multi-Session Level Persistence, Equal Level Treatment & Pre-Save Validation confirmed.")
 
+	# =========================================================================
+	# [TEST 23] Verifying Ghost Preview, 90° Hover Rotation, Same-Spot Replacement & Rule Exceptions
+	# =========================================================================
+	print("\n[TEST 23] Verifying Ghost Preview, 90° Hover Rotation, Same-Spot Replacement & Rule Exceptions...")
+
+	var LevelEditorPlacementPolicyClass = preload("res://scripts/hero_quest/editor/level_editor_placement_policy.gd")
+	var t_game23 = Node3D.new()
+	root.add_child(t_game23)
+	var cam23 = Camera3D.new()
+	var piv23 = Node3D.new()
+	t_game23.add_child(cam23)
+	t_game23.add_child(piv23)
+	var ed23 = LevelEditorClass.new()
+	t_game23.add_child(ed23)
+	var lvl_path23 = "res://data/levels/test_placement_rules_level.json"
+	ed23.setup(t_game23, builder, cam23, piv23, lvl_path23)
+	ed23.toggle_editor()
+	var h23 = ed23.tool_handler
+	var m23 = ed23.model
+	var gp23 = ed23.ghost_preview
+
+	# 1. Floor Ghost Preview Suppression
+	h23.set_tool("floor", {"mat": "stone", "type": 1})
+	assert(gp23.visible == false, "Floor tool must NOT display 3D ghost preview")
+	print("  - Floor ghost preview suppression confirmed (ghost is invisible for floors).")
+
+	# 2. Non-Floor Ghost Previews Active & Semi-Transparent
+	h23.set_tool("prop", {"type": "chair"})
+	assert(gp23.visible == true, "Chair tool must display 3D ghost preview")
+	assert(gp23.preview_node != null, "Chair ghost preview node must exist")
+	assert(gp23.ghost_mat.albedo_color.a <= 0.25, "Ghost material must be transparent")
+	print("  - Non-floor ghost preview confirmed active and transparent.")
+
+	# 3. Orientation Parity (Ghost == Placed)
+	h23.set_tool("prop", {"type": "table"})
+	h23.hovered_cell = Vector2i(70, 70)
+	h23._update_ghost_transform()
+	var table_ghost_rot = gp23.preview_node.rotation.y
+	h23._start_drag(); h23._finish_drag()
+	assert(m23.cell_data.has(Vector2i(70, 70)), "Table must be placed at (70, 70)")
+	var table_node = m23.cell_data[Vector2i(70, 70)]["nodes"].back()
+	assert(absf(table_node.rotation.y - table_ghost_rot) < 0.01, "Placed table rotation (%f) must match ghost rotation (%f)" % [table_node.rotation.y, table_ghost_rot])
+	print("  - Orientation parity verified: placed object rotation precisely matches ghost rotation.")
+
+	# 4. Same-Spot Hover 90° Rotation
+	h23.hovered_cell = Vector2i(70, 70)
+	h23._update_ghost_transform()
+	var hovered_rotated_ghost_rot = gp23.preview_node.rotation.y
+	var expected_rot = fmod(table_ghost_rot + PI * 0.5, TAU)
+	assert(absf(hovered_rotated_ghost_rot - expected_rot) < 0.01, "Hovered ghost over same tile must rotate 90° (expected %f, got %f)" % [expected_rot, hovered_rotated_ghost_rot])
+	print("  - Same-spot hover rotation confirmed: ghost rotates 90° when hovering over matching tile.")
+
+	# 5. Single-Instance Replacement (Zero Duplicates Guarantee)
+	var old_table_node = table_node
+	h23._start_drag(); h23._finish_drag()
+	var nodes_after = m23.cell_data[Vector2i(70, 70)]["nodes"]
+	assert(nodes_after.size() <= 2, "Cell must not accumulate duplicate prop instances")
+	var new_table_node = nodes_after.back()
+	assert(new_table_node != old_table_node, "New table node instance must replace old table node")
+	assert(absf(new_table_node.rotation.y - expected_rot) < 0.01, "Placed rotated table must match 90° rotation")
+	print("  - Single-instance replacement confirmed: old instance destroyed, exactly 1 prop on tile.")
+
+	# 6. Isolated Wall Rotation Between X and Z
+	h23.set_tool("wall", {"type": "modular_wall"})
+	h23.hovered_cell = Vector2i(75, 75)
+	h23._update_ghost_transform()
+	h23._start_drag(); h23._finish_drag()
+	assert(m23.is_wall_at(Vector2i(75, 75)), "Wall should be placed at (75, 75)")
+	var initial_wall_orient = m23.cell_data[Vector2i(75, 75)]["wall"]["orientation"]
+	assert(initial_wall_orient == 0, "Initial isolated wall should orient along X (axis 0)")
+
+	# Hover over placed wall with wall tool selected -> ghost rotates 90°
+	h23.hovered_cell = Vector2i(75, 75)
+	h23._update_ghost_transform()
+	assert(absf(gp23.preview_node.rotation.y - PI * 0.5) < 0.01, "Wall ghost preview must rotate 90° to Z")
+
+	# Click on placed wall -> rotates to orientation 1 (Z)
+	h23._start_drag(); h23._finish_drag()
+	var rotated_wall_orient = m23.cell_data[Vector2i(75, 75)]["wall"]["orientation"]
+	assert(rotated_wall_orient == 1, "Rotated isolated wall should orient along Z (axis 1)")
+	print("  - Isolated wall placement and 90° rotation between X and Z verified.")
+
+	# 7. 4-Way Cross Wall Exception (Cannot Rotate When Connected on All 4 Sides)
+	m23.set_wall(Vector2i(79, 80))
+	m23.set_wall(Vector2i(81, 80))
+	m23.set_wall(Vector2i(80, 79))
+	m23.set_wall(Vector2i(80, 81))
+	m23.set_wall(Vector2i(80, 80))
+
+	var center_conn = LevelEditorWallAutoTilerClass.get_wall_connections(Vector2i(80, 80), m23.is_wall_at)
+	assert(center_conn["count"] == 4, "Center wall at (80, 80) must have 4 connections")
+
+	h23.hovered_cell = Vector2i(80, 80)
+	var center_params = LevelEditorPlacementPolicyClass.get_effective_placement(Vector2i(80, 80), "wall", {"type": "modular_wall"}, m23, 0.0)
+	assert(center_params["is_exception"] == true, "4-way cross wall must be identified as exception")
+	assert(LevelEditorPlacementPolicyClass.is_rotation_suppressed(Vector2i(80, 80), "wall", {"type": "modular_wall"}, m23) == true, "Rotation must be suppressed for 4-way cross wall")
+	print("  - 4-Way cross wall exception verified: rotation suppressed when connected on all 4 sides.")
+
+	# 8. Extensible Custom Rule Exception Registry
+	var rule_called = [false]
+	LevelEditorPlacementPolicyClass.register_exception_rule("test_custom_freeze", func(cell, tool, data, model):
+		rule_called[0] = true
+		return cell == Vector2i(90, 90)
+	)
+	var check_res = LevelEditorPlacementPolicyClass.is_rotation_suppressed(Vector2i(90, 90), "prop", {"type": "chair"}, m23)
+	assert(check_res == true and rule_called[0] == true, "Custom registered rule must suppress rotation for cell (90, 90)")
+	LevelEditorPlacementPolicyClass.unregister_exception_rule("test_custom_freeze")
+	assert(LevelEditorPlacementPolicyClass.is_rotation_suppressed(Vector2i(90, 90), "prop", {"type": "chair"}, m23) == false, "Unregistered rule must no longer suppress rotation")
+	print("  - Extensible custom rule exception registry verified.")
+
+	t_game23.queue_free()
+	if FileAccess.file_exists(lvl_path23):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(lvl_path23))
+
+	print("  -> Passed! Full ghost preview, 90° rotation, duplicate purge, and extensible exception rules verified.")
+
 	print("\n=== ALL HERO QUEST TESTS PASSED SUCCESSFULLY! ===")
 	quit(0)
 
