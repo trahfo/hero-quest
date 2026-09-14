@@ -20,7 +20,7 @@ To maintain code quality, maintainability, and architectural clarity, we adopt t
 ### 1. Class Size & Complexity Budgets
 - **Target Size**: Standard GDScript classes should be under **250 lines**.
 - **Hard Ceiling**: No single GDScript file shall exceed **400 lines**.
-- When a class approaches or exceeds 400 lines, it is an architectural code smell indicating mixed responsibilities. It MUST be decomposed into focused collaborators.
+- When a class approaches or exceeds 400 lines, it is an architectural code smell indicating mixed responsibilities. It MUST be decomposed into focused collaborators. THIS INCLUDES TEST SUITS.
 
 ### 2. Component Pattern for World Interactions
 - Interactive objects (chests, anvils, altars, bells, doors, switches) must attach a dedicated component (`HeroQuestInteractable` or `Interactable3D`).

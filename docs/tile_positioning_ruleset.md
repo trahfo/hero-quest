@@ -683,5 +683,44 @@ Blocking furniture with a flat back (cupboards, drawers, bookshelves, weapon rac
   - **Room Name Label3D**: `font_size = 28`, `outline_size = 7`, `pixel_size = 0.0055`, `billboard = BaseMaterial3D.BILLBOARD_FIXED_Y` with high-contrast text and dark outline for clear legibility across all 4 camera rotation angles.
   - **Lifecycle**: Child of `overlay_root`; visible only during Room Editor mode and completely hidden/freed outside of room editing and during gameplay.
 
+---
 
+## 35. Tile Ghost Previews, 90° Hover Rotation, Single-Instance Replacement & Rule Exceptions
 
+### 35.1. Ghost Preview Display Rules
+- **Non-Floor Tiles**: Every placeable object (walls, doors/arches, windows, chests, furniture, graveyard props, decorations) displays an ~80% transparent 3D preview mesh (`LevelEditorGhostPreview`, `alpha <= 0.25`, unshaded) centered on the hovered grid cell.
+- **Floor Tiles Exception**: The floor tool (`tool_name == "floor"`) does **not** render a 3D ghost preview mesh. Floor selection relies entirely on the 2D grid cursor highlight.
+
+### 35.2. Orientation Parity (Ghost == Placed)
+- The transform (yaw orientation `rot_y`, axis, wall normal) of the ghost preview must match the exact transform of the placed entity.
+- All prop spawners (`LevelEditorCustomPropSpawner`, `CastleLevelPropSpawner`) must apply `node.rotation.y = rot_y` to their instantiated root nodes to guarantee 1:1 parity with the ghost preview.
+
+### 35.3. Same-Tile Hover Rotation (90° Clockwise Progression)
+- When hovering over an occupied grid cell with the **same tile tool** currently active:
+  - The ghost preview displays 90° rotated clockwise relative to the placed instance (`rot_y = placed_rot_y + PI * 0.5`).
+  - Arches/doors toggle their primary orientation axis (`axis = (placed_axis + 1) % 2`).
+  - Wall decors (torches, paintings) advance clockwise to the next orthogonal wall face.
+  - Isolated walls toggle between Straight X (`orientation = 0`) and Straight Z (`orientation = 1`).
+
+### 35.4. Single-Instance Replacement (Zero Duplicates Guarantee)
+- When clicking on an occupied tile to place a rotated instance:
+  - The model (`LevelEditorModel.spawn_custom_prop`, `LevelEditorModel.set_wall`) **must destroy and free all previous object nodes** at that cell (`_free_object_nodes_at_cell(cell, true)`).
+  - There must never be two instances of an object or overlapping duplicate meshes/colliders on the same cell.
+
+### 35.5. Extensible Placement Exception Architecture (`LevelEditorPlacementPolicy`)
+- **4-Way Cross Wall Exception**: A wall connected to neighboring walls on all 4 sides (`has_left and has_right and has_up and has_down`, `count == 4`) is a 4-way cross junction. Because a 4-way cross junction is omnidirectional and symmetrically connected on all 4 sides, it is registered as an exception that suppresses rotation.
+- **Custom Exception Registry**: Any future tile or architectural element requiring custom rotation inhibition or special transforms can be registered via `LevelEditorPlacementPolicy.register_exception_rule(rule_id, callable)` without altering tool handler or model code.
+
+---
+
+## 36. Editor Level Exit, Discard Lifecycle & Non-Destructive State Restoration
+
+### 36.1. Exact Restoration on Exit Without Saving
+- When exiting the Level Editor without saving (via the `[ESC]` key or the `❌ Discard & Exit [ESC]` UI button), the world geometry, grid state, interactive props, and room signs must be **non-destructively restored to the exact state when opened or saved the last time**.
+- Exiting without saving must never clear or delete existing level geometry or leave the world canvas empty.
+
+### 36.2. Restoration Flow
+1. **World Reload**: `CastleBuilder.load_from_level_file(active_file_path, true)` forcefully re-reads the JSON file from disk (or executes `init_new_level` if the session was an unsaved new level canvas), completely reconstructing original rooms, floors, walls, windows, portals, chests, and props.
+2. **Model State Flush**: `LevelEditorModel.discard_unsaved_changes()` flushes temporary node references, clears pending cell and prop modifications (`cell_data`, `erased_cells`, `erased_props`), and reloads the initial level metadata.
+3. **History Purge**: `LevelEditorHistory.clear()` purges all undo/redo history stacks from the discarded editing session, resetting UI undo/redo counts to `(0)`.
+4. **Room Overlays & Signs Sync**: `LevelEditorRoomManager.reset_state()` rebinds the overlay container, clears temporary overlay instances, and synchronizes room boundary overlays and 3D room placard signs with the restored level state.
