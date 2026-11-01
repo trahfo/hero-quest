@@ -304,9 +304,10 @@ func create_torch_on_stick(parent: Node3D, pos: Vector3, t_name: String = "Torch
 	timer.wait_time = 0.08
 	timer.autostart = true
 	timer.timeout.connect(func():
-		light.light_energy = 1.8 + randf_range(-0.35, 0.35)
+		if is_instance_valid(light) and light.visible:
+			light.light_energy = 1.8 + randf_range(-0.35, 0.35)
 	)
-	torch.add_child(timer)
+	light.add_child(timer)
 
 	parent.add_child(torch)
 	return torch

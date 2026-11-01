@@ -240,11 +240,13 @@ func create_chimney_fireplace(parent: Node3D, pos: Vector3, rot_y: float = 0.0) 
 	flicker_timer.wait_time = 0.06
 	flicker_timer.autostart = true
 	flicker_timer.timeout.connect(func():
-		fire_light.light_energy = 3.5 + randf_range(-0.7, 0.7)
-		var s = randf_range(0.85, 1.2)
-		flame_group.scale = Vector3(s, randf_range(0.8, 1.3), s)
+		if is_instance_valid(fire_light) and fire_light.visible:
+			fire_light.light_energy = 3.5 + randf_range(-0.7, 0.7)
+		if is_instance_valid(flame_group):
+			var s = randf_range(0.85, 1.2)
+			flame_group.scale = Vector3(s, randf_range(0.8, 1.3), s)
 	)
-	body.add_child(flicker_timer)
+	fire_light.add_child(flicker_timer)
 
 	_add_inspect(body, "Castle Chimney Fireplace")
 	parent.add_child(body)
