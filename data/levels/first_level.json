@@ -17055,13 +17055,13 @@
 				},
 				{
 					"cell": [
-						-9,
-						-8
+						-9.0,
+						-8.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": true,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17069,13 +17069,13 @@
 				},
 				{
 					"cell": [
-						-10,
-						-8
+						-10.0,
+						-8.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": false,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": true,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17083,13 +17083,13 @@
 				},
 				{
 					"cell": [
-						-9,
-						-9
+						-9.0,
+						-9.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": true,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17097,13 +17097,13 @@
 				},
 				{
 					"cell": [
-						-9,
-						-7
+						-9.0,
+						-7.0
 					],
 					"down": false,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": true,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17111,13 +17111,13 @@
 				},
 				{
 					"cell": [
-						-8,
-						-9
+						-8.0,
+						-9.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": true,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17125,13 +17125,13 @@
 				},
 				{
 					"cell": [
-						-8,
-						-7
+						-8.0,
+						-7.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": false,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17139,13 +17139,13 @@
 				},
 				{
 					"cell": [
-						-8,
-						-8
+						-8.0,
+						-8.0
 					],
 					"down": true,
 					"height": 4.5,
 					"left": true,
-					"orientation": 0,
+					"orientation": 0.0,
 					"right": false,
 					"rot_y": 0.0,
 					"type": "modular",
@@ -17575,8 +17575,94 @@
 				},
 				{
 					"cell": [
-						-16.0,
-						-13.0
+						7.0,
+						-11.0
+					],
+					"index": 1.0,
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "painting"
+				},
+				{
+					"cell": [
+						33.0,
+						5.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33.0,
+						6.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33.0,
+						7.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32.0,
+						5.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32.0,
+						4.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						33.0,
+						4.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32.0,
+						6.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						32.0,
+						7.0
+					],
+					"mat": "cloth_red",
+					"rot_y": 0.0,
+					"type": "carpet"
+				},
+				{
+					"cell": [
+						-8.0,
+						-8.0
 					],
 					"norm": [
 						1.0,
@@ -17585,6 +17671,62 @@
 					],
 					"rot_y": 1.5707963267949,
 					"type": "torch"
+				},
+				{
+					"cell": [
+						-8.0,
+						-6.0
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-8.0,
+						-4.0
+					],
+					"norm": [
+						1.0,
+						0.0,
+						0.0
+					],
+					"rot_y": 1.5707963267949,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-4.0,
+						-10.0
+					],
+					"pos": [
+						-8.0,
+						0.0,
+						-20.0
+					],
+					"rot_y": 0.0,
+					"type": "bookshelf"
+				},
+				{
+					"cell": [
+						-7.0,
+						-3.0
+					],
+					"rot_y": 3.14159265358979,
+					"type": "pew",
+					"with_back": false
+				},
+				{
+					"cell": [
+						-18.0,
+						-15.0
+					],
+					"rot_y": 0.0,
+					"type": "brazier"
 				},
 				{
 					"cell": [
@@ -17601,94 +17743,8 @@
 				},
 				{
 					"cell": [
-						7,
-						-11
-					],
-					"index": 1,
-					"norm": [
-						1.0,
-						0.0,
-						0.0
-					],
-					"rot_y": 1.5707963267949,
-					"type": "painting"
-				},
-				{
-					"cell": [
-						33,
-						5
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						33,
-						6
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						33,
-						7
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						32,
-						5
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						32,
-						4
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						33,
-						4
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						32,
-						6
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						32,
-						7
-					],
-					"mat": "cloth_red",
-					"rot_y": 0.0,
-					"type": "carpet"
-				},
-				{
-					"cell": [
-						-8,
-						-8
+						-16.0,
+						-13.0
 					],
 					"norm": [
 						1.0,
@@ -17700,8 +17756,34 @@
 				},
 				{
 					"cell": [
-						-8,
-						-6
+						-13.0,
+						-25.0
+					],
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"rot_y": 0.0,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-11.0,
+						-25.0
+					],
+					"norm": [
+						0.0,
+						0.0,
+						1.0
+					],
+					"rot_y": 0.0,
+					"type": "torch"
+				},
+				{
+					"cell": [
+						-7.0,
+						-12.0
 					],
 					"norm": [
 						1.0,
@@ -17713,38 +17795,16 @@
 				},
 				{
 					"cell": [
-						-8,
-						-4
-					],
-					"norm": [
-						1.0,
-						0.0,
-						0.0
-					],
-					"rot_y": 1.5707963267949,
-					"type": "torch"
-				},
-				{
-					"cell": [
-						-4,
-						-10
+						0,
+						-17
 					],
 					"pos": [
-						-8.0,
 						0.0,
-						-20.0
+						0.0,
+						-34.0
 					],
 					"rot_y": 0.0,
-					"type": "bookshelf"
-				},
-				{
-					"cell": [
-						-7,
-						-3
-					],
-					"rot_y": 3.14159265358979,
-					"type": "pew",
-					"with_back": false
+					"type": "bush"
 				}
 			],
 			"tiles": [
@@ -18351,16 +18411,6 @@
 				{
 					"cell": [
 						-18.0,
-						-15.0
-					],
-					"mat": "stone_alt",
-					"type": 1.0,
-					"walkable": true,
-					"zone": "North-West Watchtower"
-				},
-				{
-					"cell": [
-						-18.0,
 						-14.0
 					],
 					"mat": "stone_alt",
@@ -18447,6 +18497,16 @@
 					"type": 1.0,
 					"walkable": true,
 					"zone": "The Cloister Garden"
+				},
+				{
+					"cell": [
+						-18.0,
+						-15.0
+					],
+					"mat": "stone_alt",
+					"type": 1.0,
+					"walkable": true,
+					"zone": "Custom"
 				}
 			],
 			"torches": [],
