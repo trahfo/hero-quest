@@ -811,3 +811,14 @@ Doors in Hero Quest 3D are constructed procedurally via `CastleDoorBuilder` and 
 - Opening a door instantly opens sightlines, allowing vision and light sources in the revealed chamber to illuminate.
 
 
+
+## 40. Door-Frame Z-Fighting Prevention & Camera Settling
+
+### 40.1. No Coplanar Overlapping Faces in Door Assemblies
+- Any two surfaces of a door assembly (jambs, quoin trim, rebate stops, lintel, top trim, guides, leaves, hardware) that face the same direction and overlap must be at least **5 mm apart**, unless a third solid buries one of them. Floor-contact faces at `y = 0` are exempt.
+- Applied offsets: quoin trim is 1 cm proud of the jamb inner face; top-trim underside sits 1 cm below the lintel underside; rebate stops sit at `z = 0.085` (5 mm clear of the leaf) and are 7 cm shorter than the jamb; leaves stop `0.025 m` below the lintel plane; 2-tile leaves are `1.74 m` wide (1 cm centre seam); portcullis guides are inset `0.07 m`.
+- Enforced by `scripts/tests/test_suite_flicker_and_occlusion.gd` (TEST 30).
+
+### 40.2. Camera Must Settle
+- Camera follow, zoom and yaw use `HeroQuestCameraSmoothing` (exponential damping that snaps to the target). A `lerp(a, b, k * delta)` never arrives, so the camera creeps for 1-2 s after the hero stops and makes any near-coplanar surface shimmer.
+- Camera `near = 2.0`, `far = 150.0` keeps depth precision high; do not widen without need.

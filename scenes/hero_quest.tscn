@@ -48,6 +48,8 @@ script = ExtResource("2_builder")
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 24)
 fov = 42.0
+near = 2.0
+far = 150.0
 
 [node name="HeroQuestAudio" type="Node" parent="."]
 script = ExtResource("3_audio")

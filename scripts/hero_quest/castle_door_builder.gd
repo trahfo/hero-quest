@@ -9,6 +9,8 @@ const CastleMaterials = preload("res://scripts/hero_quest/castle_materials.gd")
 const TILE_SIZE: float = 2.0
 const WALL_THICKNESS: float = 0.9
 const WALL_HEIGHT: float = 4.5
+# 2-tile leaves are 1.74m wide: 1cm seam in the centre, 5mm hinge gap (covered by the rebate stop)
+const LEAF_TOP_CLEARANCE: float = 0.025 # leaf top never shares the plane of jamb tops / lintel underside
 
 var materials: CastleMaterials
 
@@ -56,15 +58,15 @@ func build_wooden_door_2tile(parent: Node3D, axis: int) -> Dictionary:
 	right_pivot.position = right_pos
 	root.add_child(right_pivot)
 
-	var left_mesh = _create_arched_wood_leaf(1.78, 3.30, 0.10, axis == 0, true, false)
+	var left_mesh = _create_arched_wood_leaf(1.74, 3.30, 0.10, axis == 0, true, false)
 	left_mesh.position = Vector3(0.875, 0, 0) if axis == 0 else Vector3(0, 0, 0.875)
 	left_pivot.add_child(left_mesh)
-	_add_door_hardware(left_mesh, 1.78, 3.30, axis == 0, true)
+	_add_door_hardware(left_mesh, 1.74, 3.30, axis == 0, true)
 
-	var right_mesh = _create_arched_wood_leaf(1.78, 3.30, 0.10, axis == 0, true, true)
+	var right_mesh = _create_arched_wood_leaf(1.74, 3.30, 0.10, axis == 0, true, true)
 	right_mesh.position = Vector3(-0.875, 0, 0) if axis == 0 else Vector3(0, 0, -0.875)
 	right_pivot.add_child(right_mesh)
-	_add_door_hardware(right_mesh, 1.78, 3.30, axis == 0, false)
+	_add_door_hardware(right_mesh, 1.74, 3.30, axis == 0, false)
 
 	return {"root": root, "pivots": [left_pivot, right_pivot], "type": "wooden_door_2tile", "axis": axis, "is_slide": false}
 
@@ -109,15 +111,15 @@ func build_iron_door_2tile(parent: Node3D, axis: int) -> Dictionary:
 	right_pivot.position = right_pos
 	root.add_child(right_pivot)
 
-	var left_mesh = _create_iron_leaf(1.78, 3.20, 0.09, axis == 0)
+	var left_mesh = _create_iron_leaf(1.74, 3.20, 0.09, axis == 0)
 	left_mesh.position = Vector3(0.875, 0, 0) if axis == 0 else Vector3(0, 0, 0.875)
 	left_pivot.add_child(left_mesh)
-	_add_iron_hardware(left_mesh, 1.78, 3.20, axis == 0, true)
+	_add_iron_hardware(left_mesh, 1.74, 3.20, axis == 0, true)
 
-	var right_mesh = _create_iron_leaf(1.78, 3.20, 0.09, axis == 0)
+	var right_mesh = _create_iron_leaf(1.74, 3.20, 0.09, axis == 0)
 	right_mesh.position = Vector3(-0.875, 0, 0) if axis == 0 else Vector3(0, 0, -0.875)
 	right_pivot.add_child(right_mesh)
-	_add_iron_hardware(right_mesh, 1.78, 3.20, axis == 0, false)
+	_add_iron_hardware(right_mesh, 1.74, 3.20, axis == 0, false)
 
 	return {"root": root, "pivots": [left_pivot, right_pivot], "type": "iron_door_2tile", "axis": axis, "is_slide": false}
 
@@ -191,30 +193,33 @@ func _build_light_tight_frame(parent: Node3D, span: float, door_h: float, axis: 
 		# Stone Quoin Trim Detail
 		var trim = MeshInstance3D.new()
 		var t_box = BoxMesh.new()
-		t_box.size = Vector3(0.06, door_h, WALL_THICKNESS + 0.04) if axis == 0 else Vector3(WALL_THICKNESS + 0.04, door_h, 0.06)
+		var trim_h = door_h - 0.03 # 1.5cm clear of floor/lintel planes (no coplanar overlap)
+		t_box.size = Vector3(0.06, trim_h, WALL_THICKNESS + 0.04) if axis == 0 else Vector3(WALL_THICKNESS + 0.04, trim_h, 0.06)
 		t_box.material = materials.mat_wall_trim
 		trim.mesh = t_box
-		var trim_x = side * (half_w - jamb_w + 0.03)
+		var trim_x = side * (half_w - jamb_w + 0.02) # inner face 1cm proud of the jamb inner face
 		trim.position = Vector3(trim_x, door_h * 0.5, 0) if axis == 0 else Vector3(0, door_h * 0.5, trim_x)
 		parent.add_child(trim)
 
 		# Rebate Stop Lip (blocks light around vertical edges, sits cleanly behind leaf)
 		var stop = MeshInstance3D.new()
 		var s_box = BoxMesh.new()
-		s_box.size = Vector3(0.05, door_h, 0.06) if axis == 0 else Vector3(0.06, door_h, 0.05)
+		var stop_h = door_h - 0.07
+		s_box.size = Vector3(0.05, stop_h, 0.06) if axis == 0 else Vector3(0.06, stop_h, 0.05)
 		s_box.material = materials.mat_wall_trim
 		stop.mesh = s_box
 		var stop_x = side * (half_w - jamb_w - 0.01)
-		stop.position = Vector3(stop_x, door_h * 0.5, 0.08) if axis == 0 else Vector3(0.08, door_h * 0.5, stop_x)
+		# z = 0.085 keeps the stop's face 5mm clear of the leaf surface at 0.05
+		stop.position = Vector3(stop_x, door_h * 0.5, 0.085) if axis == 0 else Vector3(0.085, door_h * 0.5, stop_x)
 		parent.add_child(stop)
 
 		if with_guide:
 			var guide = MeshInstance3D.new()
 			var g_box = BoxMesh.new()
-			g_box.size = Vector3(0.12, door_h, 0.22) if axis == 0 else Vector3(0.22, door_h, 0.12)
+			g_box.size = Vector3(0.12, door_h - 0.03, 0.22) if axis == 0 else Vector3(0.22, door_h - 0.03, 0.12)
 			g_box.material = materials.mat_iron
 			guide.mesh = g_box
-			var gx = side * (half_w - jamb_w + 0.04)
+			var gx = side * (half_w - jamb_w + 0.07) # inner face clear of trim/jamb/bar planes
 			guide.position = Vector3(gx, door_h * 0.5, 0) if axis == 0 else Vector3(0, door_h * 0.5, gx)
 			parent.add_child(guide)
 
@@ -233,7 +238,7 @@ func _build_light_tight_frame(parent: Node3D, span: float, door_h: float, axis: 
 	tt_box.size = Vector3(span + 0.04, 0.22, WALL_THICKNESS + 0.06) if axis == 0 else Vector3(WALL_THICKNESS + 0.06, 0.22, span + 0.04)
 	tt_box.material = materials.mat_wall_trim
 	top_trim.mesh = tt_box
-	top_trim.position = Vector3(0, door_h + 0.11, 0)
+	top_trim.position = Vector3(0, door_h + 0.10, 0) # underside 1cm below the lintel underside (never coplanar)
 	parent.add_child(top_trim)
 
 	if is_arch:
@@ -262,6 +267,7 @@ func _build_light_tight_frame(parent: Node3D, span: float, door_h: float, axis: 
 
 func _create_arched_wood_leaf(w: float, h: float, thick: float, along_x: bool, is_half_arch: bool = false, is_right: bool = false) -> Node3D:
 	var node = Node3D.new()
+	h -= LEAF_TOP_CLEARANCE
 	var plank_count = 5
 	var pw = w / float(plank_count)
 	for i in range(plank_count):
@@ -284,6 +290,7 @@ func _create_arched_wood_leaf(w: float, h: float, thick: float, along_x: bool, i
 
 func _create_iron_leaf(w: float, h: float, thick: float, along_x: bool) -> Node3D:
 	var node = Node3D.new()
+	h -= LEAF_TOP_CLEARANCE
 	var plate = MeshInstance3D.new()
 	var p_mesh = BoxMesh.new()
 	p_mesh.size = Vector3(w, h, thick) if along_x else Vector3(thick, h, w)

@@ -9,6 +9,7 @@ extends Node3D
 @onready var audio_manager: Node = $HeroQuestAudio
 
 const HeroQuestCameraOcclusion = preload("res://scripts/hero_quest/hero_quest_camera_occlusion.gd")
+const CameraSmoothing = preload("res://scripts/hero_quest/hero_quest_camera_smoothing.gd")
 const HeroQuestVisionManager = preload("res://scripts/hero_quest/vision/hero_quest_vision_manager.gd")
 const LevelEditorClass = preload("res://scripts/hero_quest/editor/level_editor.gd")
 const MiniGameManagerClass = preload("res://scripts/hero_quest/mini_game_manager.gd")
@@ -141,17 +142,18 @@ func _process(delta: float) -> void:
 	elif player:
 		# Smooth camera follow
 		var target_pos = player.global_position
-		camera_pivot.global_position = camera_pivot.global_position.lerp(target_pos, 8.0 * delta)
+		camera_pivot.global_position = CameraSmoothing.damp_vec3(camera_pivot.global_position, target_pos, 8.0, delta)
 
 	# Smooth zoom
-	cam_distance = lerpf(cam_distance, target_zoom, 10.0 * delta)
+	cam_distance = CameraSmoothing.damp_float(cam_distance, target_zoom, 10.0, delta)
 	_update_camera_zoom()
 
 	# Smooth camera rotation around target
 	var current_yaw = deg_to_rad(camera_pivot.rotation_degrees.y)
 	var target_yaw_rad = deg_to_rad(target_cam_yaw)
-	var new_yaw_rad = lerp_angle(current_yaw, target_yaw_rad, 10.0 * delta)
-	camera_pivot.rotation_degrees.y = rad_to_deg(new_yaw_rad)
+	var new_yaw_rad = CameraSmoothing.damp_angle(current_yaw, target_yaw_rad, 10.0, delta)
+	if absf(angle_difference(current_yaw, target_yaw_rad)) > 0.0001:
+		camera_pivot.rotation_degrees.y = rad_to_deg(new_yaw_rad)
 
 	# Check current zone
 	if not (level_editor and level_editor.is_active):
