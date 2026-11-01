@@ -28,7 +28,14 @@ Guide for player progression, items, loot, and interaction systems:
 - **Component Interaction Pattern**: `HeroQuestInteractable` architecture for uniform object interaction.
 - **Start Menu & Level Browser**: Paginated level discovery and draft-safe level canvas generation.
 
-### 4. [Tile & Prop Positioning Ruleset](../tile_positioning_ruleset.md)
+### 4. [Line of Sight, Exploration & Fog of War](vision_and_fog_of_war.md)
+Reference for dynamic Line of Sight, dungeon exploration memory, and lighting:
+- **3-Tier Visibility**: `UNEXPLORED` pitch black, `EXPLORED` subdued dungeon memory, `VISIBLE` direct sightline illumination.
+- **Light Amplification**: Torch and brazier sight boost (`8.0` tiles) over dark pitch-black rooms (`4.5` tiles).
+- **Door Occlusion**: Closed doors block ray penetration; opening doors instantly reveals room interiors.
+- **Controls & Editor**: `[F]` toggle Fog of War on/off, automatic full-visibility bypass in Level Editor (`[TAB]`).
+
+### 5. [Tile & Prop Positioning Ruleset](../tile_positioning_ruleset.md)
 The geometric and spatial reference for architectural builders and procedural systems:
 - Standard metrics (`TILE_SIZE = 2.0m`, `WALL_THICKNESS = 0.9m`, `WALL_HEIGHT = 4.5m`).
 - Modular wall arm connectivity and outer corner ashlar quoins.
@@ -42,3 +49,4 @@ The geometric and spatial reference for architectural builders and procedural sy
 
 For autonomous level creation and procedural design:
 - **[`level-architect` Skill](../../.agents/skills/level-architect/SKILL.md)**: A dedicated agent skill that leverages these rulesets to prompt and build entire castle levels, generate interconnected rooms, and construct valid JSON level data.
+

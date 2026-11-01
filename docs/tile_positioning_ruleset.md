@@ -792,4 +792,22 @@ Doors in Hero Quest 3D are constructed procedurally via `CastleDoorBuilder` and 
   - **First Right-Click**: Removes the attached wall decoration only (`erased_props[cell] = true`), leaving the solid wall intact.
   - **Second Right-Click**: Removes the wall structure itself, reverting the cell back to a standard walkable floor tile.
 
+---
+
+## 39. Line of Sight (LoS), Fog of War & Light Source Amplification
+
+### 39.1. 3-Tier Exploration State Machine
+- **`UNEXPLORED` (0)**: Shrouded in pitch-black dungeon darkness. Mesh rendering is shrouded and room `OmniLight3D` nodes are extinguished to eliminate wall light bleeding.
+- **`EXPLORED` (1)**: Discovered architecture remains visible in a dimmed/subdued memory state (~22% brightness with cool ambient tint).
+- **`VISIBLE` (2)**: Active line of sight directly illuminated by the hero's lantern and active in-view light sources.
+
+### 39.2. Light Source Sight Amplification
+- In pitch darkness (unlit corridors/cellars), base hero vision is **`4.5` tiles (`dark_sight_radius`)**.
+- When the hero establishes Line of Sight to any active light source (wall torches, braziers, candelabras, chandeliers, fireplaces), the light source projects its own illumination cone with a radius of **`8.0` tiles (`torch_sight_radius`)**, amplifying vision across the entire illuminated chamber.
+
+### 39.3. Barrier Occlusion & Door Sightlines
+- Modular walls (`type == WALL` / `6`), window walls, and blocking pillars occlude vision rays passing behind them.
+- Closed doors (`HeroQuestDoor.is_open == false`) completely seal sightlines into adjacent rooms.
+- Opening a door instantly opens sightlines, allowing vision and light sources in the revealed chamber to illuminate.
+
 
