@@ -48,6 +48,16 @@ static func subscribe_event(event_name: String, callback: Callable) -> void:
 		_event_listeners[event_name] = []
 	_event_listeners[event_name].append(callback)
 
+## Disconnect a previously subscribed callback
+static func unsubscribe_event(event_name: String, callback: Callable) -> void:
+	if _event_listeners.has(event_name):
+		_event_listeners[event_name].erase(callback)
+
+## Drop every listener. Callers holding script lambdas must do this before shutdown:
+## static listener storage outlives the script engine and aborts Godot on exit.
+static func clear_event_listeners() -> void:
+	_event_listeners.clear()
+
 ## Trigger an event across all subscribers
 static func trigger_event(event_name: String, event_data: Dictionary = {}) -> void:
 	if _event_listeners.has(event_name):

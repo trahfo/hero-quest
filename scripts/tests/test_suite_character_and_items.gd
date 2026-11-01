@@ -139,6 +139,7 @@ static func run(tree: SceneTree) -> void:
 	MiniGameManager.subscribe_event("chest_opened", func(data): event_received.append(data))
 	MiniGameManager.trigger_event("chest_opened", {"chest_id": "yard_chest", "mini_game": "pacman"})
 	assert(event_received.size() > 0 and event_received[0].get("mini_game") == "pacman")
+	MiniGameManager.clear_event_listeners() # static lambda listeners must not outlive the test (abort on exit)
 
 	var dummy_tile = Vector2i(4, 14)
 	MiniGameManager.saved_player_tile = dummy_tile
