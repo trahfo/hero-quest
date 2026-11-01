@@ -45,15 +45,33 @@ static func compute_fov(origin: Vector2i, radius: float, is_blocking_fn: Callabl
 
 	return visible_map
 
+## Cache key for a (origin, radius, falloff) source; stable across frames for static lights.
+static func fov_cache_key(origin: Vector2i, radius: float, falloff: float) -> Vector3i:
+	return Vector3i(origin.x, origin.y, roundi(radius * 10.0) * 1000 + roundi(falloff * 10.0))
+
+## Cached compute_fov. The caller owns `cache` and must clear it when blocking cells change.
+static func compute_fov_cached(cache: Dictionary, origin: Vector2i, radius: float, is_blocking_fn: Callable, falloff_tiles: float = 4.0) -> Dictionary:
+	var key = fov_cache_key(origin, radius, falloff_tiles)
+	if cache.has(key):
+		return cache[key]
+	var fov = compute_fov(origin, radius, is_blocking_fn, falloff_tiles)
+	cache[key] = fov
+	return fov
+
 ## Computes composite visibility from multiple light and sight sources.
-static func compute_multi_source_fov(sources: Array, is_blocking_fn: Callable) -> Dictionary:
+## Pass an optional `cache` Dictionary to reuse per-source FoVs between calls.
+static func compute_multi_source_fov(sources: Array, is_blocking_fn: Callable, cache: Variant = null) -> Dictionary:
 	var composite: Dictionary = {}
 	for src in sources:
 		var origin: Vector2i = src.get("origin", Vector2i.ZERO)
 		var radius: float = float(src.get("radius", 5.5))
 		var mult: float = float(src.get("intensity", 1.0))
 		var falloff: float = float(src.get("falloff_tiles", 4.0))
-		var fov = compute_fov(origin, radius, is_blocking_fn, falloff)
+		var fov: Dictionary
+		if cache is Dictionary:
+			fov = compute_fov_cached(cache, origin, radius, is_blocking_fn, falloff)
+		else:
+			fov = compute_fov(origin, radius, is_blocking_fn, falloff)
 
 		for cell in fov.keys():
 			var val = fov[cell] * mult

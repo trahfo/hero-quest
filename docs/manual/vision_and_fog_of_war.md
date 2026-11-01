@@ -29,7 +29,7 @@ To produce an intimate, atmospheric dungeon crawler feel without seeing overly f
 
 ### 2.3. Differential Real-Time Performance
 - **O(1) Differential Stamping**: Only touches the ~30 active cells that changed, completely eliminating full-texture clearing loops.
-- **Position Dirty Checking**: Zero CPU raycasting or texture uploads while the hero is stationary.
+- **Cell Dirty Checking**: Vision is cell-based, so it is recomputed only when the hero enters a new grid cell (or on a door/fog/editor change) — never per frame, never for sub-tile movement.
 
 
 
@@ -56,9 +56,34 @@ Following [ADR 0001](../adr/0001-gdscript-modularity-and-class-size-limits.md), 
    - State coordinator tracking `explored_cells` and `visible_cells`.
    - Discovers dungeon `OmniLight3D` nodes and listens to `HeroQuestDoor.door_state_changed`.
    - Manages dynamic light activation and triggers FoW updates.
+   - Delegates light state to [`HeroQuestLightBudget`](../../scripts/hero_quest/vision/hero_quest_light_budget.gd).
 3. **[`HeroQuestFogRenderer`](../../scripts/hero_quest/vision/hero_quest_fog_renderer.gd)** & **[`fog_of_war.gdshader`](../../shaders/fog_of_war.gdshader)**:
-   - Generates a dynamic 2D FoW texture (`R` = active sight, `G` = explored memory).
+   - Generates a dynamic 2D FoW texture (`R` = active sight, `G` = explored memory), sized to the level's grid bounds with **1 texel per grid cell**; bilinear sampling feathers the cell borders.
    - Renders a screen-space depth-reconstructing spatial post-processing shroud with bilinear smooth gradients.
+
+---
+
+## 4b. Performance Budget
+
+Measured on `first_level.json` (1624 tiles, ~8300 meshes, 86 omni lights), headless:
+
+| Metric | Before | After |
+| --- | --- | --- |
+| Vision work while walking (200 frames) | ~447 ms | ~2.7 ms |
+| Forced vision update | ~1.9 ms | ~0.18 ms |
+| Fog texture stamping | 7x7 `get_pixel`/`set_pixel` per cell | 1 texel per cell, upload only when dirty |
+| Shadow-casting lights lit at once | up to all visible torches | nearest 4 |
+| Relief bricks in shadow passes | all (~2000 casters) | none |
+
+Rules that keep it cheap (do not regress them):
+1. **Recompute on cell change only** — `update_vision()` returns immediately while the hero stays in the same grid cell.
+2. **FoV cache** — per-source FoV is cached by `(cell, radius, falloff)` in `_fov_cache` (`HeroQuestLosCalculator.compute_fov_cached`), and `is_cell_blocking` is memoised. Both caches are cleared by `invalidate_caches()` on door state changes and `refresh_scene_entities()` (editor/fog toggles). Anything that changes blocking cells must call it.
+3. **Light range test first** — lights outside the hero's `dark_sight_radius + 1` box are never ray-traced.
+4. **Shadow budget** — `HeroQuestLightBudget.apply_shadow_budget` keeps `shadow_enabled` only on the `MAX_SHADOW_LIGHTS` (4) nearest active lights.
+5. **Idle lights are free** — hidden lights pause their flicker `Timer`; `visible` is only written when it actually changes.
+6. **Small relief meshes never cast shadows** (`CastleBrickScatterer`).
+
+Tests: `scripts/tests/test_suite_vision_performance.gd`.
 
 ---
 

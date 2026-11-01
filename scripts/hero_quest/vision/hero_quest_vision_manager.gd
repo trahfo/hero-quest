@@ -5,6 +5,7 @@ extends Node
 ## dynamic light activation, and Fog of War rendering.
 
 const HeroQuestLosCalculator = preload("res://scripts/hero_quest/vision/hero_quest_los_calculator.gd")
+const HeroQuestLightBudget = preload("res://scripts/hero_quest/vision/hero_quest_light_budget.gd")
 const HeroQuestFogRenderer = preload("res://scripts/hero_quest/vision/hero_quest_fog_renderer.gd")
 const HeroQuestDoor = preload("res://scripts/hero_quest/hero_quest_door.gd")
 
@@ -27,7 +28,8 @@ var registered_lights: Array[Dictionary] = []
 var registered_doors: Array[HeroQuestDoor] = []
 
 var is_fog_enabled: bool = true
-var _last_player_pos: Vector3 = Vector3(99999, 99999, 99999)
+var _fov_cache: Dictionary = {}    # Vector3i -> Dictionary (per-source FoV, cleared on door/grid change)
+var _block_cache: Dictionary = {}  # Vector2i -> bool
 var _last_player_tile: Vector2i = Vector2i(-9999, -9999)
 
 func setup(p_builder: Node3D, p_player: Node3D, p_camera: Camera3D) -> void:
@@ -45,7 +47,12 @@ func setup(p_builder: Node3D, p_player: Node3D, p_camera: Camera3D) -> void:
 	refresh_scene_entities()
 	update_vision(true)
 
+func invalidate_caches() -> void:
+	_fov_cache.clear()
+	_block_cache.clear()
+
 func refresh_scene_entities() -> void:
+	invalidate_caches()
 	registered_lights.clear()
 	registered_doors.clear()
 
@@ -81,9 +88,17 @@ func refresh_scene_entities() -> void:
 				door.door_state_changed.connect(_on_door_state_changed)
 
 func _on_door_state_changed(_open: bool, _locked: bool) -> void:
+	invalidate_caches()
 	update_vision(true)
 
 func is_cell_blocking(cell: Vector2i) -> bool:
+	if _block_cache.has(cell):
+		return _block_cache[cell]
+	var blocked = _compute_blocking(cell)
+	_block_cache[cell] = blocked
+	return blocked
+
+func _compute_blocking(cell: Vector2i) -> bool:
 	if not builder or not is_instance_valid(builder) or not ("grid" in builder) or not builder.grid:
 		return false
 	if not builder.grid.has(cell):
@@ -106,27 +121,29 @@ func is_cell_blocking(cell: Vector2i) -> bool:
 
 	return false
 
+## Recomputes only when the hero enters a new grid cell (vision is cell-based, so sub-tile
+## movement can never change the result), or when forced (door/fog/editor change).
 func update_vision(force: bool = false) -> void:
 	if not builder or not player or not is_instance_valid(player):
 		return
 
 	var p_pos = player.global_position
-	# Fast skip if player hasn't moved at least 0.15m and not forced
-	if not force and p_pos.distance_squared_to(_last_player_pos) < 0.02 and not player.is_moving:
+	var p_cell = builder.world_to_grid(p_pos)
+	if not force and p_cell == _last_player_tile:
 		return
 
-	_last_player_pos = p_pos
-	var p_cell = builder.world_to_grid(p_pos)
 	_last_player_tile = p_cell
 	var is_blocking = Callable(self, "is_cell_blocking")
 
-	# 1. Base Line of Sight from Hero with gentle 3.8-tile soft falloff
-	var hero_fov = HeroQuestLosCalculator.compute_fov(p_cell, dark_sight_radius, is_blocking, falloff_tiles)
+	# 1. Base Line of Sight from Hero with gentle 3.8-tile soft falloff (cached, shared with step 3)
+	var hero_fov = HeroQuestLosCalculator.compute_fov_cached(_fov_cache, p_cell, dark_sight_radius, is_blocking, falloff_tiles)
 
 	# 2. Amplify Line of Sight from nearby illuminated light sources
 	var active_sources: Array[Dictionary] = [
 		{ "origin": p_cell, "radius": dark_sight_radius, "intensity": 1.0, "falloff_tiles": falloff_tiles }
 	]
+	var near_cells = ceili(dark_sight_radius) + 1
+	var lit_nodes: Array = []
 
 	for light_data in registered_lights:
 		var light_node: OmniLight3D = light_data.get("node", null)
@@ -134,36 +151,32 @@ func update_vision(force: bool = false) -> void:
 			continue
 
 		var l_cell: Vector2i = light_data["cell"]
-		var l_rad: float = light_data["radius"]
 		var l_energy: float = light_data["energy"]
 
-		# Quick bounding check before expensive raycast: distance within (dark_sight + 1)
-		var cell_dx = absi(l_cell.x - p_cell.x)
-		var cell_dz = absi(l_cell.y - p_cell.y)
-		var is_nearby = (cell_dx <= ceili(dark_sight_radius) + 1) and (cell_dz <= ceili(dark_sight_radius) + 1)
+		if not is_fog_enabled:
+			HeroQuestLightBudget.set_light_active(light_node, true, l_energy)
+			lit_nodes.append(light_node)
+			continue
 
-		# Light activates if it is inside the hero's field of view or clear LoS
+		# Cheap bounding box test first: lights outside it are never even ray-traced
 		var is_light_visible = false
-		if is_nearby:
+		if absi(l_cell.x - p_cell.x) <= near_cells and absi(l_cell.y - p_cell.y) <= near_cells:
 			is_light_visible = hero_fov.has(l_cell) or HeroQuestLosCalculator.has_clear_los(p_cell, l_cell, is_blocking)
 
-		if is_light_visible and is_fog_enabled:
-			light_node.visible = true
-			light_node.light_energy = l_energy
+		HeroQuestLightBudget.set_light_active(light_node, is_light_visible, l_energy)
+		if is_light_visible:
+			lit_nodes.append(light_node)
 			active_sources.append({
 				"origin": l_cell,
-				"radius": l_rad,
+				"radius": light_data["radius"],
 				"intensity": 1.0,
 				"falloff_tiles": 4.8
 			})
-		elif is_fog_enabled:
-			light_node.visible = false
-		else:
-			light_node.visible = true
-			light_node.light_energy = l_energy
 
-	# 3. Compute Composite Visibility Map with smooth gradients
-	visible_cells = HeroQuestLosCalculator.compute_multi_source_fov(active_sources, is_blocking)
+	HeroQuestLightBudget.apply_shadow_budget(lit_nodes, p_pos)
+
+	# 3. Compute Composite Visibility Map with smooth gradients (static light FoVs come from cache)
+	visible_cells = HeroQuestLosCalculator.compute_multi_source_fov(active_sources, is_blocking, _fov_cache)
 
 	# 4. Update Explored History
 	for cell in visible_cells.keys():
@@ -186,14 +199,7 @@ func set_fog_enabled(enabled: bool) -> void:
 	if builder and "grid" in builder and fog_renderer:
 		fog_renderer.update_bounds_from_grid(builder.grid.keys(), 2.0)
 
-	for light_data in registered_lights:
-		var light_node: OmniLight3D = light_data.get("node", null)
-		if is_instance_valid(light_node):
-			light_node.visible = true
-			light_node.light_energy = light_data.get("energy", 1.0)
-
-	if is_fog_enabled:
-		update_vision(true)
+	update_vision(true)
 
 func toggle_fog() -> void:
 	set_fog_enabled(not is_fog_enabled)
@@ -206,8 +212,10 @@ func reveal_all() -> void:
 		visible_cells[c] = 1.0
 	if fog_renderer:
 		fog_renderer.reveal_all()
+	var all_nodes: Array = []
 	for light_data in registered_lights:
 		var light_node: OmniLight3D = light_data.get("node", null)
 		if is_instance_valid(light_node):
-			light_node.visible = true
-			light_node.light_energy = light_data.get("energy", 1.0)
+			HeroQuestLightBudget.set_light_active(light_node, true, light_data.get("energy", 1.0))
+			all_nodes.append(light_node)
+	HeroQuestLightBudget.apply_shadow_budget(all_nodes, player.global_position if player else Vector3.ZERO)

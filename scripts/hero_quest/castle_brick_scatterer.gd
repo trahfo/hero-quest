@@ -85,6 +85,8 @@ func _instantiate_brick(
 	mesh.size = size
 	mesh.material = materials.mat_wall_trim
 	inst.mesh = mesh
+	# 6cm relief stones are invisible in shadow maps; skipping them removes thousands of shadow-pass draws
+	inst.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 	# Embed 0.025m inside the wall, protrude (depth - 0.025m) outside the wall.
 	# With depth ~ 0.06m: back face is at wall_surface - 0.025m, front face at wall_surface + 0.035m.

@@ -11,18 +11,22 @@ var shader_mat: ShaderMaterial
 var fow_image: Image
 var fow_texture: ImageTexture
 
-var texture_width: int = 128
-var texture_height: int = 128
+# 1 texel == 1 grid cell. Bilinear sampling in the shader feathers cell borders.
+var texture_width: int = 64
+var texture_height: int = 64
+var tile_size: float = 2.0
+var min_cell: Vector2i = Vector2i(-32, -32)
 
-var world_min: Vector2 = Vector2(-40.0, -40.0)
-var world_max: Vector2 = Vector2(40.0, 40.0)
-var world_size: Vector2 = Vector2(80.0, 80.0)
+var world_min: Vector2 = Vector2(-65.0, -65.0)
+var world_max: Vector2 = Vector2(65.0, 65.0)
+var world_size: Vector2 = Vector2(130.0, 130.0)
 
 var is_fog_enabled: bool = true
 
 # Differential tracking to avoid full image clearing loops
 var prev_visible_cells: Array[Vector2i] = []
 var stamped_explored: Dictionary = {}
+var _dirty: bool = false
 
 func setup(camera: Camera3D) -> void:
 	_init_shader_quad(camera)
@@ -61,13 +65,16 @@ func _init_texture() -> void:
 
 	stamped_explored.clear()
 	prev_visible_cells.clear()
+	_dirty = false
 
 	if shader_mat:
 		shader_mat.set_shader_parameter("fow_texture", fow_texture)
 		shader_mat.set_shader_parameter("grid_origin", world_min)
 		shader_mat.set_shader_parameter("grid_size", world_size)
 
-func update_bounds_from_grid(grid_cells: Array, tile_size: float = 2.0) -> void:
+## Sizes the texture to the grid bounds (+ margin). Rebuilds only when the bounds change;
+## stamped state is re-applied from the explored/visible sets on the next update_fog_map().
+func update_bounds_from_grid(grid_cells: Array, p_tile_size: float = 2.0) -> void:
 	if grid_cells.is_empty():
 		return
 
@@ -82,79 +89,72 @@ func update_bounds_from_grid(grid_cells: Array, tile_size: float = 2.0) -> void:
 			max_c.y = maxi(max_c.y, c.y)
 
 	var margin_tiles = 4
-	world_min = Vector2((min_c.x - margin_tiles) * tile_size, (min_c.y - margin_tiles) * tile_size)
-	world_max = Vector2((max_c.x + margin_tiles) * tile_size, (max_c.y + margin_tiles) * tile_size)
-	world_size = world_max - world_min
+	var new_min = Vector2i(min_c.x - margin_tiles, min_c.y - margin_tiles)
+	var new_w = max_c.x - min_c.x + 1 + margin_tiles * 2
+	var new_h = max_c.y - min_c.y + 1 + margin_tiles * 2
+	if new_min == min_cell and new_w == texture_width and new_h == texture_height and is_equal_approx(p_tile_size, tile_size):
+		return
 
-	if shader_mat:
-		shader_mat.set_shader_parameter("grid_origin", world_min)
-		shader_mat.set_shader_parameter("grid_size", world_size)
+	tile_size = p_tile_size
+	min_cell = new_min
+	texture_width = new_w
+	texture_height = new_h
+	# Texel i covers world [(min_cell + i - 0.5) * tile, (min_cell + i + 0.5) * tile]
+	world_min = (Vector2(min_cell) - Vector2(0.5, 0.5)) * tile_size
+	world_size = Vector2(texture_width, texture_height) * tile_size
+	world_max = world_min + world_size
+	_init_texture()
 
-## Differential update: Only touches the few dozen cells that actually changed
-func update_fog_map(visible_cells: Dictionary, explored_cells: Dictionary, tile_size: float = 2.0) -> void:
+## World XZ -> texel of the grid cell containing it (used by tests and tools).
+func cell_to_pixel(cell: Vector2i) -> Vector2i:
+	return cell - min_cell
+
+func _in_bounds(px: Vector2i) -> bool:
+	return px.x >= 0 and px.x < texture_width and px.y >= 0 and px.y < texture_height
+
+## Differential update: only touches cells that changed; uploads once, only when dirty.
+func update_fog_map(visible_cells: Dictionary, explored_cells: Dictionary, _tile_size: float = 2.0) -> void:
 	if not fow_image:
 		return
 
 	# 1. Clear previous visible cells (R channel -> 0.0)
 	for cell in prev_visible_cells:
 		if not visible_cells.has(cell):
-			_stamp_cell_channel_r(cell, 0.0, tile_size)
+			_set_channel(cell, 0, 0.0)
 	prev_visible_cells.clear()
 
 	# 2. Stamp new explored cells (G channel -> 1.0) only once per cell
 	for cell in explored_cells.keys():
 		if not stamped_explored.has(cell):
 			stamped_explored[cell] = true
-			_stamp_cell_channel_g(cell, 1.0, tile_size)
+			_set_channel(cell, 1, 1.0)
 
 	# 3. Stamp currently visible cells (R channel -> intensity)
 	for cell in visible_cells.keys():
-		var intensity = float(visible_cells[cell])
-		_stamp_cell_channel_r(cell, intensity, tile_size)
+		_set_channel(cell, 0, float(visible_cells[cell]))
 		prev_visible_cells.append(cell)
 
-	fow_texture.update(fow_image)
+	if _dirty:
+		fow_texture.update(fow_image)
+		_dirty = false
 
-func _stamp_cell_channel_r(cell: Vector2i, intensity: float, tile_size: float) -> void:
-	var world_x = cell.x * tile_size
-	var world_z = cell.y * tile_size
-
-	var uv_x = (world_x - world_min.x) / world_size.x
-	var uv_z = (world_z - world_min.y) / world_size.y
-
-	var center_px = int(uv_x * float(texture_width))
-	var center_pz = int(uv_z * float(texture_height))
-
-	var pixel_radius = maxi(1, int((tile_size * 1.0 / world_size.x) * float(texture_width)))
-
-	for dy in range(-pixel_radius, pixel_radius + 1):
-		for dx in range(-pixel_radius, pixel_radius + 1):
-			var px = center_px + dx
-			var py = center_pz + dy
-			if px >= 0 and px < texture_width and py >= 0 and py < texture_height:
-				var current = fow_image.get_pixel(px, py)
-				var new_r = intensity if intensity == 0.0 else maxf(current.r, intensity)
-				fow_image.set_pixel(px, py, Color(new_r, current.g, 0.0, 1.0))
-
-func _stamp_cell_channel_g(cell: Vector2i, intensity: float, tile_size: float) -> void:
-	var world_x = cell.x * tile_size
-	var world_z = cell.y * tile_size
-
-	var uv_x = (world_x - world_min.x) / world_size.x
-	var uv_z = (world_z - world_min.y) / world_size.y
-
-	var center_px = int(uv_x * float(texture_width))
-	var center_pz = int(uv_z * float(texture_height))
-
-	var pixel_radius = maxi(1, int((tile_size * 1.0 / world_size.x) * float(texture_width)))
-
-	for dy in range(-pixel_radius, pixel_radius + 1):
-		for dx in range(-pixel_radius, pixel_radius + 1):
-			var px = center_px + dx
-			var py = center_pz + dy
-			if px >= 0 and px < texture_width and py >= 0 and py < texture_height:
-				var current = fow_image.get_pixel(px, py)
-				fow_image.set_pixel(px, py, Color(current.r, maxf(current.g, intensity), 0.0, 1.0))
+func _set_channel(cell: Vector2i, channel: int, value: float) -> void:
+	var px = cell_to_pixel(cell)
+	if not _in_bounds(px):
+		return
+	var cur = fow_image.get_pixelv(px)
+	if channel == 0:
+		if is_equal_approx(cur.r, value):
+			return
+		cur.r = value
+	else:
+		if is_equal_approx(cur.g, value):
+			return
+		cur.g = value
+	cur.b = 0.0
+	cur.a = 1.0
+	fow_image.set_pixelv(px, cur)
+	_dirty = true
 
 func set_enabled(active: bool) -> void:
 	is_fog_enabled = active
@@ -166,3 +166,4 @@ func reveal_all() -> void:
 		return
 	fow_image.fill(Color(1.0, 1.0, 0.0, 1.0))
 	fow_texture.update(fow_image)
+	_dirty = false
