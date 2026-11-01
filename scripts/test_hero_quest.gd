@@ -7,6 +7,8 @@ const TestSuiteCharacterAndItems = preload("res://scripts/tests/test_suite_chara
 const TestSuiteDoorsAndInteractions = preload("res://scripts/tests/test_suite_doors_and_interactions.gd")
 const TestSuiteLevelEditor = preload("res://scripts/tests/test_suite_level_editor.gd")
 const TestSuiteEditorPersistenceAndPreview = preload("res://scripts/tests/test_suite_editor_persistence_and_preview.gd")
+const TestSuiteVisionPerformance = preload("res://scripts/tests/test_suite_vision_performance.gd")
+const TestSuiteFlickerAndOcclusion = preload("res://scripts/tests/test_suite_flicker_and_occlusion.gd")
 const TestSuiteADRCompliance = preload("res://scripts/tests/test_suite_adr_compliance.gd")
 
 func _init() -> void:
@@ -21,9 +23,11 @@ func _init() -> void:
 	await TestSuiteDoorsAndInteractions.run(self)
 	await TestSuiteLevelEditor.run(self)
 	await TestSuiteEditorPersistenceAndPreview.run(self)
+	await TestSuiteVisionPerformance.run(self)
+	await TestSuiteFlickerAndOcclusion.run(self)
 	await TestSuiteADRCompliance.run(self)
 
 	print("\n================================================================")
-	print("   === ALL 8 TEST SUITES & 29 TESTS PASSED SUCCESSFULLY! ===")
+	print("   === ALL 10 TEST SUITES PASSED SUCCESSFULLY! ===")
 	print("================================================================")
 	quit(0)

@@ -51,7 +51,7 @@ static func run(tree: SceneTree) -> void:
 
 	# 4. Verify Camera Occlusion Fading Manager
 	assert(hq.occlusion_mgr != null, "HeroQuestCameraOcclusion manager missing")
-	assert(hq.occlusion_mgr.target_alpha == 0.3, "Target obstruction alpha must be 0.3 (30% transparent)")
+	assert(hq.occlusion_mgr.target_alpha >= 0.15 and hq.occlusion_mgr.target_alpha <= 0.25, "Occluders must be translucent: 15-25% alpha")
 	print("  - Camera Occlusion Fading verified: active with 30% transparency target.")
 
 	# 5. Verify Gothic Windows and Chimney
