@@ -229,8 +229,13 @@ func _switch_archetype(idx: int) -> void:
 	if humanoid_visuals:
 		humanoid_visuals.apply_appearance(data)
 
+func refresh_nearby_interactable() -> void:
+	nearby_interactable_node = null
+	nearby_interactable_comp = null
+	_check_interaction_proximity()
+
 func _get_prop_at_cell(cell: Vector2i) -> Node3D:
-	if not castle_builder or not castle_builder.grid.has(cell):
+	if not castle_builder or not is_instance_valid(castle_builder) or not ("grid" in castle_builder) or not castle_builder.grid.has(cell):
 		return null
 	var prop = castle_builder.grid[cell].get("prop", null)
 	if is_instance_valid(prop):
@@ -253,8 +258,13 @@ func _get_prop_at_cell(cell: Vector2i) -> Node3D:
 	return null
 
 func _check_interaction_proximity() -> void:
-	if not castle_builder:
+	if not castle_builder or not is_instance_valid(castle_builder):
 		return
+
+	if not is_instance_valid(nearby_interactable_node):
+		nearby_interactable_node = null
+	if not is_instance_valid(nearby_interactable_comp):
+		nearby_interactable_comp = null
 
 	var found_node: Node3D = null
 	var found_comp: HeroQuestInteractable = null
@@ -291,11 +301,14 @@ func _check_interaction_proximity() -> void:
 		found_node = null
 		found_comp = null
 
-	if found_node != nearby_interactable_node:
+	var prev_node = nearby_interactable_node if is_instance_valid(nearby_interactable_node) else null
+
+	if found_node != prev_node:
 		nearby_interactable_node = found_node
 		nearby_interactable_comp = found_comp
 		var prompt = nearby_interactable_comp.get_prompt_text() if is_instance_valid(nearby_interactable_comp) else ""
 		nearby_interactable_changed.emit(prompt)
+
 
 func _find_interactable(prop: Node3D) -> HeroQuestInteractable:
 	if not is_instance_valid(prop): return null

@@ -138,12 +138,14 @@ func _fade_mesh(mesh_inst: MeshInstance3D) -> void:
 func _restore_mesh(mesh_inst: MeshInstance3D) -> void:
 	if is_instance_valid(mesh_inst):
 		var orig_mat = faded_meshes.get(mesh_inst, null)
-		mesh_inst.material_override = orig_mat
+		if orig_mat == null or is_instance_valid(orig_mat):
+			mesh_inst.material_override = orig_mat
 	faded_meshes.erase(mesh_inst)
 	mesh_linger.erase(mesh_inst)
 
 func cleanup() -> void:
 	for mesh_inst in faded_meshes.keys():
-		_restore_mesh(mesh_inst)
+		if is_instance_valid(mesh_inst):
+			_restore_mesh(mesh_inst)
 	faded_meshes.clear()
 	mesh_linger.clear()

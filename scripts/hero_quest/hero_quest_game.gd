@@ -9,12 +9,14 @@ extends Node3D
 @onready var audio_manager: Node = $HeroQuestAudio
 
 const HeroQuestCameraOcclusion = preload("res://scripts/hero_quest/hero_quest_camera_occlusion.gd")
+const HeroQuestVisionManager = preload("res://scripts/hero_quest/vision/hero_quest_vision_manager.gd")
 const LevelEditorClass = preload("res://scripts/hero_quest/editor/level_editor.gd")
 const MiniGameManagerClass = preload("res://scripts/hero_quest/mini_game_manager.gd")
 const HeroQuestMiniGameDialogClass = preload("res://scripts/hero_quest/mini_game_dialog.gd")
 
 var player: CharacterBody3D
 var occlusion_mgr: HeroQuestCameraOcclusion
+var vision_mgr: HeroQuestVisionManager
 var level_editor: LevelEditorClass
 var mini_game_dialog: HeroQuestMiniGameDialogClass
 var cam_distance: float = 24.0
@@ -54,7 +56,12 @@ func _ready() -> void:
 	add_child(occlusion_mgr)
 	occlusion_mgr.setup(camera, player)
 
-	# 4. Connect HUD and Player signals
+	# 4. Setup Dynamic Line of Sight and Fog of War
+	vision_mgr = HeroQuestVisionManager.new()
+	add_child(vision_mgr)
+	vision_mgr.setup(castle_builder, player, camera)
+
+	# 5. Connect HUD and Player signals
 	if player:
 		player.interaction_triggered.connect(_on_player_interaction)
 		player.nearby_interactable_changed.connect(_on_player_prompt_changed)
@@ -64,11 +71,11 @@ func _ready() -> void:
 		if hud and hud.has_method("setup_player_ui"):
 			hud.setup_player_ui(player)
 
-	# 5. Initialize Mini-Game Dialog & Level Editor
+	# 6. Initialize Mini-Game Dialog & Level Editor
 	_init_mini_game_dialog()
 	_init_level_editor()
 
-	# 6. Initial zone update
+	# 7. Initial zone update
 	_update_zone(true)
 
 	if hud:
@@ -76,7 +83,7 @@ func _ready() -> void:
 			hud.show_notice("Returned to Castle from %s!" % return_state.get("last_game_id", "mini-game").to_upper())
 		else:
 			var display_name = pending_level_name if pending_level_name != "" else selected_level_path.get_file().get_basename().capitalize()
-			hud.show_notice("Hero Quest: %s\nPress [TAB] for Level Editor · [1-4] Character Archetypes" % display_name)
+			hud.show_notice("Hero Quest: %s\nPress [TAB] for Level Editor · [F] Fog of War · [1-4] Archetypes" % display_name)
 
 func _init_level_editor() -> void:
 	level_editor = LevelEditorClass.new()
@@ -93,10 +100,17 @@ func _on_editor_toggled(active: bool) -> void:
 	if player:
 		player.set_physics_process(not active)
 		player.set_process_unhandled_input(not active)
+		if not active and player.has_method("refresh_nearby_interactable"):
+			player.refresh_nearby_interactable()
 	if hud:
 		hud.visible = not active
+	if occlusion_mgr:
+		occlusion_mgr.cleanup()
+	if vision_mgr:
+		vision_mgr.set_fog_enabled(not active)
 	if not active:
 		_update_zone(true)
+
 
 func _spawn_player(start_tile: Vector2i = Vector2i(0, 0)) -> void:
 	if not player_scene:
@@ -147,6 +161,10 @@ func _process(delta: float) -> void:
 	if occlusion_mgr:
 		occlusion_mgr.process_occlusion(delta)
 
+	# Process Line of Sight & exploration tracking
+	if vision_mgr and not (level_editor and level_editor.is_active):
+		vision_mgr.update_vision()
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_TAB:
@@ -173,10 +191,15 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event is InputEventKey and event.pressed:
 		if event.keycode == KEY_Q:
 			target_zoom = clampf(target_zoom - 3.0, min_cam_distance, max_cam_distance)
-		elif event.keycode == KEY_E and not player.nearby_interactable:
+		elif event.keycode == KEY_E and not (player and player.nearby_interactable):
 			target_zoom = clampf(target_zoom + 3.0, min_cam_distance, max_cam_distance)
 		elif event.keycode == KEY_R:
 			target_cam_yaw -= 90.0
+		elif event.keycode == KEY_F and not event.echo:
+			if vision_mgr:
+				vision_mgr.toggle_fog()
+				if hud:
+					hud.show_notice("Fog of War: %s" % ("ENABLED" if vision_mgr.is_fog_enabled else "DISABLED (Revealed)"))
 
 func _update_camera_zoom() -> void:
 	if camera:
