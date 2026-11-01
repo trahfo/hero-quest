@@ -22,6 +22,14 @@ The `godot` MCP server ([Coding-Solo/godot-mcp](https://github.com/Coding-Solo/g
 
 When calling Godot MCP tools, provide `projectPath: "/Users/jakob/Workspace/god"`.
 
+## Dev tooling (mise)
+Use [mise](docs/manual/development_setup.md) for all workflows instead of calling Godot by hand (it honors `GODOT_BIN`):
+- `mise run test`: headless test suites (run before finishing any change)
+- `mise run check`: headless parse check of every script
+- `mise run line-limits`: ADR 0001 size check
+- `mise play` / `mise editor`: launch the game / editor
+- `mise run import`: refresh the `.godot` cache; `mise run lint` / `mise run format`: gdtoolkit
+
 ## Architectural Guidelines & Code Size Limits
 To keep the codebase maintainable, modular, and easy for humans and AI agents to extend, follow [ADR 0001: GDScript Modularity, Class Size Limits, and Component Architecture](docs/adr/0001-gdscript-modularity-and-class-size-limits.md):
 

@@ -1,0 +1,11 @@
+# gdtoolkit lint config. Style-only rules the codebase intentionally does not follow are relaxed.
+disable:
+  - class-definitions-order
+  - no-elif-return
+  - no-else-return
+  - max-returns
+  - unused-argument
+  - duplicated-load
+  - function-variable-name
+  - max-public-methods
+max-line-length: 260

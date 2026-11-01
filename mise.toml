@@ -1,0 +1,63 @@
+# Dev tooling for the Hero Quest 3D Godot project. Run `mise tasks` to list everything.
+min_version = "2026.1.0"
+
+[env]
+# Override on other machines: GODOT_BIN=/path/to/godot mise run test
+GODOT_BIN = "{{ get_env(name='GODOT_BIN', default='/Applications/Godot.app/Contents/MacOS/Godot') }}"
+PROJECT_PATH = "{{ config_root }}"
+
+[tools]
+uv = "latest"
+"pipx:gdtoolkit" = "4.5.0"
+
+[tasks.play]
+description = "Launch the game (start menu)"
+run = '"$GODOT_BIN" --path "$PROJECT_PATH"'
+
+[tasks.editor]
+description = "Open the Godot editor for this project"
+run = '"$GODOT_BIN" --editor --path "$PROJECT_PATH"'
+
+[tasks.import]
+description = "Headless re-import of assets (refreshes the .godot cache and UIDs)"
+run = '"$GODOT_BIN" --headless --path "$PROJECT_PATH" --import'
+
+[tasks.test]
+description = "Run all headless test suites (scripts/test_hero_quest.gd)"
+# Godot 4.7 can SIGABRT while quitting headless after a clean run, so judge by the suite's own verdict.
+run = '''
+bash -c '
+out=$("$GODOT_BIN" --headless --path "$PROJECT_PATH" --script res://scripts/test_hero_quest.gd 2>&1)
+echo "$out" | grep -v "^\[" | tail -40
+echo "$out" | grep -q "PASSED SUCCESSFULLY" && ! echo "$out" | grep -qE "SCRIPT ERROR|Assertion failed"
+'
+'''
+
+[tasks.check]
+description = "Headless parse check: loads every GDScript and fails on errors"
+run = '"$GODOT_BIN" --headless --path "$PROJECT_PATH" --script res://scripts/dev/check_all.gd'
+
+[tasks.lint]
+description = "gdlint all scripts (advisory: gdtoolkit cannot parse every Godot 4.7 construct)"
+run = 'gdlint scripts || true'
+
+[tasks.format]
+description = "gdformat all scripts"
+run = 'gdformat scripts'
+
+[tasks.line-limits]
+description = "ADR 0001 check: no GDScript file over 400 lines (warn over 250)"
+run = '''
+bash -c '
+fail=0
+while IFS= read -r f; do
+  n=$(wc -l < "$f")
+  if [ "$n" -gt 400 ]; then echo "FAIL $n $f"; fail=1
+  elif [ "$n" -gt 250 ]; then echo "warn $n $f"; fi
+done < <(find scripts -name "*.gd")
+exit $fail'
+'''
+
+[tasks.clean]
+description = "Remove the .godot cache (re-run `mise run import` afterwards)"
+run = 'rm -rf "$PROJECT_PATH/.godot"'

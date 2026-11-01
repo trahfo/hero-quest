@@ -35,7 +35,13 @@ Reference for dynamic Line of Sight, dungeon exploration memory, and lighting:
 - **Door Occlusion**: Closed doors block ray penetration; opening doors instantly reveals room interiors.
 - **Controls & Editor**: `[F]` toggle Fog of War on/off, automatic full-visibility bypass in Level Editor (`[TAB]`).
 
-### 5. [Tile & Prop Positioning Ruleset](../tile_positioning_ruleset.md)
+### 5. [Camera, Occlusion & Rendering Stability](camera_and_occlusion.md)
+Reference for the follow camera, see-through occlusion of walls/objects, and the root-cause rules that keep doors from flickering.
+
+### 6. [Development Setup (mise)](development_setup.md)
+Install, environment overrides (`GODOT_BIN`), and all `mise run` tasks: `run`, `editor`, `test`, `check`, `import`, `lint`, `format`, `line-limits`, `clean`.
+
+### 7. [Tile & Prop Positioning Ruleset](../tile_positioning_ruleset.md)
 The geometric and spatial reference for architectural builders and procedural systems:
 - Standard metrics (`TILE_SIZE = 2.0m`, `WALL_THICKNESS = 0.9m`, `WALL_HEIGHT = 4.5m`).
 - Modular wall arm connectivity and outer corner ashlar quoins.
